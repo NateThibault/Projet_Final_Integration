@@ -1,3 +1,4 @@
+import MyMenu from '@/component/molecules/my-menu'
 import './globals.css'
 import { Inter } from 'next/font/google'
 
@@ -18,7 +19,7 @@ export default function RootLayout({
     <html lang="en">
       <body className={inter.className}>
         <header>
-          
+          <MyMenu/>
         </header>
         {children}
       </body>
