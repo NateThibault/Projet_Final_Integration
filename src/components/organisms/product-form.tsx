@@ -12,7 +12,6 @@ const schema = yup
     title: yup.string().min(2).max(50).required(),
     description: yup.string().max(255).required(),
     price: yup.number().required(),
-    message: yup.string().required(),
   })
   .required();
 
