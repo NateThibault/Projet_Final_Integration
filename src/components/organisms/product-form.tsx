@@ -1,11 +1,10 @@
 "use client";
-import { Button, Container, Grid, TextField } from "@mui/material";
+import { Button, Container, Grid, TextField, TextareaAutosize } from "@mui/material";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
-import { useContext, useEffect } from "react";
-import { ApplicationContext } from "@/context/application.provider";
-import { ContactContext } from "@/context/contact.provider";
+import { useContext } from "react";
+import { ProductContext } from "@/context/product.provider";
 
 const schema = yup
   .object({
@@ -22,43 +21,32 @@ interface ProductForm {
 }
 
 export default function ProductForm() {
-  const applicationContext = useContext(ApplicationContext);
-  const contactContext = useContext(ContactContext);
+  const productContext = useContext(ProductContext);
 
   const {
     register,
     handleSubmit,
-    watch,
-    formState: { errors, isValid },
+    formState: { errors, isValid, isDirty },
   } = useForm<ProductForm>({
     defaultValues: {
-      title: applicationContext.title,
+      title: productContext.title,
     },
     mode: "onBlur",
     resolver: yupResolver(schema),
   });
 
   function onFormSubmit(data: ProductForm) {
-    applicationContext.setTitle(data.title);
-    contactContext.setTitle(data.title);
-    contactContext.setPrice(data.price);
-    contactContext.setDescription(data.description);
+    productContext.setTitle(data.title);
+    productContext.setPrice(data.price);
+    productContext.setDescription(data.description);
   }
-
-  useEffect(() => {
-    applicationContext.setTitle(watch("title"));
-  }, [watch("title")]);
-
-  useEffect(() => {
-    contactContext.setDescription(watch("description"));
-  }, [watch("description")]);
 
   return (
     <>
-      <Container sx={{ backgroundColor: "lightgrey", padding: "20px" }}>
+      <Container sx={{ backgroundColor: "lightgrey", padding: "20px", borderRadius: "10px", marginTop: "30px" }}>
         <form onSubmit={handleSubmit(onFormSubmit)}>
           <Grid container rowSpacing={3}>
-            <Grid item sm={12}>
+            <Grid item xs={12}>
               <TextField
                 id="title"
                 label="Title"
@@ -70,7 +58,7 @@ export default function ProductForm() {
                 required
               />
             </Grid>
-            <Grid item sm={12}>
+            <Grid item xs={12}>
               <TextField
                 id="price"
                 label="Price"
@@ -82,7 +70,7 @@ export default function ProductForm() {
                 required
               />
             </Grid>
-            <Grid item sm={12}>
+            <Grid item xs={12}>
               <TextField
                 id="description"
                 label="Description"
@@ -94,9 +82,12 @@ export default function ProductForm() {
                 required
               />
             </Grid>
-            <Grid item sm={12}>
-              <Button variant="contained" type="submit" disabled={!isValid}>
+            <Grid item xs={12} align="right" >
+              <Button variant="contained" type="submit" disabled={!isValid} sx={{ marginRight: "20px", width: "80px" }}>
                 Send
+              </Button>
+              <Button variant="contained" type="reset" value="reset" disabled={!isDirty}>
+                Cancel
               </Button>
             </Grid>
           </Grid>

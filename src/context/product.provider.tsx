@@ -1,13 +1,11 @@
 "use client";
-
 import React, { useState, ReactNode, createContext } from "react";
 
 interface Props {
   children?: ReactNode;
-  // any props that come into the component
 }
 
-interface ContactContextProps {
+interface productContextProps {
   title: string;
   setTitle: (val: string) => void;
   price: number;
@@ -16,8 +14,8 @@ interface ContactContextProps {
   setDescription: (val: string) => void;
 }
 
-export const ContactContext = createContext<ContactContextProps>(
-  {} as ContactContextProps
+export const ProductContext = createContext<productContextProps>(
+  {} as productContextProps
 );
 
 export default function ContactProvider({ children }: Props) {
@@ -26,8 +24,8 @@ export default function ContactProvider({ children }: Props) {
   const [price, setPrice] = useState<number>(0);
 
   return (
-    <ContactContext.Provider value={{ title, setTitle, price, setPrice, description, setDescription }}>
+    <ProductContext.Provider value={{ title, setTitle, price, setPrice, description, setDescription }}>
       {children}
-    </ContactContext.Provider>
+    </ProductContext.Provider>
   );
 }

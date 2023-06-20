@@ -1,4 +1,3 @@
-import ApplicationProvider from '@/context/application.provider'
 import './globals.css'
 import { Inter } from 'next/font/google'
 
@@ -18,12 +17,10 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={inter.className}>
-      <ApplicationProvider>
         <header>
           
         </header>
         {children}
-        </ApplicationProvider>
       </body>
     </html>
   )
