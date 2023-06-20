@@ -3,8 +3,6 @@ import { Button, Container, Grid, TextField } from "@mui/material";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
-import { useContext } from "react";
-import { ProductContext } from "@/context/product.provider";
 
 const schema = yup
   .object({
@@ -20,38 +18,44 @@ interface ProductForm {
   description: string;
 }
 
-interface ProductFormProps{
-  data: ProductForm;
+interface ProductFormProps {
+  data: ApiProduct;
+}
+
+interface ApiProduct {
+  product: {
+    categoryId: string;
+    createdAt: string;
+    description: string;
+    imageUrl: string;
+    isSold: boolean;
+    price: number;
+    title: string;
+    updatedAt: string;
+    userId: string;
+    _id: string
+  }
 }
 
 export default function ProductForm(props: ProductFormProps) {
-  const productContext = useContext(ProductContext);
-
   const {
     register,
-    handleSubmit,
     reset,
     formState: { errors, isValid, isDirty },
   } = useForm<ProductForm>({
     defaultValues: {
-      title: props.data.title,
-      price: props.data.price,
-      description: props.data.description
+      title: props.data.product.title,
+      price: props.data.product.price,
+      description: props.data.product.description
     },
     mode: "onBlur",
     resolver: yupResolver(schema),
   });
 
-  function onFormSubmit(data: ProductForm) {
-    productContext.setTitle(data.title);
-    productContext.setPrice(data.price);
-    productContext.setDescription(data.description);
-  }
-
   return (
     <>
       <Container sx={{ backgroundColor: "lightgrey", padding: "24px", borderRadius: "5px", marginTop: "30px" }}>
-        <form onSubmit={handleSubmit(onFormSubmit)}>
+        <form>
           <Grid container rowSpacing={3}>
             <Grid item xs={12}>
               <TextField sx={{ backgroundColor: "white", borderRadius: "5px" }}
