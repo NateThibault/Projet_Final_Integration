@@ -12,7 +12,15 @@ import Button from '@mui/material/Button';
 import MenuItem from '@mui/material/MenuItem';
 import SportsSoccerIcon from '@mui/icons-material/SportsSoccer';
 
-const pages = ['Products', 'Categories'];
+interface MenuItem {
+    label: string;
+    route: string;
+}
+
+const pages: MenuItem[] = [
+    { label: "Produits", route: "/products" },
+    { label: "Catégories", route: "/categories" },
+]
 
 function MyMenu() {
     const [anchorElNav, setAnchorElNav] = React.useState<null | HTMLElement>(null);
@@ -82,8 +90,8 @@ function MyMenu() {
                             }}
                         >
                             {pages.map((page) => (
-                                <MenuItem key={page} onClick={handleCloseNavMenu}>
-                                    <Typography textAlign="center">{page}</Typography>
+                                <MenuItem key={page.label} onClick={handleCloseNavMenu}>
+                                    <Typography textAlign="center">{page.label}</Typography>
                                 </MenuItem>
                             ))}
                         </Menu>
@@ -110,18 +118,14 @@ function MyMenu() {
                     <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
                         {pages.map((page) => (
                             <Button
-                                key={page}
+                                key={page.label}
                                 onClick={handleCloseNavMenu}
                                 sx={{ my: 2, color: 'white', display: 'block' }}
-                                href={`/${page.toLowerCase()}`}
+                                href={`/${page.label.toLowerCase()}`}
                             >
-                                {page}
+                                {page.label}
                             </Button>
                         ))}
-                    </Box>
-                    <Box>
-                        <Button sx={{ color: "white", padding: "0", }}>EN</Button>
-                        <Button sx={{ color: "white", padding: "0" }}>FR</Button>
                     </Box>
                 </Toolbar>
             </Container>
