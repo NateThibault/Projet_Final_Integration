@@ -105,7 +105,7 @@ function MyMenu() {
                             textDecoration: 'none',
                         }}
                     >
-                        LOGO
+                        TP3
                     </Typography>
                     <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
                         {pages.map((page) => (
@@ -118,6 +118,10 @@ function MyMenu() {
                                 {page}
                             </Button>
                         ))}
+                    </Box>
+                    <Box>
+                        <Button sx={{ color: "white", padding: "0", }}>EN</Button>
+                        <Button sx={{ color: "white", padding: "0" }}>FR</Button>
                     </Box>
                 </Toolbar>
             </Container>
