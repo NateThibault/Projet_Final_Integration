@@ -20,7 +20,11 @@ interface ProductForm {
   description: string;
 }
 
-export default function ProductForm() {
+interface ProductFormProps{
+  data: ProductForm;
+}
+
+export default function ProductForm(props: ProductFormProps) {
   const productContext = useContext(ProductContext);
 
   const {
@@ -30,9 +34,9 @@ export default function ProductForm() {
     formState: { errors, isValid, isDirty },
   } = useForm<ProductForm>({
     defaultValues: {
-      title: productContext.title,
-      price: productContext.price,
-      description: productContext.description
+      title: props.data.title,
+      price: props.data.price,
+      description: props.data.description
     },
     mode: "onBlur",
     resolver: yupResolver(schema),
