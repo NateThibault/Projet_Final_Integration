@@ -1,5 +1,5 @@
 "use client";
-import { Button, Container, Grid, TextField, TextareaAutosize } from "@mui/material";
+import { Button, Container, Grid, TextField } from "@mui/material";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
@@ -30,6 +30,8 @@ export default function ProductForm() {
   } = useForm<ProductForm>({
     defaultValues: {
       title: productContext.title,
+      price: productContext.price,
+      description: productContext.description,
     },
     mode: "onBlur",
     resolver: yupResolver(schema),
@@ -43,11 +45,11 @@ export default function ProductForm() {
 
   return (
     <>
-      <Container sx={{ backgroundColor: "lightgrey", padding: "20px", borderRadius: "10px", marginTop: "30px" }}>
+      <Container sx={{ backgroundColor: "lightgrey", padding: "24px", borderRadius: "5px", marginTop: "30px" }}>
         <form onSubmit={handleSubmit(onFormSubmit)}>
           <Grid container rowSpacing={3}>
             <Grid item xs={12}>
-              <TextField
+              <TextField sx={{backgroundColor: "white", borderRadius: "5px"}}
                 id="title"
                 label="Title"
                 variant="outlined"
@@ -59,7 +61,7 @@ export default function ProductForm() {
               />
             </Grid>
             <Grid item xs={12}>
-              <TextField
+              <TextField sx={{backgroundColor: "white", borderRadius: "5px"}}
                 id="price"
                 label="Price"
                 variant="outlined"
@@ -71,7 +73,9 @@ export default function ProductForm() {
               />
             </Grid>
             <Grid item xs={12}>
-              <TextField
+              <TextField sx={{backgroundColor: "white", borderRadius: "5px"}}
+                multiline={true}
+                rows={4}
                 id="description"
                 label="Description"
                 variant="outlined"
@@ -82,12 +86,12 @@ export default function ProductForm() {
                 required
               />
             </Grid>
-            <Grid item xs={12} align="right" >
-              <Button variant="contained" type="submit" disabled={!isValid} sx={{ marginRight: "20px", width: "80px" }}>
-                Send
-              </Button>
-              <Button variant="contained" type="reset" value="reset" disabled={!isDirty}>
+            <Grid item xs={12} sx={{ textAlign: "right" }} >
+            <Button variant="contained" type="reset" disabled={!isDirty} sx={{ marginRight: "20px", width: "100px" }}>
                 Cancel
+              </Button>
+              <Button variant="contained" type="submit" disabled={!isValid} sx={{ width: "100px" }}>
+                Send
               </Button>
             </Grid>
           </Grid>
