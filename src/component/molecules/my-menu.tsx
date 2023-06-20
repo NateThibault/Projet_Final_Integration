@@ -32,7 +32,7 @@ function MyMenu() {
 
     return (
         <AppBar position="static">
-            <Container maxWidth="xl" sx={{ backgroundColor: "lightgrey" }}>
+            <Container maxWidth="xl">
                 <Toolbar disableGutters>
                     <SportsSoccerIcon sx={{ display: { xs: 'none', md: 'flex' }, mr: 1 }} />
                     <Typography
