@@ -26,12 +26,13 @@ export default function ProductForm() {
   const {
     register,
     handleSubmit,
+    reset,
     formState: { errors, isValid, isDirty },
   } = useForm<ProductForm>({
     defaultValues: {
       title: productContext.title,
       price: productContext.price,
-      description: productContext.description,
+      description: productContext.description
     },
     mode: "onBlur",
     resolver: yupResolver(schema),
@@ -49,7 +50,7 @@ export default function ProductForm() {
         <form onSubmit={handleSubmit(onFormSubmit)}>
           <Grid container rowSpacing={3}>
             <Grid item xs={12}>
-              <TextField sx={{backgroundColor: "white", borderRadius: "5px"}}
+              <TextField sx={{ backgroundColor: "white", borderRadius: "5px" }}
                 id="title"
                 label="Title"
                 variant="outlined"
@@ -61,7 +62,7 @@ export default function ProductForm() {
               />
             </Grid>
             <Grid item xs={12}>
-              <TextField sx={{backgroundColor: "white", borderRadius: "5px"}}
+              <TextField sx={{ backgroundColor: "white", borderRadius: "5px" }}
                 id="price"
                 label="Price"
                 variant="outlined"
@@ -73,7 +74,7 @@ export default function ProductForm() {
               />
             </Grid>
             <Grid item xs={12}>
-              <TextField sx={{backgroundColor: "white", borderRadius: "5px"}}
+              <TextField sx={{ backgroundColor: "white", borderRadius: "5px" }}
                 multiline={true}
                 rows={4}
                 id="description"
@@ -87,7 +88,7 @@ export default function ProductForm() {
               />
             </Grid>
             <Grid item xs={12} sx={{ textAlign: "right" }} >
-            <Button variant="contained" type="reset" disabled={!isDirty} sx={{ marginRight: "20px", width: "100px" }}>
+              <Button variant="contained" onClick={() => { reset() }} disabled={!isDirty} sx={{ marginRight: "20px", width: "100px" }}>
                 Cancel
               </Button>
               <Button variant="contained" type="submit" disabled={!isValid} sx={{ width: "100px" }}>
