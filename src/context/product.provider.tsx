@@ -18,7 +18,7 @@ export const ProductContext = createContext<productContextProps>(
   {} as productContextProps
 );
 
-export default function ContactProvider({ children }: Props) {
+export default function ProductProvider({ children }: Props) {
   const [title, setTitle] = useState<string>("");
   const [description, setDescription] = useState<string>("");
   const [price, setPrice] = useState<number>(0);
