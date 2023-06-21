@@ -6,6 +6,7 @@ import IconButton from '@mui/material/IconButton';
 import DeleteIcon from '@mui/icons-material/Delete';
 import EditIcon from '@mui/icons-material/Edit';
 import Typography from '@mui/material/Typography';
+import Button from '@mui/material/Button';
 
 interface RowData {
   id: number;
@@ -84,19 +85,28 @@ export default function ListProduits({ fileCreationDate }: ListProduitsProps) {
         sx={{
           maxWidth: '800px',
           width: '100%',
-          boxShadow: '0px 2px 4px rgba(0, 0, 0, 0.1)',
+          height: 800,
         }}
       >
         <Typography variant="h4" component="h1" align="center" gutterBottom>
           Liste des produits
         </Typography>
-        <div style={{ height: 400, width: '100%' }}>
+        <div style={{ height: 600, width: '100%', position: 'relative' }}>
           <DataGrid
             rows={rows}
             columns={columns}
             checkboxSelection
             disableRowSelectionOnClick
+            pagination
+            pageSize={10}
           />
+          <Button
+            variant="contained"
+            color="primary"
+            style={{ position: 'absolute', bottom: -50, right: 16, marginTop: '16px' }}
+          >
+            Ajouter
+          </Button>
         </div>
       </Box>
     </Box>
