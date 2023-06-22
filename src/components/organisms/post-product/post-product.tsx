@@ -1,14 +1,18 @@
 "use client";
-import { Button, Container, Grid, TextField } from "@mui/material";
+import * as React from 'react';
+import { Button, Checkbox, Container, FormControl, FormControlLabel, Grid, InputLabel, MenuItem, Select, SelectChangeEvent, TextField } from "@mui/material";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
+import { postProductData } from "@/API/api";
 
 const schema = yup
   .object({
     title: yup.string().min(2).max(50).required(),
     description: yup.string().max(255).required(),
     price: yup.number().required(),
+    categoryId: yup.string().required(),
+    isSold: yup.boolean()
   })
   .required();
 
@@ -16,37 +20,49 @@ interface ProductForm {
   title: string;
   price: number;
   description: string;
+  categoryId: string;
+  isSold: boolean;
 }
 
 interface ProductFormProps {
-  data: ApiProduct;
+  productData: ApiProduct;
+  categoriesData: Categories
 }
 
 interface ApiProduct {
-  product: {
+    _id: string
+    title: string;
     categoryId: string;
-    createdAt: string;
     description: string;
-    imageUrl: string;
     isSold: boolean;
     price: number;
-    title: string;
-    updatedAt: string;
-    userId: string;
-    _id: string
-  }
+}
+
+interface Categories {
+  map(arg0: (category: Categories) => void): React.ReactNode;
+  _id: string;
+  name: string;
 }
 
 export default function ProductForm(props: ProductFormProps) {
+  // console.log(props.categoriesData)
+  // props.categoriesData.map((result) => {console.log("result     " + result.name)})
+  const [category, setCategory] = React.useState('')
+  const handleChange = (event: SelectChangeEvent) => {
+    setCategory(event.target.value as string);
+  }
+
   const {
     register,
     reset,
     formState: { errors, isValid, isDirty },
   } = useForm<ProductForm>({
     defaultValues: {
-      title: props.data.product.title,
-      price: props.data.product.price,
-      description: props.data.product.description
+      title: props.productData.title,
+      price: props.productData.price,
+      description: props.productData.description,
+      categoryId: props.productData.categoryId,
+      isSold: props.productData.isSold,
     },
     mode: "onBlur",
     resolver: yupResolver(schema),
@@ -95,12 +111,34 @@ export default function ProductForm(props: ProductFormProps) {
                 required
               />
             </Grid>
+            <Grid item xs={12}>
+              <FormControl fullWidth required>
+                <InputLabel id="labelCategories">Catégorie</InputLabel>
+                <Select {...register("categoryId")} sx={{ backgroundColor: "white", borderRadius: "5px" }}
+                  labelId="labelCategories"
+                  id="categoryId"
+                  value={category}
+                  label="Catégorie *"
+                  onChange={handleChange}
+                >
+                  <MenuItem value={10}>Ten</MenuItem>
+                  <MenuItem value={20}>Twenty</MenuItem>
+                  <MenuItem value={"637bc5cc85b7540a4240605c"}>Casse-têtes</MenuItem>
+                  {/* {props.categoriesData.map((result: Categories) => {
+                    <MenuItem value={result._id}>{result.name}</MenuItem>
+                  })} */}
+                </Select>
+              </FormControl>
+            </Grid>
+            <Grid item xs={12}>
+              <FormControlLabel sx={{ color: "black" }} id="isSold" control={<Checkbox />} label="Is the product sold ?" />
+            </Grid>
             <Grid item xs={12} sx={{ textAlign: "right" }} >
-              <Button variant="contained" onClick={() => { reset() }} disabled={!isDirty} sx={{ marginRight: "20px", width: "100px" }}>
-                Cancel
+              <Button variant="contained" onClick={() => { reset() }} disabled={!isDirty} sx={{ marginLeft: "20px", width: "100px" }}>
+                Annuler
               </Button>
-              <Button variant="contained" type="submit" disabled={!isValid} sx={{ width: "100px" }}>
-                Send
+              <Button variant="contained" type="button" disabled={!isValid} sx={{ marginLeft: "20px", width: "100px" }} onClick={() => { postProductData(body) }}>
+                Ajouter
               </Button>
             </Grid>
           </Grid>

@@ -1,12 +1,13 @@
-import ProductForm from "@/components/organisms/product-form";
-import getData from "@/API/api";
+import ProductForm from "@/components/organisms/put-product/put-product";
+import { getCategoriesData, getProductData } from "@/API/api";
 
 export default async function EditProduct({ params }: { params: { id: string } }) {
-  const data = await getData(params.id)
+  const productData = await getProductData(params.id)
+  const categoriesData = await getCategoriesData()
 
   return (
     <>
-      <ProductForm data={data} />
+      <ProductForm productData={productData} categoriesData={categoriesData} />
     </>
   );
 }

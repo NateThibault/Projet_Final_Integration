@@ -1,24 +1,20 @@
-import ProductForm from "@/components/organisms/product-form";
+import { getCategoriesData } from "@/API/api";
+import ProductForm from "@/components/organisms/post-product/post-product";
 
-export default function addProduct() {
-  const data = {
-    product: {
+export default async function addProduct() {
+  const categoriesData = await getCategoriesData()
+  const productData = {
       categoryId: "",
-    createdAt: "",
-    description: "",
-    imageUrl: "",
-    isSold: false,
-    price: 0,
-    title: "",
-    updatedAt: "",
-    userId: "",
-    _id: ""
-    }
+      description: "",
+      isSold: false,
+      price: 0,
+      title: "",
+      _id: ""
   }
 
   return (
     <>
-      <ProductForm data={data} />
+      <ProductForm productData={productData} categoriesData={categoriesData} />
     </>
   );
 }
