@@ -1,10 +1,13 @@
-import DataGridDemo from '@/components/molecules/feat_categories/categories'
-import styles from './page.module.css'
+import React from 'react';
+import styles from './page.module.css';
+import CategoryGrid from '@/component/molecules/feat_categories/categories';
 
-export default function Home() {
+const Home = () => {
   return (
     <main className={styles.main}>
-      <DataGridDemo />
+      <CategoryGrid />
     </main>
-  )
-}
+  );
+};
+
+export default Home;
