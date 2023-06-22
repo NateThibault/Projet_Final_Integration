@@ -5,6 +5,7 @@ import { DataGrid, GridColDef, GridCellParams } from '@mui/x-data-grid';
 import DeleteIcon from '@mui/icons-material/Delete';
 import EditIcon from '@mui/icons-material/EditSharp';
 import { getCategoriesData } from '../../../API/api';
+import { Box } from '@mui/material';
 
 
 
@@ -59,7 +60,12 @@ const CategoryGrid = () => {
   useEffect(() => {
     getCategoriesData()
       .then((data) => {
-        setRows(data);
+        const categoryRows = data.map((category: { name: any; }, index: number) => ({
+          id: index + 1, // Generate a unique id based on the index
+          name: category.name,
+          // Add other fields as needed
+        }));
+        setRows(categoryRows);
       })
       .catch((error) => {
         console.error('Error fetching data:', error);
@@ -68,16 +74,26 @@ const CategoryGrid = () => {
   }, []);
 
   return (
-    <div style={{ height: 500, width: '90%' }}>
+    <Box sx={{ height: 400, width: '100%' }}>
       <DataGrid
         rows={rows}
         columns={columns}
+        initialState={{
+          pagination: {
+            paginationModel: {
+              pageSize: 10,
+            },
+          },
+        }}
+        pageSizeOptions={[10, 25, 50]} 
+        loading={rows.length === 0} // Show loading state while fetching data
         disableColumnMenu
         disableRowSelectionOnClick
       />
-    </div>
+    </Box>
   );
 };
+
 
 export default CategoryGrid;
 
