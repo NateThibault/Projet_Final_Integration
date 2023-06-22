@@ -4,10 +4,8 @@ import React, { useEffect, useState } from 'react';
 import { DataGrid, GridColDef, GridCellParams } from '@mui/x-data-grid';
 import DeleteIcon from '@mui/icons-material/Delete';
 import EditIcon from '@mui/icons-material/EditSharp';
-import { getCategoriesData } from '../../../API/api';
-import { Box } from '@mui/material';
-
-
+import { getCategoriesData, deleteCategoryData } from '../../../API/api';
+import { Box, CircularProgress } from '@mui/material';
 
 const columns: GridColDef[] = [
   {
@@ -25,12 +23,12 @@ const columns: GridColDef[] = [
       </span>
     ),
     renderCell: (params: GridCellParams) => (
-      <button style={{ background: 'none', border: 'none' }}>
-        <DeleteIcon style={{ color:"grey" }} />
+      <button style={{ background: 'none', border: 'none' }} onClick={() => handleDeleteButtonClick(params)}>
+        <DeleteIcon style={{ color: 'grey' }} />
       </button>
     ),
-    headerAlign: 'center', 
-    align: 'center', 
+    headerAlign: 'center',
+    align: 'center',
     filterable: false,
     sortable: false,
   },
@@ -38,17 +36,17 @@ const columns: GridColDef[] = [
     field: 'modify',
     renderHeader: (params) => (
       <span>
-        <EditIcon color="primary" style={{ color:"#2196F3" }} />
+        <EditIcon color="primary" style={{ color: '#2196F3' }} />
       </span>
     ),
     width: 50,
     renderCell: (params: GridCellParams) => (
       <button style={{ background: 'none', border: 'none' }}>
-        <EditIcon color="primary" style={{ color:"#2196F3" }} />
+        <EditIcon color="primary" style={{ color: '#2196F3' }} />
       </button>
     ),
-    headerAlign: 'center', 
-    align: 'center', 
+    headerAlign: 'center',
+    align: 'center',
     filterable: false,
     sortable: false,
   },
@@ -56,52 +54,72 @@ const columns: GridColDef[] = [
 
 const CategoryGrid = () => {
   const [rows, setRows] = useState([]);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
+    setLoading(true);
+
     getCategoriesData()
       .then((data) => {
-        const categoryRows = data.map((category: { name: any; }, index: number) => ({
-          id: index + 1, // Generate a unique id based on the index
+        const categoryRows = data.map((category: { _id: any; name: any }, index: number) => ({
+          id: category._id,
           name: category.name,
-          // Add other fields as needed
         }));
         setRows(categoryRows);
+        setLoading(false);
       })
       .catch((error) => {
         console.error('Error fetching data:', error);
-        setRows([]); // Set empty rows on error
+        setRows([]);
+        setLoading(false);
       });
   }, []);
 
+  // const handleDeleteButtonClick = (params: GridCellParams) => {
+  //   const categoryId = params.id as string; // Assuming the id is a string
+
+  //   setLoading(true);
+
+  //   deleteCategoryData(categoryId)
+  //     .then(() => {
+  //       // Remove the deleted row from the rows state
+  //       setRows((prevRows) => prevRows.filter((row) => row.id !== categoryId));
+  //       setLoading(false);
+  //     })
+  //     .catch((error) => {
+  //       console.error('Error deleting category:', error);
+  //       setLoading(false);
+  //     });
+  // };
+
   return (
-    <Box sx={{ height: 400, width: '100%' }}>
-      <DataGrid
-        rows={rows}
-        columns={columns}
-        initialState={{
-          pagination: {
-            paginationModel: {
-              pageSize: 10,
+    <Box sx={{ height: 'auto', maxHeight: '100%', minHeight: '99%', width: '90%' }}>
+      {loading ? (
+        <Box sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100%' }}>
+          <CircularProgress />
+        </Box>
+      ) : (
+        <DataGrid
+          rows={rows}
+          columns={columns}
+          initialState={{
+            pagination: {
+              paginationModel: {
+                pageSize: 10,
+              },
             },
-          },
-        }}
-        pageSizeOptions={[10, 25, 50]} 
-        loading={rows.length === 0} // Show loading state while fetching data
-        disableColumnMenu
-        disableRowSelectionOnClick
-      />
+          }}
+          pageSizeOptions={[10, 25, 50]}
+          loading={loading}
+          disableColumnMenu
+          disableRowSelectionOnClick
+        />
+      )}
     </Box>
   );
 };
 
-
 export default CategoryGrid;
 
 
-// function handleModifyButtonClick(params: GridCellParams<any, unknown, unknown, import("@mui/x-data-grid").GridTreeNode>): void {
-//   throw new Error('Function not implemented.');
-// }
-// function handleDeleteButtonClick(params: GridCellParams<any, unknown, unknown, import("@mui/x-data-grid").GridTreeNode>): void {
-//   throw new Error('Function not implemented.');
-// }
 
