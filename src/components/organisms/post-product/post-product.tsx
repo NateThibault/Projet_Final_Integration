@@ -1,6 +1,6 @@
 "use client";
 import * as React from 'react';
-import { Button, Checkbox, Container, FormControl, FormControlLabel, Grid, InputLabel, MenuItem, Select, SelectChangeEvent, TextField } from "@mui/material";
+import { Button, Checkbox, Container, FormControl, Grid, InputLabel, MenuItem, Select, SelectChangeEvent, TextField } from "@mui/material";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
@@ -30,12 +30,12 @@ interface ProductFormProps {
 }
 
 interface ApiProduct {
-    _id: string
-    title: string;
-    categoryId: string;
-    description: string;
-    isSold: boolean;
-    price: number;
+  _id: string
+  title: string;
+  categoryId: string;
+  description: string;
+  isSold: boolean;
+  price: number;
 }
 
 interface Categories {
@@ -45,8 +45,8 @@ interface Categories {
 }
 
 export default function ProductForm(props: ProductFormProps) {
-  // console.log(props.categoriesData)
-  // props.categoriesData.map((result) => {console.log("result     " + result.name)})
+  // console.log(props.categoriesData) 
+  // props.categoriesData.map((result) => {console.log("result     " + result.name)}) FONCTIONNE ICI MAIS PAS DANS LE SELECT
   const [category, setCategory] = React.useState('')
   const handleChange = (event: SelectChangeEvent) => {
     setCategory(event.target.value as string);
@@ -126,18 +126,15 @@ export default function ProductForm(props: ProductFormProps) {
                   <MenuItem value={"637bc5cc85b7540a4240605c"}>Casse-têtes</MenuItem>
                   {/* {props.categoriesData.map((result: Categories) => {
                     <MenuItem value={result._id}>{result.name}</MenuItem>
-                  })} */}
+                  })} */}    {/* POURQUOI CE CODE NE FONCTIONNE PAS */}
                 </Select>
               </FormControl>
-            </Grid>
-            <Grid item xs={12}>
-              <FormControlLabel sx={{ color: "black" }} id="isSold" control={<Checkbox />} label="Is the product sold ?" />
             </Grid>
             <Grid item xs={12} sx={{ textAlign: "right" }} >
               <Button variant="contained" onClick={() => { reset() }} disabled={!isDirty} sx={{ marginLeft: "20px", width: "100px" }}>
                 Annuler
               </Button>
-              <Button variant="contained" type="button" disabled={!isValid} sx={{ marginLeft: "20px", width: "100px" }} onClick={() => { postProductData(body) }}>
+              <Button variant="contained" type="button" disabled={!isValid} sx={{ marginLeft: "20px", width: "100px" }} onClick={() => { postProductData(/* COMMENT PASSER LE CONTENU DU BODY ICI */) }}>
                 Ajouter
               </Button>
             </Grid>

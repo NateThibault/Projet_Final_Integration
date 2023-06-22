@@ -30,12 +30,12 @@ interface ProductFormProps {
 }
 
 interface ApiProduct {
-    categoryId: string;
-    description: string;
-    isSold: boolean;
-    price: number;
-    title: string;
-    _id: string;
+  categoryId: string;
+  description: string;
+  isSold: boolean;
+  price: number;
+  title: string;
+  _id: string;
 }
 
 interface Categories {
@@ -50,7 +50,8 @@ interface Category {
 
 
 export default function ProductForm(props: ProductFormProps) {
-  const categoriesData = props.categoriesData
+  // console.log(props.categoriesData) 
+  // props.categoriesData.map((result) => {console.log("result     " + result.name)}) FONCTIONNE ICI MAIS PAS DANS LE SELECT
   const [category, setCategory] = React.useState('')
   const handleChange = (event: SelectChangeEvent) => {
     setCategory(event.target.value as string);
@@ -130,18 +131,18 @@ export default function ProductForm(props: ProductFormProps) {
                   <MenuItem value={"637bc5cc85b7540a4240605c"}>Casse-têtes</MenuItem>
                   {/* {categoriesData.categories.map((category: Category) => {
                     <MenuItem value={category._id}>{category.name}</MenuItem>
-                  })} */}
+                  })} */}    {/* POURQUOI CE CODE NE FONCTIONNE PAS */}
                 </Select>
               </FormControl>
             </Grid>
-            <Grid item xs={12}>
-              <FormControlLabel sx={{ color: "black" }} id="isSold" control={<Checkbox {...register("isSold")} />} label="Est-ce que le produit est disponible ?" />
+            <Grid item xs={12}>    {/* POURQUOI LE CHECBKOX NE SE DÉCOCHE PAS LORSQU'ON CLIQUE SUR LE BOUTON ANNULER */}
+              <FormControlLabel sx={{ color: "black" }} id="isSold" control={<Checkbox {...register("isSold")} />} label="Est-ce que le produit est vendu ?" />
             </Grid>
             <Grid item xs={12} sx={{ textAlign: "right" }} >
               <Button variant="contained" onClick={() => { reset() }} disabled={!isDirty} sx={{ marginLeft: "20px", width: "100px" }}>
                 Annuler
               </Button>
-              <Button variant="contained" type="button" disabled={!isValid} sx={{ marginLeft: "20px", width: "100px" }} onClick={() => { putProductData(props.productData._id, body) }}>
+              <Button variant="contained" type="button" disabled={!isValid} sx={{ marginLeft: "20px", width: "100px" }} onClick={() => { putProductData(props.productData._id, /* COMMENT PASSER LE CONTENU DU BODY ICI */) }}>
                 Modifier
               </Button>
             </Grid>
