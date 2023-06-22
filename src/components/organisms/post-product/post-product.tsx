@@ -45,8 +45,6 @@ interface Categories {
 }
 
 export default function ProductForm(props: ProductFormProps) {
-  // console.log(props.categoriesData) 
-  // props.categoriesData.map((result) => {console.log("result     " + result.name)}) FONCTIONNE ICI MAIS PAS DANS LE SELECT
   const [category, setCategory] = React.useState('')
   const handleChange = (event: SelectChangeEvent) => {
     setCategory(event.target.value as string);
@@ -121,12 +119,9 @@ export default function ProductForm(props: ProductFormProps) {
                   label="Catégorie *"
                   onChange={handleChange}
                 >
-                  <MenuItem value={10}>Ten</MenuItem>
-                  <MenuItem value={20}>Twenty</MenuItem>
-                  <MenuItem value={"637bc5cc85b7540a4240605c"}>Casse-têtes</MenuItem>
-                  {/* {props.categoriesData.map((result: Categories) => {
-                    <MenuItem value={result._id}>{result.name}</MenuItem>
-                  })} */}    {/* POURQUOI CE CODE NE FONCTIONNE PAS */}
+                  {props.categoriesData.map((result) => (
+                    <MenuItem key={result._id} value={result._id}>{result.name}</MenuItem>
+                  ))}
                 </Select>
               </FormControl>
             </Grid>
