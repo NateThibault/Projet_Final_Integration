@@ -121,7 +121,7 @@ function MyMenu() {
                                 key={page.label}
                                 onClick={handleCloseNavMenu}
                                 sx={{ my: 2, color: 'white', display: 'block' }}
-                                href={`/${page.label.toLowerCase()}`}
+                                href={page.route}
                             >
                                 {page.label}
                             </Button>
