@@ -5,6 +5,7 @@ import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 import { putProductData } from "@/API/api";
+import { ProductFormProps, ProductForm } from '@/interface/interface';
 
 const schema = yup
   .object({
@@ -16,43 +17,24 @@ const schema = yup
   })
   .required();
 
-interface ProductForm {
-  title: string;
-  price: number;
-  description: string;
-  categoryId: string;
-  isSold: boolean;
-}
-
-interface ProductFormProps {
-  productData: ApiProduct;
-  categoriesData: Categories
-}
-
-interface ApiProduct {
-  categoryId: string;
-  description: string;
-  isSold: boolean;
-  price: number;
-  title: string;
-  _id: string;
-}
-
-interface Categories {
-  map(arg0: (result: Categories) => void): React.ReactNode;
-  _id: string;
-  name: string;
-}
-
 export default function ProductForm(props: ProductFormProps) {
-  const [category, setCategory] = React.useState('')
+  const [category, setCategory] = React.useState(props.productData.categoryId)
+  const [isSold, setIsSold] = React.useState(props.productData.isSold);
+  const [isSoldDirty, setIsSoldDirty] = React.useState(false);
+  const [isCategoryDirty, setIsCategoryDirty] = React.useState(false);
   const handleChange = (event: SelectChangeEvent) => {
     setCategory(event.target.value as string);
+    setIsCategoryDirty(true);
+  }
+  const handleChange2 = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setIsSold(event.target.checked);
+    setIsSoldDirty(true);
   }
 
   const {
     register,
     reset,
+    getValues,
     formState: { errors, isValid, isDirty },
   } = useForm<ProductForm>({
     defaultValues: {
@@ -125,14 +107,14 @@ export default function ProductForm(props: ProductFormProps) {
                 </Select>
               </FormControl>
             </Grid>
-            <Grid item xs={12}>    {/* POURQUOI LE CHECBKOX NE SE DÉCOCHE PAS LORSQU'ON CLIQUE SUR LE BOUTON ANNULER */}
-              <FormControlLabel sx={{ color: "black" }} id="isSold" control={<Checkbox {...register("isSold")} />} label="Est-ce que le produit est vendu ?" />
+            <Grid item xs={12}>
+              <FormControlLabel sx={{ color: "black" }} id="isSold" control={<Checkbox checked={isSold} {...register("isSold")} onChange={handleChange2} />} label="Est-ce que le produit est vendu ?" />
             </Grid>
             <Grid item xs={12} sx={{ textAlign: "right" }} >
-              <Button variant="contained" onClick={() => { reset() }} disabled={!isDirty} sx={{ marginLeft: "20px", width: "100px" }}>
+              <Button variant="contained" onClick={() => { reset(), setCategory(props.productData.categoryId), setIsCategoryDirty(false), setIsSold(props.productData.isSold), setIsSoldDirty(false); }} disabled={!isDirty && !isCategoryDirty && !isSoldDirty} sx={{ marginLeft: "20px", width: "100px" }}>
                 Annuler
               </Button>
-              <Button variant="contained" type="button" disabled={!isValid} sx={{ marginLeft: "20px", width: "100px" }} onClick={() => { putProductData(props.productData._id, /* COMMENT PASSER LE CONTENU DU BODY ICI */) }}>
+              <Button variant="contained" type="button" disabled={!isValid || !isDirty && !isCategoryDirty && !isSoldDirty} sx={{ marginLeft: "20px", width: "100px" }} onClick={() => { const formData = getValues(); putProductData(props.productData._id, formData) }}>
                 Modifier
               </Button>
             </Grid>
