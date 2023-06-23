@@ -1,6 +1,6 @@
 "use client"
 import * as React from 'react'
-import { Button, Container, FormControl, Grid, InputLabel, MenuItem, Select, SelectChangeEvent, TextField } from "@mui/material"
+import { Box, Button, CircularProgress, Container, FormControl, Grid, InputLabel, MenuItem, Select, SelectChangeEvent, TextField } from "@mui/material"
 import { useForm } from "react-hook-form"
 import { yupResolver } from "@hookform/resolvers/yup"
 import * as yup from "yup"
@@ -18,13 +18,28 @@ const schema = yup
   .required()
 
 export default function ProductForm(props: ProductFormProps) {
+  const [loading, setLoading] = React.useState(false)
+  const [response, setResponse] = React.useState("Une erreur est survenue")
   const [category, setCategory] = React.useState('')
   const [isCategoryDirty, setIsCategoryDirty] = React.useState(false)
-  const handleChange = (event: SelectChangeEvent) => {
+  const handleChangeCategoryId = (event: SelectChangeEvent) => {
     setCategory(event.target.value as string)
     setIsCategoryDirty(true)
   }
-
+  const submit = async () => {
+    setLoading(true)
+    try {
+      const formData = getValues()
+      await postProductData(formData)
+      setResponse("Produit ajouté avec succès")
+      alert(response)
+      window.location.href = "/products"
+    } catch (error) {
+      setResponse("Une erreur est survenue")
+      alert(response)
+      setLoading(false)
+    }
+  }
   const {
     register,
     reset,
@@ -44,8 +59,12 @@ export default function ProductForm(props: ProductFormProps) {
 
   return (
     <>
-      <Container sx={{ backgroundColor: "lightgrey", padding: "24px", borderRadius: "5px", marginTop: "30px" }}>
-        <form>
+      {loading ? (
+        <Box sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100vh' }}>
+          <CircularProgress />
+        </Box>
+      ) : (
+        <Container sx={{ backgroundColor: "lightgrey", padding: "24px", borderRadius: "5px", marginTop: "30px" }}>
           <Grid container rowSpacing={3}>
             <Grid item xs={12}>
               <TextField sx={{ backgroundColor: "white", borderRadius: "5px" }}
@@ -72,6 +91,22 @@ export default function ProductForm(props: ProductFormProps) {
               />
             </Grid>
             <Grid item xs={12}>
+              <FormControl fullWidth required>
+                <InputLabel id="labelCategories">Catégorie</InputLabel>
+                <Select {...register("categoryId")} sx={{ backgroundColor: "white", borderRadius: "5px" }}
+                  labelId="labelCategories"
+                  id="categoryId"
+                  value={category}
+                  label="Catégorie *"
+                  onChange={handleChangeCategoryId}
+                >
+                  {props.categoriesData.map((result) => (
+                    <MenuItem key={result._id} value={result._id}>{result.name}</MenuItem>
+                  ))}
+                </Select>
+              </FormControl>
+            </Grid>
+            <Grid item xs={12}>
               <TextField sx={{ backgroundColor: "white", borderRadius: "5px" }}
                 multiline={true}
                 rows={4}
@@ -85,33 +120,17 @@ export default function ProductForm(props: ProductFormProps) {
                 required
               />
             </Grid>
-            <Grid item xs={12}>
-              <FormControl fullWidth required>
-                <InputLabel id="labelCategories">Catégorie</InputLabel>
-                <Select {...register("categoryId")} sx={{ backgroundColor: "white", borderRadius: "5px" }}
-                  labelId="labelCategories"
-                  id="categoryId"
-                  value={category}
-                  label="Catégorie *"
-                  onChange={handleChange}
-                >
-                  {props.categoriesData.map((result) => (
-                    <MenuItem key={result._id} value={result._id}>{result.name}</MenuItem>
-                  ))}
-                </Select>
-              </FormControl>
-            </Grid>
             <Grid item xs={12} sx={{ textAlign: "right" }} >
               <Button variant="contained" onClick={() => { reset(), setCategory(props.productData.categoryId), setIsCategoryDirty(false) }} disabled={!isDirty && !isCategoryDirty} sx={{ marginLeft: "20px", width: "100px" }}>
                 Annuler
               </Button>
-              <Button variant="contained" type="button" disabled={!isValid} sx={{ marginLeft: "20px", width: "100px" }} onClick={() => { const formData = getValues(); postProductData(formData) }}>
+              <Button variant="contained" type="button" disabled={!isValid} sx={{ marginLeft: "20px", width: "100px" }} onClick={submit}>
                 Ajouter
               </Button>
             </Grid>
           </Grid>
-        </form>
-      </Container>
+        </Container>
+      )}
     </>
   )
 }
