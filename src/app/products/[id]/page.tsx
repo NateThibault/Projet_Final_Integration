@@ -1,7 +1,7 @@
-import ProductForm from "@/components/organisms/put-product/put-product";
-import { getCategoriesData, getProductData } from "@/API/api";
+import ProductForm from "@/components/organisms/put-product/put-product"
+import { getCategoriesData, getProductData } from "@/API/api"
 
-export default async function EditProduct({ params }: { params: { id: string } }) {
+export default async function editProduct({ params }: { params: { id: string } }) {
   const productData = await getProductData(params.id)
   const categoriesData = await getCategoriesData()
 
@@ -9,5 +9,5 @@ export default async function EditProduct({ params }: { params: { id: string } }
     <>
       <ProductForm productData={productData} categoriesData={categoriesData} />
     </>
-  );
+  )
 }

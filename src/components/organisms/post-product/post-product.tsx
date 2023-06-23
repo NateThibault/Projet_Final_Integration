@@ -1,11 +1,11 @@
-"use client";
-import * as React from 'react';
-import { Button, Container, FormControl, Grid, InputLabel, MenuItem, Select, SelectChangeEvent, TextField } from "@mui/material";
-import { useForm } from "react-hook-form";
-import { yupResolver } from "@hookform/resolvers/yup";
-import * as yup from "yup";
-import { postProductData } from "@/API/api";
-import { ProductFormProps, ProductForm } from '@/interface/interface';
+"use client"
+import * as React from 'react'
+import { Button, Container, FormControl, Grid, InputLabel, MenuItem, Select, SelectChangeEvent, TextField } from "@mui/material"
+import { useForm } from "react-hook-form"
+import { yupResolver } from "@hookform/resolvers/yup"
+import * as yup from "yup"
+import { postProductData } from "@/API/api"
+import { ProductFormProps, ProductForm } from '@/interface/interface'
 
 const schema = yup
   .object({
@@ -15,14 +15,14 @@ const schema = yup
     categoryId: yup.string().required(),
     isSold: yup.boolean()
   })
-  .required();
+  .required()
 
 export default function ProductForm(props: ProductFormProps) {
   const [category, setCategory] = React.useState('')
-  const [isCategoryDirty, setIsCategoryDirty] = React.useState(false);
+  const [isCategoryDirty, setIsCategoryDirty] = React.useState(false)
   const handleChange = (event: SelectChangeEvent) => {
-    setCategory(event.target.value as string);
-    setIsCategoryDirty(true);
+    setCategory(event.target.value as string)
+    setIsCategoryDirty(true)
   }
 
   const {
@@ -36,11 +36,11 @@ export default function ProductForm(props: ProductFormProps) {
       price: props.productData.price,
       description: props.productData.description,
       categoryId: props.productData.categoryId,
-      isSold: props.productData.isSold,
+      isSold: props.productData.isSold
     },
     mode: "onBlur",
     resolver: yupResolver(schema),
-  });
+  })
 
   return (
     <>
@@ -113,5 +113,5 @@ export default function ProductForm(props: ProductFormProps) {
         </form>
       </Container>
     </>
-  );
+  )
 }

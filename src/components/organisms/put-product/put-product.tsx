@@ -1,11 +1,11 @@
-"use client";
-import * as React from 'react';
-import { Button, Checkbox, Container, FormControl, FormControlLabel, Grid, InputLabel, MenuItem, Select, SelectChangeEvent, TextField } from "@mui/material";
-import { useForm } from "react-hook-form";
-import { yupResolver } from "@hookform/resolvers/yup";
-import * as yup from "yup";
-import { putProductData } from "@/API/api";
-import { ProductFormProps, ProductForm } from '@/interface/interface';
+"use client"
+import * as React from 'react'
+import { Button, Checkbox, Container, FormControl, FormControlLabel, Grid, InputLabel, MenuItem, Select, SelectChangeEvent, TextField } from "@mui/material"
+import { useForm } from "react-hook-form"
+import { yupResolver } from "@hookform/resolvers/yup"
+import * as yup from "yup"
+import { putProductData } from "@/API/api"
+import { ProductFormProps, ProductForm } from '@/interface/interface'
 
 const schema = yup
   .object({
@@ -15,20 +15,20 @@ const schema = yup
     categoryId: yup.string().min(1).required(),
     isSold: yup.boolean()
   })
-  .required();
+  .required()
 
 export default function ProductForm(props: ProductFormProps) {
   const [category, setCategory] = React.useState(props.productData.categoryId)
-  const [isSold, setIsSold] = React.useState(props.productData.isSold);
-  const [isSoldDirty, setIsSoldDirty] = React.useState(false);
-  const [isCategoryDirty, setIsCategoryDirty] = React.useState(false);
-  const handleChange = (event: SelectChangeEvent) => {
-    setCategory(event.target.value as string);
-    setIsCategoryDirty(true);
+  const [isSold, setIsSold] = React.useState(props.productData.isSold)
+  const [isSoldDirty, setIsSoldDirty] = React.useState(false)
+  const [isCategoryDirty, setIsCategoryDirty] = React.useState(false)
+  const handleChangeCategoryId = (event: SelectChangeEvent) => {
+    setCategory(event.target.value as string)
+    setIsCategoryDirty(true)
   }
-  const handleChange2 = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setIsSold(event.target.checked);
-    setIsSoldDirty(true);
+  const handleChangeCheckbox = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setIsSold(event.target.checked)
+    setIsSoldDirty(true)
   }
 
   const {
@@ -46,7 +46,7 @@ export default function ProductForm(props: ProductFormProps) {
     },
     mode: "onBlur",
     resolver: yupResolver(schema),
-  });
+  })
 
   return (
     <>
@@ -99,7 +99,7 @@ export default function ProductForm(props: ProductFormProps) {
                   id="categoryId"
                   value={category}
                   label="Catégorie *"
-                  onChange={handleChange}
+                  onChange={handleChangeCategoryId}
                 >
                   {props.categoriesData.map((result) => (
                     <MenuItem key={result._id} value={result._id}>{result.name}</MenuItem>
@@ -108,10 +108,10 @@ export default function ProductForm(props: ProductFormProps) {
               </FormControl>
             </Grid>
             <Grid item xs={12}>
-              <FormControlLabel sx={{ color: "black" }} id="isSold" control={<Checkbox checked={isSold} {...register("isSold")} onChange={handleChange2} />} label="Est-ce que le produit est vendu ?" />
+              <FormControlLabel sx={{ color: "black" }} id="isSold" control={<Checkbox checked={isSold} {...register("isSold")} onChange={handleChangeCheckbox} />} label="Est-ce que le produit est vendu ?" />
             </Grid>
             <Grid item xs={12} sx={{ textAlign: "right" }} >
-              <Button variant="contained" onClick={() => { reset(), setCategory(props.productData.categoryId), setIsCategoryDirty(false), setIsSold(props.productData.isSold), setIsSoldDirty(false); }} disabled={!isDirty && !isCategoryDirty && !isSoldDirty} sx={{ marginLeft: "20px", width: "100px" }}>
+              <Button variant="contained" onClick={() => { reset(), setCategory(props.productData.categoryId), setIsCategoryDirty(false), setIsSold(props.productData.isSold), setIsSoldDirty(false) }} disabled={!isDirty && !isCategoryDirty && !isSoldDirty} sx={{ marginLeft: "20px", width: "100px" }}>
                 Annuler
               </Button>
               <Button variant="contained" type="button" disabled={!isValid || !isDirty && !isCategoryDirty && !isSoldDirty} sx={{ marginLeft: "20px", width: "100px" }} onClick={() => { const formData = getValues(); putProductData(props.productData._id, formData) }}>
@@ -122,5 +122,5 @@ export default function ProductForm(props: ProductFormProps) {
         </form>
       </Container>
     </>
-  );
+  )
 }
