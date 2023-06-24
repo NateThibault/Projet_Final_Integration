@@ -46,6 +46,13 @@ export default function ProductForm(props: ProductFormProps) {
       setLoading(false)
     }
   }
+  const cancel = () => {
+    reset()
+    setCategory(props.productData.categoryId)
+    setIsCategoryDirty(false)
+    setIsSold(props.productData.isSold)
+    setIsSoldDirty(false)
+  }
   const {
     register,
     reset,
@@ -60,7 +67,7 @@ export default function ProductForm(props: ProductFormProps) {
       isSold: props.productData.isSold
     },
     mode: "onBlur",
-    resolver: yupResolver(schema),
+    resolver: yupResolver(schema)
   })
 
   return (
@@ -99,11 +106,12 @@ export default function ProductForm(props: ProductFormProps) {
             <Grid item xs={12}>
               <FormControl fullWidth required>
                 <InputLabel id="labelCategories">Catégorie</InputLabel>
-                <Select {...register("categoryId")} sx={{ backgroundColor: "white", borderRadius: "5px" }}
+                <Select sx={{ backgroundColor: "white", borderRadius: "5px" }}
                   labelId="labelCategories"
                   id="categoryId"
                   value={category}
                   label="Catégorie *"
+                  {...register("categoryId")}
                   onChange={handleChangeCategoryId}
                 >
                   {props.categoriesData.map((result) => (
@@ -127,13 +135,24 @@ export default function ProductForm(props: ProductFormProps) {
               />
             </Grid>
             <Grid item xs={12}>
-              <FormControlLabel sx={{ color: "black" }} id="isSold" control={<Checkbox checked={isSold} {...register("isSold")} onChange={handleChangeCheckbox} />} label="Est-ce que le produit est vendu ?" />
+              <FormControlLabel sx={{ color: "black" }}
+                id="isSold"
+                label="Est-ce que le produit est vendu ?"
+                control={<Checkbox checked={isSold} {...register("isSold")} onChange={handleChangeCheckbox} />}
+              />
             </Grid>
-            <Grid item xs={12} sx={{ textAlign: "right" }} >
-              <Button variant="contained" onClick={() => { reset(), setCategory(props.productData.categoryId), setIsCategoryDirty(false), setIsSold(props.productData.isSold), setIsSoldDirty(false) }} disabled={!isDirty && !isCategoryDirty && !isSoldDirty} sx={{ marginLeft: "20px", width: "100px" }}>
+            <Grid item xs={12} sx={{ textAlign: "right" }}>
+              <Button sx={{ marginLeft: "20px", width: "100px" }}
+                variant="contained"
+                onClick={cancel}
+                disabled={!isDirty && !isCategoryDirty && !isSoldDirty}>
                 Annuler
               </Button>
-              <Button variant="contained" type="button" disabled={!isValid || !isDirty && !isCategoryDirty && !isSoldDirty} sx={{ marginLeft: "20px", width: "100px" }} onClick={submit}>
+              <Button sx={{ marginLeft: "20px", width: "100px" }}
+                variant="contained"
+                type="button"
+                onClick={submit}
+                disabled={!isValid || !isDirty && !isCategoryDirty && !isSoldDirty}>
                 Modifier
               </Button>
             </Grid>
