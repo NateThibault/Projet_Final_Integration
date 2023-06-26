@@ -1,8 +1,4 @@
-<<<<<<< HEAD
-import MyMenu from '@/components/molecules/myMenu/myMenu'
-=======
 import MyMenu from '@/components/molecules/my-menu/my-menu'
->>>>>>> aa78a1ea11a6c5fd5ba0464e2ec8be2320cbf345
 import './globals.css'
 import { Inter } from 'next/font/google'
 import MyFooter from '@/components/molecules/myFooter/myFooter'
