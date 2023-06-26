@@ -13,11 +13,11 @@ export async function putProductData(id: string, formData: ProductForm) {
   if (!res.ok) {
     throw new Error('Failed to fetch data')
   }
-  return console.log(formData), res.json()
+  return res.json()
 }
 
 export async function postProductData(formData: ProductForm) {
-  const res = await fetch(`https://api-final-qxme.onrender.com/products/add`, { method: "POST", body: JSON.stringify(formData)})
+  const res = await fetch(`https://api-final-qxme.onrender.com/products`, { method: "POST", body: JSON.stringify(formData)})
   if (!res.ok) {
     throw new Error('Failed to fetch data')
   }
