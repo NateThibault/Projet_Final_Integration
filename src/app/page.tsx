@@ -1,7 +1,7 @@
 "use client";
 
 import styles from "./page.module.css";
-import Header from ".../components/molecules/header/header";
+import Header from "../components/molecules/header/header";
 import { Box } from "@mui/material";
 import { Grid } from "@mui/material";
 import { Typography } from "@mui/material";
@@ -62,12 +62,12 @@ export default function Home() {
           Liste des membres de l'équipe :
         </Typography>
 
-        <Typography
+        <Box
           sx={{
             marginTop: "30px",
             marginLeft: "80px",
             marginRight: "80px",
-            color: "black",
+            color: "black",marginBottom:"100px"
           }}
         >
           <Typography>Nathan Thibault</Typography>
@@ -75,7 +75,7 @@ export default function Home() {
           <Typography>Priscila Carvalho</Typography> 
           <Typography>Mari-Pier Dubois</Typography>
           <Typography>Toufik Dellys</Typography>
-        </Typography>
+        </Box>
       </Box>
     </>
   );
