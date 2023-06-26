@@ -1,6 +1,7 @@
-import MyMenu from '@/component/molecules/my-menu/my-menu'
+import MyMenu from '@/components/molecules/myMenu/myMenu'
 import './globals.css'
 import { Inter } from 'next/font/google'
+import MyFooter from '@/components/molecules/myFooter/myFooter'
 
 
 const inter = Inter({ subsets: ['latin'] })
@@ -21,6 +22,9 @@ export default function RootLayout({
         <header>
           <MyMenu/>
         </header>
+        <footer> 
+          <MyFooter/>
+        </footer>
         {children}
       </body>
     </html>
