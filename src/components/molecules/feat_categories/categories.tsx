@@ -8,7 +8,7 @@ import { getCategoriesData, deleteCategoryData } from '../../../API/api';
 import { Box, CircularProgress } from '@mui/material';
 
 const CategoryGrid = () => {
-  const [rows, setRows] = useState([]);
+  const [rows, setRows] = useState<{ id: string; name: string }[]>([]);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
@@ -16,7 +16,7 @@ const CategoryGrid = () => {
 
     getCategoriesData()
       .then((data) => {
-        const categoryRows = data.map((category: { _id: any; name: any }, index: number) => ({
+        const categoryRows = data.map((category: { _id: any; name: any }) => ({
           id: category._id,
           name: category.name,
         }));
@@ -24,7 +24,7 @@ const CategoryGrid = () => {
         setLoading(false);
       })
       .catch((error) => {
-        console.error('Error fetching data:', error);
+        console.error("Erreur dans l'extraction des données :", error);
         setRows([]);
         setLoading(false);
       });
@@ -33,7 +33,7 @@ const CategoryGrid = () => {
   const handleDeleteButtonClick = (params: GridCellParams) => {
     const categoryId = params.id as string; // Assuming the id is a string
 
-    const confirmDelete = window.confirm('Are you sure you want to delete this category?');
+    const confirmDelete = window.confirm('Êtes-vous sûr de vouloir supprimer cette catégorie ?');
     if (!confirmDelete) {
       return;
     }
@@ -45,12 +45,12 @@ const CategoryGrid = () => {
         // Remove the deleted row from the rows state
         setRows((prevRows) => prevRows.filter((row) => row.id !== categoryId));
         setLoading(false);
-        window.alert('Category deleted successfully.');
+        window.alert('La catégorie a été supprimée avec succès.');
       })
       .catch((error) => {
-        console.error('Error deleting category:', error);
+        console.error('Erreur lors de la suppression de la catégorie', error);
         setLoading(false);
-        window.alert('Failed to delete category.');
+        window.alert('Erreur lors de la suppression de la catégorie');
       });
   };
 
@@ -100,7 +100,7 @@ const CategoryGrid = () => {
   ];
 
   return (
-    <Box sx={{ height: 'auto', maxHeight: '100%', minHeight: '99%', width: '90%' }}>
+    <Box sx={{ height: 'auto', maxHeight: '100%', minHeight: '99%', width: '90%', marginBottom:"" }}>
       {loading ? (
         <Box sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100%' }}>
           <CircularProgress />
