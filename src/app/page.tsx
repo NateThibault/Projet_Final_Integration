@@ -1,7 +1,7 @@
 "use client";
 
 import styles from "./page.module.css";
-import Header from "../components/molecules/header/header";
+import Header from ".../components/molecules/header/header";
 import { Box } from "@mui/material";
 import { Grid } from "@mui/material";
 import { Typography } from "@mui/material";
