@@ -22,10 +22,13 @@ export default function RootLayout({
         <header>
           <MyMenu/>
         </header>
+
+        {children}
+        
         <footer> 
           <MyFooter/>
         </footer>
-        {children}
+       
       </body>
     </html>
   )
