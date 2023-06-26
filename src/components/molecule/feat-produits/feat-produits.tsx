@@ -97,8 +97,17 @@ export default function ListProduits({ fileCreationDate }: ListProduitsProps) {
             columns={columns}
             checkboxSelection
             disableRowSelectionOnClick
-            pagination
-            pageSize={10}
+            initialState={{
+              pagination: {
+                paginationModel: {
+                  pageSize: 10,
+                },
+  
+              },
+  
+            }}
+  
+            pageSizeOptions={[10, 25, 50]}
           />
           <Button
             variant="contained"
