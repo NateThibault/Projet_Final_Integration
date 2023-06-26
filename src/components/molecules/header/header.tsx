@@ -10,7 +10,7 @@ export default function Header(props: HeaderProps) {
 
   return (
     <>
-     <Typography sx={{fontSize:"30px", marginTop:"10px", marginBottom:"50px"}}>{props.title}</Typography>
+     <Typography sx={{fontSize:"30px",fontFamily:"serif", marginTop:"10px", marginBottom:"50px"}}>{props.title}</Typography>
     </>
     );
     }

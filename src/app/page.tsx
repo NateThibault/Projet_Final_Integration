@@ -41,10 +41,10 @@ export default function Home() {
             marginLeft: "80px",
             marginRight: "80px",
             textAlign: "justify",
-            color: "black",
+            color: "black",fontSize:"18px"  
           }}
         >
-          Description du projet : Le projet consiste à créer un interface
+          Le projet consiste à créer un interface
           administrateure liée au back-end et a la base de données réalisés
           durant le court de programmation . 
         </Typography>
@@ -67,13 +67,14 @@ export default function Home() {
             marginTop: "30px",
             marginLeft: "80px",
             marginRight: "80px",
-            color: "black",marginBottom:"100px"
+            color: "black",
+            
           }}
         >
           <Typography>Nathan Thibault</Typography>
           <Typography>William Bitton </Typography>
           <Typography>Priscila Carvalho</Typography> 
-          <Typography>Mari-Pier Dubois</Typography>
+          <Typography>Marie-Pier Dubois</Typography>
           <Typography>Toufik Dellys</Typography>
         </Box>
       </Box>
