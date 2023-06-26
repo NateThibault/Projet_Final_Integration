@@ -30,6 +30,7 @@ export default function Home() {
             marginRight: "80px",
             color: "black",
             fontSize: "25px",
+            fontFamily:"serif",
           }}
         >
           Description du projet :
@@ -41,12 +42,15 @@ export default function Home() {
             marginLeft: "80px",
             marginRight: "80px",
             textAlign: "justify",
-            color: "black",fontSize:"18px"  
+            color: "black",
+            fontSize:"18px",
+            fontFamily:"serif", 
+
           }}
         >
-          Le projet consiste à créer un interface
+          Le projet consiste à créer une interface
           administrateure liée au back-end et a la base de données réalisés
-          durant le court de programmation . 
+          durant le cours de programmation . 
         </Typography>
 
         <Typography
@@ -56,27 +60,29 @@ export default function Home() {
             marginRight: "80px",
             color: "black",
             fontSize: "25px",
+            fontFamily:"serif",
           }}
         >
           {" "}
           Liste des membres de l'équipe :
         </Typography>
 
-        <Box
+        <Typography
           sx={{
             marginTop: "30px",
             marginLeft: "80px",
             marginRight: "80px",
             color: "black",
-            
+            fontSize: "18px",
+            fontFamily:"serif",
           }}
         >
-          <Typography>Nathan Thibault</Typography>
-          <Typography>William Bitton </Typography>
-          <Typography>Priscila Carvalho</Typography> 
-          <Typography>Marie-Pier Dubois</Typography>
-          <Typography>Toufik Dellys</Typography>
-        </Box>
+          <Box >- Nathan Thibault</Box>
+          <Box >- William Bitton </Box>
+          <Box >- Priscila Carvalho</Box> 
+          <Box >- Marie-Pier Dubois</Box>
+          <Box >- Toufik Dellys</Box>
+        </Typography>
       </Box>
     </>
   );
