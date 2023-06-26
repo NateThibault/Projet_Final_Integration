@@ -8,7 +8,7 @@ import Box from '@mui/material/Box';
 function MyFooter() {
   return (
     <footer>
-      <AppBar position="static" sx={{ height: '60px' }}>
+      <AppBar position="static" sx={{ height: '10%' }}>
         <Toolbar sx={{ justifyContent: 'center' }}>
           <Typography variant="body1" component="div" sx={{ display: 'flex' }}>
             <Box sx={{ mr: '0.5rem' }}>Toufik Dellys |</Box>
