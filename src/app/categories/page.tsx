@@ -2,8 +2,8 @@
 
 import React from 'react';
 import styles from '../page.module.css';
-import CategoryGrid from '@/component/molecules/feat_categories/categories';
 import { Typography } from '@mui/material';
+import CategoryGrid from '@/components/molecules/feat_categories/categories';
 
 const Categories = () => {
     return (

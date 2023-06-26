@@ -7,51 +7,6 @@ import EditIcon from '@mui/icons-material/EditSharp';
 import { getCategoriesData, deleteCategoryData } from '../../../API/api';
 import { Box, CircularProgress } from '@mui/material';
 
-const columns: GridColDef[] = [
-  {
-    field: 'name',
-    headerName: 'Nom de la Catégorie',
-    flex: 1,
-    editable: false,
-  },
-  {
-    field: 'delete',
-    width: 50,
-    renderHeader: (params) => (
-      <span>
-        <DeleteIcon style={{ color: 'grey' }} />
-      </span>
-    ),
-    renderCell: (params: GridCellParams) => (
-      <button style={{ background: 'none', border: 'none' }} onClick={() => handleDeleteButtonClick(params)}>
-        <DeleteIcon style={{ color: 'grey' }} />
-      </button>
-    ),
-    headerAlign: 'center',
-    align: 'center',
-    filterable: false,
-    sortable: false,
-  },
-  {
-    field: 'modify',
-    renderHeader: (params) => (
-      <span>
-        <EditIcon color="primary" style={{ color: '#2196F3' }} />
-      </span>
-    ),
-    width: 50,
-    renderCell: (params: GridCellParams) => (
-      <button style={{ background: 'none', border: 'none' }}>
-        <EditIcon color="primary" style={{ color: '#2196F3' }} />
-      </button>
-    ),
-    headerAlign: 'center',
-    align: 'center',
-    filterable: false,
-    sortable: false,
-  },
-];
-
 const CategoryGrid = () => {
   const [rows, setRows] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -75,22 +30,74 @@ const CategoryGrid = () => {
       });
   }, []);
 
-  // const handleDeleteButtonClick = (params: GridCellParams) => {
-  //   const categoryId = params.id as string; // Assuming the id is a string
+  const handleDeleteButtonClick = (params: GridCellParams) => {
+    const categoryId = params.id as string; // Assuming the id is a string
 
-  //   setLoading(true);
+    const confirmDelete = window.confirm('Are you sure you want to delete this category?');
+    if (!confirmDelete) {
+      return;
+    }
 
-  //   deleteCategoryData(categoryId)
-  //     .then(() => {
-  //       // Remove the deleted row from the rows state
-  //       setRows((prevRows) => prevRows.filter((row) => row.id !== categoryId));
-  //       setLoading(false);
-  //     })
-  //     .catch((error) => {
-  //       console.error('Error deleting category:', error);
-  //       setLoading(false);
-  //     });
-  // };
+    setLoading(true);
+
+    deleteCategoryData(categoryId)
+      .then(() => {
+        // Remove the deleted row from the rows state
+        setRows((prevRows) => prevRows.filter((row) => row.id !== categoryId));
+        setLoading(false);
+        window.alert('Category deleted successfully.');
+      })
+      .catch((error) => {
+        console.error('Error deleting category:', error);
+        setLoading(false);
+        window.alert('Failed to delete category.');
+      });
+  };
+
+  const columns: GridColDef[] = [
+    {
+      field: 'name',
+      headerName: 'Nom de la Catégorie',
+      flex: 1,
+      editable: false,
+    },
+    {
+      field: 'delete',
+      width: 50,
+      renderHeader: (params) => (
+        <span>
+          <DeleteIcon style={{ color: 'grey' }} />
+        </span>
+      ),
+      renderCell: (params: GridCellParams) => (
+        <button style={{ background: 'none', border: 'none' }} onClick={() => handleDeleteButtonClick(params)}>
+          <DeleteIcon style={{ color: 'grey' }} />
+        </button>
+      ),
+      headerAlign: 'center',
+      align: 'center',
+      filterable: false,
+      sortable: false,
+    },
+    {
+      field: 'modify',
+      renderHeader: (params) => (
+        <span>
+          <EditIcon color="primary" style={{ color: '#2196F3' }} />
+        </span>
+      ),
+      width: 50,
+      renderCell: (params: GridCellParams) => (
+        <button style={{ background: 'none', border: 'none' }}>
+          <EditIcon color="primary" style={{ color: '#2196F3' }} />
+        </button>
+      ),
+      headerAlign: 'center',
+      align: 'center',
+      filterable: false,
+      sortable: false,
+    },
+  ];
 
   return (
     <Box sx={{ height: 'auto', maxHeight: '100%', minHeight: '99%', width: '90%' }}>
@@ -120,6 +127,3 @@ const CategoryGrid = () => {
 };
 
 export default CategoryGrid;
-
-
-
