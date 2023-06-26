@@ -1,7 +1,7 @@
 "use client"
 
+import { Typography } from '@mui/material';
 import React from 'react';
-import { useTranslations } from 'next-intl';
 interface HeaderProps{
   title: string;
 }
@@ -10,9 +10,7 @@ export default function Header(props: HeaderProps) {
 
   return (
     <>
-      <div className="container">
-        <h2>{props.title}</h2>
-      </div>
+     <Typography sx={{fontSize:"30px", marginTop:"10px", marginBottom:"50px"}}>{props.title}</Typography>
     </>
     );
     }
