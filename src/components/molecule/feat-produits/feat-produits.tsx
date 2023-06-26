@@ -26,32 +26,36 @@ const columns: GridColDef[] = [
     width: 150,
     valueGetter: (params: GridValueGetterParams<RowData, any>) =>
       params.rowIndex + 1,
+    flex: 1, 
   },
   {
     field: 'Titre',
     headerName: 'Titre',
     width: 150,
-    editable: true,
+    editable: false,
+    flex: 1, // Adicionado
   },
   {
     field: 'Description',
     headerName: 'Description',
     width: 150,
-    editable: true,
+    editable: false,
+    flex: 1, // Adicionado
   },
   {
     field: 'Prix',
     headerName: 'Prix',
     type: 'number',
     width: 110,
-    editable: true,
+    editable: false,
+    flex: 1, // Adicionado
   },
   {
     field: 'actions',
     headerName: 'Actions',
     width: 120,
     renderCell: (params: GridValueGetterParams<RowData, any>) => (
-      <div>
+      <div style={{ display: 'flex', justifyContent: 'flex-end', width: '100%' }}>
         <IconButton color="secondary" size="small">
           <DeleteIcon style={{ color: 'gray' }} />
         </IconButton>
@@ -83,24 +87,29 @@ export default function ListProduits({ fileCreationDate }: ListProduitsProps) {
     >
       <Box
         sx={{
-          maxWidth: '800px',
+          maxWidth: '90%',
           width: '100%',
-          height: 800,
+          height: '50%',
         }}
       >
         <Typography variant="h4" component="h1" align="center" gutterBottom>
           Liste des produits
         </Typography>
-        <div style={{ height: 600, width: '100%', position: 'relative' }}>
+        <div style={{ height: '50%', width: '100%', position: 'relative' }}>
           <DataGrid
             rows={rows}
             columns={columns}
             checkboxSelection
-            disableRowSelectionOnClick
+            disableColumnMenu
+            disableSelectionOnClick
             initialState={{
+
               pagination: {
+  
                 paginationModel: {
+  
                   pageSize: 10,
+  
                 },
   
               },
