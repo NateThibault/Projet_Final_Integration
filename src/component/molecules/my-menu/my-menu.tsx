@@ -18,6 +18,7 @@ interface MenuItem {
 }
 
 const pages: MenuItem[] = [
+    { label: "Acceuil", route: "/" },
     { label: "Produits", route: "/products" },
     { label: "Catégories", route: "/categories" },
 ]

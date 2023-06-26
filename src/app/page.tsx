@@ -11,7 +11,7 @@ export default function Home() {
   return (
     <>
     
-    <main className={styles.main}>
+    <Box className={styles.main} sx={{background:"white"}}>
    
       <Box
        sx={{ marginLeft:"80px"}}>
@@ -21,7 +21,7 @@ export default function Home() {
      <Grid
           container
           justifyContent="center"
-          style={{ minHeight: 'calc(20vh - 64px)' }} 
+          style={{ minHeight: 'calc(20vh - 64px)',color:"black"}} 
         >
           <Grid item>
             <Typography variant="h2" align="center">
@@ -30,7 +30,7 @@ export default function Home() {
        
          <h2>Tp3 integration</h2>
      </Grid>
-     <Typography sx={{ marginLeft:"80px", marginRight:"80px"}}>
+     <Typography sx={{ marginLeft:"80px", marginRight:"80px",color:"black"}}>
      <ul>
           <li>Coordinateur/Architecte de la solution : </li>
           <li>Chef de projet (Dev Lead): </li>
@@ -40,7 +40,7 @@ export default function Home() {
         </ul>
         </Typography>
        
-     <Typography sx={{marginTop:"30px", marginLeft:"80px", marginRight:"80px",textAlign:"justify"}}>Description du projet :
+     <Typography sx={{marginTop:"30px", marginLeft:"80px", marginRight:"80px",textAlign:"justify",color:"black"}}>Description du projet :
 Le projet consiste à améliorer l'expérience utilisateur en ajoutant une interface conviviale et attrayante aux données provenant du backend d'une application ou d'une API. L'objectif principal est de rendre les informations plus accessibles, intuitives et esthétiquement agréables pour les utilisateurs finaux.
 Le projet se déroulera en plusieurs étapes :
 Analyse des données backend : L'équipe chargée du projet examinera les données backend disponibles et comprendra leur structure, leur format et leur importance pour l'interface utilisateur.
@@ -55,7 +55,7 @@ Ce projet vise à transformer les données backend en une interface utilisateur 
 
 
 
-    </main>
+    </Box>
     </>
   );
 }
