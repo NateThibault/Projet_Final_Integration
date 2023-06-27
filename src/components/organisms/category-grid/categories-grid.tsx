@@ -81,7 +81,6 @@ const CategoryGrid = () => {
       width: 50,
       renderHeader: (params) => (
         <span>
-          <DeleteIcon style={{ color: 'grey' }} />
         </span>
       ),
       renderCell: (params: GridCellParams) => (
@@ -98,7 +97,6 @@ const CategoryGrid = () => {
       field: 'modify',
       renderHeader: (params) => (
         <span>
-          <EditIcon color="primary" style={{ color: '#2196F3' }} />
         </span>
       ),
       width: 50,

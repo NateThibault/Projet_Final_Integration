@@ -100,3 +100,9 @@ a {
     color-scheme: dark;
   }
 }
+
+@media screen and (max-width: 600px) {
+  footer .MuiTypography-body1 .MuiBox-root {
+    font-size: 0.8rem;
+  }
+}
