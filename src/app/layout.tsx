@@ -22,7 +22,7 @@ export default function RootLayout({
         <header>
           <MyMenu />
         </header>
-        <main style={{ width: "80%", margin: "0 auto", marginBottom: "10%" }}>
+        <main style={{ width: "80%", margin: "0 auto 100px" }}>
           {children}
         </main>
         <footer style={{ position: 'fixed', left: 0, bottom: 0, width: '100%' }}>
