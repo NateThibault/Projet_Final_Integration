@@ -25,7 +25,7 @@ const columns: GridColDef[] = [
     headerName: 'Date de création',
     width: 150,
     valueGetter: (params: GridValueGetterParams<RowData, any>) =>
-      params.rowIndex + 1,
+      params.rowNode,
     flex: 1,
   },
   {
@@ -58,16 +58,16 @@ const columns: GridColDef[] = [
     width: 120,
     flex: 1,
     headerAlign: 'right',
-    renderCell: (params: GridValueGetterParams<RowData, any>) => (
+    renderCell: () => (
       <div style={{ display: 'flex', justifyContent: 'flex-end', width: '100%'}}>
-          <IconButton color="secondary" size="small">
+        <IconButton color="secondary" size="small">
           <DeleteIcon style={{ color: 'gray' }} />
         </IconButton>
         <IconButton color="primary" size="small">
           <EditIcon />
         </IconButton>
       </div>
-    ),
+    )
   },
 ];
 
@@ -106,9 +106,15 @@ export default function ListProduits({ fileCreationDate }: ListProduitsProps) {
             columns={columns}
             checkboxSelection
             disableColumnMenu
-            disableSelectionOnClick
-            pageSize={10}
-            rowsPerPageOptions={[10, 25, 50]}
+            disableRowSelectionOnClick
+            initialState={{
+              pagination: {
+                paginationModel: {
+                  pageSize: 10,
+                },
+              },
+            }}
+            pageSizeOptions={[10, 25, 50]}
           />
           <Button
             variant="contained"
