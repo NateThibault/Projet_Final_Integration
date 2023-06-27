@@ -6,7 +6,7 @@ import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 import { CategoryFormProps, Category } from '@/app/interface/interface';
-import { postCategoryData, putCategoryData } from '@/API/api';
+import { postCategoryData, putCategoryData } from '@/api/api';
 
 const schema = yup
   .object({
