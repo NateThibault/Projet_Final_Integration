@@ -4,6 +4,8 @@ import React from 'react';
 import styles from '../page.module.css';
 import { Typography } from '@mui/material';
 import CategoryGrid from '@/components/molecules/feat_categories/categories';
+import BoutonAdd from '@/components/molecules/feat_categories/boutonAdd';
+
 
 const Categories = () => {
     return (
@@ -15,6 +17,10 @@ const Categories = () => {
         </div>
         <div className={styles.centeredGrid}>  
           <CategoryGrid />
+          
+        </div>
+        <div className={styles.alignBoutonRight}>
+          <BoutonAdd/>
         </div>
       </main>
     );
