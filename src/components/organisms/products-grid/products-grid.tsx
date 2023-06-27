@@ -1,23 +1,13 @@
 "use client"
-import * as React from 'react';
-import Box from '@mui/material/Box';
-import { DataGrid, GridColDef, GridValueGetterParams } from '@mui/x-data-grid';
-import IconButton from '@mui/material/IconButton';
-import DeleteIcon from '@mui/icons-material/Delete';
-import EditIcon from '@mui/icons-material/Edit';
-import Typography from '@mui/material/Typography';
-import Button from '@mui/material/Button';
-
-interface RowData {
-  id: number;
-  Titre: string;
-  Description: string;
-  Prix: number;
-}
-
-interface ListProduitsProps {
-  fileCreationDate: string;
-}
+import * as React from 'react'
+import Box from '@mui/material/Box'
+import { DataGrid, GridColDef, GridValueGetterParams } from '@mui/x-data-grid'
+import IconButton from '@mui/material/IconButton'
+import DeleteIcon from '@mui/icons-material/Delete'
+import EditIcon from '@mui/icons-material/Edit'
+import Typography from '@mui/material/Typography'
+import Button from '@mui/material/Button'
+import { RowData, ListProduitsProps } from '@/interface/interface'
 
 const columns: GridColDef[] = [
   {
@@ -59,7 +49,7 @@ const columns: GridColDef[] = [
     flex: 1,
     headerAlign: 'right',
     renderCell: () => (
-      <div style={{ display: 'flex', justifyContent: 'flex-end', width: '100%'}}>
+      <div style={{ display: 'flex', justifyContent: 'flex-end', width: '100%' }}>
         <IconButton color="secondary" size="small">
           <DeleteIcon style={{ color: 'gray' }} />
         </IconButton>
@@ -69,7 +59,7 @@ const columns: GridColDef[] = [
       </div>
     )
   },
-];
+]
 
 
 const rows: RowData[] = [
@@ -78,7 +68,7 @@ const rows: RowData[] = [
   { id: 3, Titre: 'Produit 3', Description: 'Description 3', Prix: 30 },
   { id: 4, Titre: 'Produit 4', Description: 'Description 4', Prix: 40 },
   { id: 5, Titre: 'Produit 5', Description: 'Description 5', Prix: 50 },
-];
+]
 
 export default function ListProduits({ fileCreationDate }: ListProduitsProps) {
   return (
@@ -126,5 +116,5 @@ export default function ListProduits({ fileCreationDate }: ListProduitsProps) {
         </div>
       </Box>
     </Box>
-  );
+  )
 }
