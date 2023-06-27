@@ -6,7 +6,7 @@ import { Box } from "@mui/material";
 import { Grid } from "@mui/material";
 import { Typography } from "@mui/material";
 
-export default function Home() {
+const Home = () => {
   return (
     <>
       <Box className={styles.main}>

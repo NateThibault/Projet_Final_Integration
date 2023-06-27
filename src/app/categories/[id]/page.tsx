@@ -1,4 +1,4 @@
-import { getCategoryData } from "@/API/api"
+import { getCategoryData } from "@/api/api"
 import CategoryForm from "@/components/organisms/category-form"
 
 export default async function editCategory({ params }: { params: { id: string } }) {

@@ -1,3 +1,19 @@
+/*CSS POUR PAGE CATEGORIE GRID*/
+.centeredGrid {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 1%;
+}
+.centeredTypo{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 2%;
+  color: black;
+}
+
+
 
 /* Enable hover only on non-touch devices */
 @media (hover: hover) and (pointer: fine) {
