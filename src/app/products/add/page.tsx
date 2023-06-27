@@ -7,7 +7,7 @@ export default async function addProduct() {
     categoryId: "",
     description: "",
     isSold: false,
-    price: 0,
+    price: null,
     title: "",
     _id: ""
   }

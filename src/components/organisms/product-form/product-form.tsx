@@ -24,12 +24,20 @@ export default function ProductForm(props: ProductFormProps) {
   const [isSoldDirty, setIsSoldDirty] = React.useState(false)
   const [isCategoryDirty, setIsCategoryDirty] = React.useState(false)
   const handleChangeCategoryId = (event: SelectChangeEvent) => {
-    setCategory(event.target.value as string)
-    setIsCategoryDirty(true)
+    setCategory(event.target.value)
+    if (event.target.value == props.productData.categoryId) {
+      setIsCategoryDirty(false)
+    } else {
+      setIsCategoryDirty(true)
+    }
   }
   const handleChangeCheckbox = (event: React.ChangeEvent<HTMLInputElement>) => {
     setIsSold(event.target.checked)
-    setIsSoldDirty(true)
+    if (event.target.checked == props.productData.isSold) {
+      setIsSoldDirty(false)
+    } else {
+      setIsSoldDirty(true)
+    }
   }
   const submit = async (formData: Product) => {
     setLoading(true)
@@ -87,7 +95,7 @@ export default function ProductForm(props: ProductFormProps) {
         </Box>
       ) : (
         <Container sx={{ backgroundColor: "lightgrey", padding: "24px", borderRadius: "5px", marginTop: "30px" }}>
-          <form onSubmit={handleSubmit(submit)}>
+          <form onSubmit={handleSubmit(submit)} action="/products">
             <Grid container rowSpacing={3}>
               <Grid item xs={12}>
                 <TextField sx={{ backgroundColor: "white", borderRadius: "5px" }}

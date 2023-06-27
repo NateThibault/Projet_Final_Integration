@@ -28,8 +28,6 @@ export async function putProductData(id: string, formData: Product) {
 }
 
 export async function postProductData(formData: Product) {
-  console.log(formData)
-  console.log(JSON.stringify(formData))
   const res = await fetch(`https://api-final-qxme.onrender.com/products`, {
     method: "POST",
     body: JSON.stringify(formData),
