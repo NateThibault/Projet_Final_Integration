@@ -8,7 +8,7 @@ const inter = Inter({ subsets: ['latin'] })
 
 export const metadata = {
   title: 'TP3 Intégration',
-  description: 'Created by Nathan Thibault, Priscila Carvalho, Marie-Pier Dubois, William Bitton',
+  description: 'Created by Nathan Thibault, Priscila Carvalho, Toufik Dellys, Marie-Pier Dubois, William Bitton',
 }
 
 export default function RootLayout({
