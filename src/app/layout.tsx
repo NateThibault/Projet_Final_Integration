@@ -23,7 +23,9 @@ export default function RootLayout({
           <MyMenu/>
         </header>
 
-        {children}
+        <div style={{ marginBottom: "50px" }}>
+         {children}
+        </div>
         
         <footer> 
           <MyFooter/>
