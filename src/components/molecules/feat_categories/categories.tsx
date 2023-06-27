@@ -6,7 +6,7 @@ import { DataGrid, GridColDef, GridCellParams } from '@mui/x-data-grid';
 import DeleteIcon from '@mui/icons-material/Delete';
 import EditIcon from '@mui/icons-material/EditSharp';
 import { getCategoriesData, deleteCategoryData } from '../../../api/api';
-import { Box, CircularProgress } from '@mui/material';
+import { Box, Button, CircularProgress } from '@mui/material';
 
 const CategoryGrid = () => {
   
@@ -38,18 +38,17 @@ const CategoryGrid = () => {
   }, []);
 
   const handleDeleteButtonClick = (params: GridCellParams) => {
-    const categoryId = params.id as string; 
-
+    const categoryId = params.id as string;
+  
     const confirmDelete = window.confirm('Êtes-vous sûr de vouloir supprimer cette catégorie ?');
     if (!confirmDelete) {
       return;
     }
-
+  
     setLoading(true);
-
+  
     deleteCategoryData(categoryId)
       .then(() => {
-        // Remove the deleted row from the rows state
         setRows((prevRows) => prevRows.filter((row) => row.id !== categoryId));
         setLoading(false);
         window.alert('La catégorie a été supprimée avec succès.');
@@ -116,7 +115,7 @@ const CategoryGrid = () => {
   ];
 
   return (
-    <Box sx={{ height: 'auto', maxHeight: '100%', minHeight: '99%', width: '90%'}}>
+    <Box sx={{ height: 'auto', maxHeight: '100%',  width: '80%'}}>
       {loading ? (
         <Box sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100%' }}>
           <CircularProgress />
@@ -141,6 +140,9 @@ const CategoryGrid = () => {
     </Box>
   );
 };
+
+
+
 
 export default CategoryGrid;
 

@@ -56,11 +56,16 @@ export async function getCategoriesData() {
 }
 
 export async function getCategoryData(id: string) {
-  const res = await fetch(`https://api-final-qxme.onrender.com/categories/${id}`, { method: "GET" })
-  if (!res.ok) {
-    throw new Error('Failed to fetch data')
-  }
-  return res.json()
+    const res = await fetch(`https://api-final-qxme.onrender.com/categories/${id}`, {
+       method: "GET",
+       headers: {
+        'Cache-Control': 'no-cache'
+      }
+      })
+    if (!res.ok) {
+        throw new Error('Failed to fetch data')
+    }
+    return res.json()
 }
 
 export async function putCategoryData(id: string, formData: Category) {
