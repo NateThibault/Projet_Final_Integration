@@ -1,4 +1,4 @@
-import { getCategoriesData } from "@/api/api"
+import { getCategoriesData } from "@/API/api"
 import ProductForm from "@/components/organisms/product-form/product-form"
 
 export default async function addProduct() {

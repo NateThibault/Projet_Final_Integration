@@ -1,4 +1,4 @@
-/* import createMiddleware from 'next-intl/middleware';
+ import createMiddleware from 'next-intl/middleware';
  
 export default createMiddleware({
   // A list of all locales that are supported
@@ -11,4 +11,4 @@ export default createMiddleware({
 export const config = {
   // Skip all paths that should not be internationalized
   matcher: ['/((?!api|_next|.*\\..*).*)'],
-}; */
+}; 

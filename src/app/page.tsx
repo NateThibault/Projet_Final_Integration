@@ -5,14 +5,16 @@ import Header from "../components/molecules/header/header";
 import { Box } from "@mui/material";
 import { Grid } from "@mui/material";
 import { Typography } from "@mui/material";
+import { useTranslations } from "next-intl";
 
 const Home = () => {
+  const t = useTranslations();
   return (
     <>
       <main className={styles.main}>
    
         <Box sx={{ marginLeft: "40px" }}>
-          <Header title={"Home"}></Header>
+          <Header title={t("Home")}></Header>
         </Box>
         <Grid
           container

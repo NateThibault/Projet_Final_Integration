@@ -6,6 +6,7 @@ import { Typography } from '@mui/material';
 import CategoryGrid from '@/components/molecules/feat_categories/categories';
 
 const Categories = () => {
+  
     return (
       <main className={styles.main}>
         <div className={styles.centeredTypo}>  
