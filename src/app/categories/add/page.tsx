@@ -1,5 +1,5 @@
-import Header from "@/components/atoms/header/header";
-import CategoryForm from "@/components/organisms/category-form/category-form";
+import Header from "@/components/atoms/header/header"
+import CategoryForm from "@/components/organisms/category-form/category-form"
 
 export default async function addCategory() {
   const categoryData = {
@@ -13,5 +13,5 @@ export default async function addCategory() {
       <Header title={"Ajouter une catégorie"} />
       <CategoryForm categoryData={categoryData} />
     </>
-  );
+  )
 }
