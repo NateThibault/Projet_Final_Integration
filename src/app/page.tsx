@@ -8,6 +8,11 @@ import { Typography } from "@mui/material";
 
 const Home = () => {
   return (
+
+    <main className={styles.main}>
+   
+    </main>
+  )
     <>
       <Box className={styles.main}>
         <Box sx={{ marginLeft: "80px" }}>
