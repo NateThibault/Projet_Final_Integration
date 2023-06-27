@@ -1,20 +1,20 @@
 "use client"
-import * as React from 'react';
-import AppBar from '@mui/material/AppBar';
-import Box from '@mui/material/Box';
-import Toolbar from '@mui/material/Toolbar';
-import IconButton from '@mui/material/IconButton';
-import Typography from '@mui/material/Typography';
-import Menu from '@mui/material/Menu';
-import MenuIcon from '@mui/icons-material/Menu';
-import Container from '@mui/material/Container';
-import Button from '@mui/material/Button';
-import MenuItem from '@mui/material/MenuItem';
-import SportsSoccerIcon from '@mui/icons-material/SportsSoccer';
+import * as React from 'react'
+import AppBar from '@mui/material/AppBar'
+import Box from '@mui/material/Box'
+import Toolbar from '@mui/material/Toolbar'
+import IconButton from '@mui/material/IconButton'
+import Typography from '@mui/material/Typography'
+import Menu from '@mui/material/Menu'
+import MenuIcon from '@mui/icons-material/Menu'
+import Container from '@mui/material/Container'
+import Button from '@mui/material/Button'
+import MenuItem from '@mui/material/MenuItem'
+import SportsSoccerIcon from '@mui/icons-material/SportsSoccer'
 
 interface MenuItem {
-    label: string;
-    route: string;
+    label: string
+    route: string
 }
 
 const pages: MenuItem[] = [
@@ -23,20 +23,13 @@ const pages: MenuItem[] = [
 ]
 
 function MyMenu() {
-    const [anchorElNav, setAnchorElNav] = React.useState<null | HTMLElement>(null);
-    const [anchorElUser, setAnchorElUser] = React.useState<null | HTMLElement>(null);
+    const [anchorElNav, setAnchorElNav] = React.useState<null | HTMLElement>(null)
     const handleOpenNavMenu = (event: React.MouseEvent<HTMLElement>) => {
-        setAnchorElNav(event.currentTarget);
-    };
-    const handleOpenUserMenu = (event: React.MouseEvent<HTMLElement>) => {
-        setAnchorElUser(event.currentTarget);
-    };
+        setAnchorElNav(event.currentTarget)
+    }
     const handleCloseNavMenu = () => {
-        setAnchorElNav(null);
-    };
-    const handleCloseUserMenu = () => {
-        setAnchorElUser(null);
-    };
+        setAnchorElNav(null)
+    }
 
     return (
         <AppBar position="static">
@@ -91,7 +84,7 @@ function MyMenu() {
                         >
                             {pages.map((page) => (
                                 <MenuItem key={page.label} onClick={handleCloseNavMenu}>
-                                    <Typography textAlign="center">{page.label}</Typography>
+                                    <Typography textAlign="center" component="a" href={page.route}>{page.label}</Typography>
                                 </MenuItem>
                             ))}
                         </Menu>
@@ -101,9 +94,8 @@ function MyMenu() {
                         variant="h5"
                         noWrap
                         component="a"
-                        href=""
+                        href="/"
                         sx={{
-                            mr: 2,
                             display: { xs: 'flex', md: 'none' },
                             flexGrow: 1,
                             fontFamily: 'monospace',
@@ -127,9 +119,12 @@ function MyMenu() {
                             </Button>
                         ))}
                     </Box>
+                    <Typography component="a" href="/fr" style={{ color: "white", marginRight: "3px" }}>FR</Typography>
+                    <Typography>/</Typography>
+                    <Typography component="a" href="/en" style={{ color: "white", marginLeft: "3px" }}>EN</Typography>
                 </Toolbar>
             </Container>
         </AppBar>
-    );
+    )
 }
-export default MyMenu;
+export default MyMenu
