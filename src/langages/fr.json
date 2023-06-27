@@ -1,0 +1,16 @@
+{
+    
+    "acceuil":{
+    "page-title":"Acceuil",
+    "subtitle":"TP3 INTEGRATION"
+},
+    "produits":{
+    "page-title":" Produits",
+    "subtitle":"Liste des produits"
+},
+    "categories":{
+    "page-title":" Ctegories",
+    "subtitle":"Liste des categories"
+}
+     
+}

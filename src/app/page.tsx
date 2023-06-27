@@ -4,11 +4,15 @@ import styles from "./page.module.css"
 import Header from "../components/atoms/header/header"
 import { Box } from "@mui/material"
 import { Typography } from "@mui/material"
+import { useTranslations } from "next-intl"
 
 const Home = () => {
+  const t = useTranslations();
   return (
   <>
-      <Header title={"TP3 Intégration"} />
+      <Header 
+      title={t("home.page-title")} />
+  
       <Box className={styles.main}>
         <Typography
           sx={{

@@ -1,15 +1,18 @@
 {
     
-
         "home":{
-        "page-title":"Hello world!"
+        "page-title":" Home",
+        "subtitle": " INTEGRATION TP3"
     },
         "products":{
-        "page-title":"about us"
+        "page-title":" Products ",
+        "subtitle": " Products List"
+
     },
-        "contact":{
-        "page-title":"contact us"
-    },
-         
+        "categories":{
+        "page-title":" Categories ",
+        "subtitle": " Categories List"
     }
+         
+}
 
