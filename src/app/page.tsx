@@ -12,8 +12,6 @@ const Home = () => {
       <Box className={styles.main}>
         <Typography
           sx={{
-            marginLeft: "80px",
-            marginRight: "80px",
             color: "black",
             fontSize: "25px",
           }}
@@ -24,8 +22,6 @@ const Home = () => {
         <Typography
           sx={{
             marginTop: "10px",
-            marginLeft: "80px",
-            marginRight: "80px",
             color: "black",
           }}
         >
@@ -37,8 +33,6 @@ const Home = () => {
         <Typography
           sx={{
             marginTop: "50px",
-            marginLeft: "80px",
-            marginRight: "80px",
             color: "black",
             fontSize: "25px",
           }}
@@ -49,8 +43,6 @@ const Home = () => {
         <Box
           sx={{
             marginTop: "30px",
-            marginLeft: "80px",
-            marginRight: "80px",
             color: "black", marginBottom: "100px"
           }}
         >
