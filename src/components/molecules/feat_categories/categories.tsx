@@ -2,7 +2,7 @@
 
 
 import React, { useEffect, useState } from 'react';
-import { DataGrid, GridColDef, GridCellParams } from '@mui/x-data-grid';
+import { DataGrid, GridColDef, GridCellParams } from "@mui/data-grid";
 import DeleteIcon from '@mui/icons-material/Delete';
 import EditIcon from '@mui/icons-material/EditSharp';
 import { getCategoriesData, deleteCategoryData } from '../../../api/api';

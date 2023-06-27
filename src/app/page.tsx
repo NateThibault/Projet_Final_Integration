@@ -10,7 +10,7 @@ const Home = () => {
   return (
     <>
       <main className={styles.main}>
-      <Container>
+   
         <Box sx={{ marginLeft: "40px" }}>
           <Header title={"Home"}></Header>
         </Box>
@@ -27,7 +27,7 @@ const Home = () => {
         </Grid>
         <Typography
           sx={{
-            marginLeft: "15px",
+            marginLeft: "80px",
             marginRight: "80px",
             color: "black",
             fontSize: "25px",
@@ -40,7 +40,7 @@ const Home = () => {
         <Typography
           sx={{
             marginTop: "10px",
-            marginLeft: "15px",
+            marginLeft: "80px",
             marginRight: "80px",
             textAlign: "justify",
             color: "black",
@@ -57,7 +57,7 @@ const Home = () => {
         <Typography
           sx={{
             marginTop: "50px",
-            marginLeft: "15px",
+            marginLeft: "80px",
             marginRight: "80px",
             color: "black",
             fontSize: "25px",
@@ -71,7 +71,7 @@ const Home = () => {
         <Typography
           sx={{
             marginTop: "30px",
-            marginLeft: "15px",
+            marginLeft: "80px",
             marginRight: "80px",
             color: "black",
             fontSize: "18px",
@@ -84,10 +84,11 @@ const Home = () => {
           <Box >- Marie-Pier Dubois</Box>
           <Box >- Toufik Dellys</Box>
         </Typography>
-        </Container>
+       
       </main>
     </>
   );
 }
+export default Home;
 
 
