@@ -1,5 +1,6 @@
 "use client"
 
+
 import React, { useEffect, useState } from 'react';
 import { DataGrid, GridColDef, GridCellParams } from '@mui/x-data-grid';
 import DeleteIcon from '@mui/icons-material/Delete';
@@ -8,8 +9,14 @@ import { getCategoriesData, deleteCategoryData } from '../../../API/api';
 import { Box, CircularProgress } from '@mui/material';
 
 const CategoryGrid = () => {
+  
   const [rows, setRows] = useState<{ id: string; name: string }[]>([]);
   const [loading, setLoading] = useState(true);
+  const [isClient, setIsClient] = useState(false);
+
+  useEffect(() => {
+    setIsClient(true);
+  }, []);
 
   useEffect(() => {
     setLoading(true);
@@ -31,7 +38,7 @@ const CategoryGrid = () => {
   }, []);
 
   const handleDeleteButtonClick = (params: GridCellParams) => {
-    const categoryId = params.id as string; // Assuming the id is a string
+    const categoryId = params.id as string; 
 
     const confirmDelete = window.confirm('Êtes-vous sûr de vouloir supprimer cette catégorie ?');
     if (!confirmDelete) {
@@ -52,6 +59,15 @@ const CategoryGrid = () => {
         setLoading(false);
         window.alert('Erreur lors de la suppression de la catégorie');
       });
+  };
+
+  const handleModifyButtonClick = (params: GridCellParams) => {
+    const categoryId = params.id as string;
+
+    if (isClient) {
+      // Redirect to modify category page
+      window.location.href = `/categories/${categoryId}`;
+    }
   };
 
   const columns: GridColDef[] = [
@@ -88,7 +104,7 @@ const CategoryGrid = () => {
       ),
       width: 50,
       renderCell: (params: GridCellParams) => (
-        <button style={{ background: 'none', border: 'none' }}>
+        <button style={{ background: 'none', border: 'none' }} onClick={() => handleModifyButtonClick(params)}>
           <EditIcon color="primary" style={{ color: '#2196F3' }} />
         </button>
       ),
@@ -100,7 +116,7 @@ const CategoryGrid = () => {
   ];
 
   return (
-    <Box sx={{ height: 'auto', maxHeight: '100%', minHeight: '99%', width: '90%', marginBottom:"" }}>
+    <Box sx={{ height: 'auto', maxHeight: '100%', minHeight: '99%', width: '90%'}}>
       {loading ? (
         <Box sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100%' }}>
           <CircularProgress />
@@ -127,3 +143,4 @@ const CategoryGrid = () => {
 };
 
 export default CategoryGrid;
+
