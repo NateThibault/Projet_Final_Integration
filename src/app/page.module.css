@@ -1,16 +1,26 @@
 /*CSS POUR PAGE CATEGORIE GRID*/
-.centeredGrid {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  margin-top: 1%;
-}
 .centeredTypo{
   display: flex;
   justify-content: center;
   align-items: center;
   margin-top: 2%;
   color: black;
+}
+
+.centeredGrid {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 1%;
+  position: relative;
+}
+
+.buttonContainer {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 1%;
+  width: 100%;
+  margin-bottom: 1%;
 }
 
 

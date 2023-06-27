@@ -1,4 +1,5 @@
 import { getCategoriesData } from "@/api/api"
+import Header from "@/components/atoms/header/header"
 import ProductForm from "@/components/organisms/product-form/product-form"
 
 export default async function addProduct() {
@@ -14,6 +15,7 @@ export default async function addProduct() {
 
   return (
     <>
+      <Header title={"Ajouter un produit"} />
       <ProductForm productData={productData} categoriesData={categoriesData} />
     </>
   )
