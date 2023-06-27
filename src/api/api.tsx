@@ -1,7 +1,9 @@
 
 import { Product, Category } from "@/interface/interface"
 
-export async function getProductData(id?: string) {
+
+
+export async function getProductsData(id?: string) {
   const url = id ? `https://api-final-qxme.onrender.com/products/${id}` : `https://api-final-qxme.onrender.com/products`;
 
   const res = await fetch(url, {
@@ -12,15 +14,27 @@ export async function getProductData(id?: string) {
   });
 
   if (!res.ok) {
-    throw new Error('Failed to fetch data');
+    throw new Error('Échech de la récupération des données');
   }
 
   const data = await res.json();
 
-  // Add the _id property as the id property
   const products = Array.isArray(data) ? data.map(product => ({ ...product, id: product._id })) : [];
 
   return products;
+}
+
+export async function getProductData(id: string) {
+  const res = await fetch(`https://api-final-qxme.onrender.com/products/${id}`, {
+    method: "GET",
+    headers: {
+      'Cache-Control': 'no-cache'
+    }
+  })
+  if (!res.ok) {
+    throw new Error('Échec de la récupération des données')
+  }
+  return res.json()
 }
 
 export async function deleteProductData(productId: string) {
@@ -33,7 +47,7 @@ export async function deleteProductData(productId: string) {
   });
 
   if (!res.ok) {
-    throw new Error('Failed to delete the product');
+    throw new Error('Échec lors de la suppression du produit');
   }
 }
 
@@ -46,7 +60,7 @@ export async function putProductData(id: string, formData: Product) {
     }
   })
   if (!res.ok) {
-    throw new Error('Failed to fetch data')
+    throw new Error('Échec de la récupération des données')
   }
   return res.json()
 }
@@ -60,7 +74,7 @@ export async function postProductData(formData: Product) {
     }
   })
   if (!res.ok) {
-    throw new Error('Failed to fetch data')
+    throw new Error('Échech de la récupération des données')
   }
   return res.json()
 }
@@ -73,7 +87,7 @@ export async function getCategoriesData() {
     }
   })
   if (!res.ok) {
-    throw new Error('Failed to fetch data')
+    throw new Error('Échec de la récupération des données')
   }
   return res.json()
 }
@@ -86,7 +100,7 @@ export async function getCategoryData(id: string) {
       }
       })
     if (!res.ok) {
-        throw new Error('Failed to fetch data')
+        throw new Error('Échec de la récupération des données')
     }
     return res.json()
 }
@@ -100,7 +114,7 @@ export async function putCategoryData(id: string, formData: Category) {
     }
   })
   if (!res.ok) {
-    throw new Error('Failed to fetch data')
+    throw new Error('Échec de la récupération des données')
   }
   return res.json()
 }
@@ -114,7 +128,7 @@ export async function postCategoryData(formData: Category) {
     }
   })
   if (!res.ok) {
-    throw new Error('Failed to fetch data')
+    throw new Error('Échec de la récupération des données')
   }
   return res.json()
 }
@@ -122,7 +136,7 @@ export async function postCategoryData(formData: Category) {
 export async function deleteCategoryData(categoryId: string) {
   const res = await fetch(`https://api-final-qxme.onrender.com/categories/${categoryId}`, { method: 'DELETE' });
   if (!res.ok) {
-    throw new Error('Failed to delete category');
+    throw new Error('Échec de la suppression de la catégorie');
   }
 }
 

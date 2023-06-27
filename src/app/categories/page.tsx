@@ -8,6 +8,7 @@ import ButtonAdd from '@/components/atoms/button-add/button-add'
 import Header from '@/components/atoms/header/header'
 
 
+
 const Categories = () => {
   return (
     <>

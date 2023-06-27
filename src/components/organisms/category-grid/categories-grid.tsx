@@ -1,19 +1,19 @@
 "use client"
 
-
 import React, { useEffect, useState } from 'react'
 import { DataGrid, GridColDef, GridCellParams } from '@mui/x-data-grid'
 import DeleteIcon from '@mui/icons-material/Delete'
 import EditIcon from '@mui/icons-material/EditSharp'
 import { getCategoriesData, deleteCategoryData } from '../../../api/api'
-import { Box, CircularProgress } from '@mui/material'
+import {Box, CircularProgress} from '@mui/material'
+
 
 const CategoryGrid = () => {
   
   const [rows, setRows] = useState<{ id: string; name: string }[]>([])
   const [loading, setLoading] = useState(true)
   const [isClient, setIsClient] = useState(false)
-
+  
   useEffect(() => {
     setIsClient(true)
   }, [])
@@ -38,6 +38,7 @@ const CategoryGrid = () => {
   }, [])
 
   const handleDeleteButtonClick = (params: GridCellParams) => {
+
     const categoryId = params.id as string
   
     const confirmDelete = window.confirm('Êtes-vous sûr de vouloir supprimer cette catégorie ?')
@@ -64,7 +65,6 @@ const CategoryGrid = () => {
     const categoryId = params.id as string
 
     if (isClient) {
-      // Redirect to modify category page
       window.location.href = `/categories/${categoryId}`
     }
   }
@@ -131,6 +131,8 @@ const CategoryGrid = () => {
       )}
     </Box>
   )
+
+  
 }
 
 export default CategoryGrid

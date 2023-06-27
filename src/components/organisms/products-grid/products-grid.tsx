@@ -1,12 +1,14 @@
 "use client"
+
 import React, { useState, useEffect } from 'react';
 import { DataGrid, GridCellParams, GridColDef } from '@mui/x-data-grid';
 import DeleteIcon from '@mui/icons-material/Delete'
 import EditIcon from '@mui/icons-material/EditSharp'
-import { getProductData, deleteProductData } from '../../../api/api';
+import { deleteProductData, getProductsData } from '../../../api/api';
 import { Box, CircularProgress } from '@mui/material';
 
 const ProductGrid = () => {
+  
   const [rows, setRows] = useState<{ id: string; title: string; description: string; price: number }[]>([]);
   const [loading, setLoading] = useState(true);
   const [isClient, setIsClient] = useState(false)
@@ -18,11 +20,11 @@ const ProductGrid = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const data = await getProductData();
+        const data = await getProductsData();
         setRows(data);
         setLoading(false);
       } catch (error) {
-        console.error('Error fetching product data:', error);
+        console.error('Échec de la récupération des données :', error);
         setRows([]);
         setLoading(false);
       }
@@ -65,7 +67,7 @@ const ProductGrid = () => {
   const columns: GridColDef[] = [
     {
       field: 'title',
-      headerName: 'Title',
+      headerName: 'Titre',
       width: 100,
       flex: 1, 
     },
@@ -77,7 +79,7 @@ const ProductGrid = () => {
     },
     {
       field: 'price',
-      headerName: 'Price',
+      headerName: 'Prix',
       type: 'number',
       width: 110,
       headerAlign: 'center',
