@@ -25,3 +25,16 @@ export interface Categories {
     _id: string
     name: string
 }
+
+export interface Category {
+    name: string;
+}
+
+export interface CategoryFormProps {
+    categoryData: ApiCategories
+}
+
+export interface ApiCategories {
+    _id: string;
+    name: string;
+}
