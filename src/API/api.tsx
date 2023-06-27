@@ -1,17 +1,40 @@
 
 import { Product, Category } from "@/interface/interface"
 
-export async function getProductData(id: string) {
-  const res = await fetch(`https://api-final-qxme.onrender.com/products/${id}`, {
+export async function getProductData(id?: string) {
+  const url = id ? `https://api-final-qxme.onrender.com/products/${id}` : `https://api-final-qxme.onrender.com/products`;
+
+  const res = await fetch(url, {
     method: "GET",
     headers: {
       'Cache-Control': 'no-cache'
     }
-  })
+  });
+
   if (!res.ok) {
-    throw new Error('Failed to fetch data')
+    throw new Error('Failed to fetch data');
   }
-  return res.json()
+
+  const data = await res.json();
+
+  // Add the _id property as the id property
+  const products = Array.isArray(data) ? data.map(product => ({ ...product, id: product._id })) : [];
+
+  return products;
+}
+
+export async function deleteProductData(productId: string) {
+  const res = await fetch(`https://api-final-qxme.onrender.com/products/${productId}`, {
+    method: "DELETE",
+    headers: {
+      'Content-Type': 'application/json',
+      'Cache-Control': 'no-cache'
+    }
+  });
+
+  if (!res.ok) {
+    throw new Error('Failed to delete the product');
+  }
 }
 
 export async function putProductData(id: string, formData: Product) {
