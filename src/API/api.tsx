@@ -95,4 +95,11 @@ export async function postCategoryData(formData: Category) {
     return res.json()
 }
 
+export async function deleteCategoryData(categoryId: string) {
+  const res = await fetch(`https://api-final-qxme.onrender.com/categories/${categoryId}`, { method: 'DELETE' });
+  if (!res.ok) {
+    throw new Error('Failed to delete category');
+  }
+}
+
 
