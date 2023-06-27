@@ -42,7 +42,7 @@ const Home = () => {
 
         <Box
           sx={{
-            marginTop: "30px",
+            marginTop: "10px",
             color: "black", marginBottom: "100px"
           }}
         >
