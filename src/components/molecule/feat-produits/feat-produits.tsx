@@ -26,21 +26,21 @@ const columns: GridColDef[] = [
     width: 150,
     valueGetter: (params: GridValueGetterParams<RowData, any>) =>
       params.rowIndex + 1,
-    flex: 1, 
+    flex: 1,
   },
   {
     field: 'Titre',
     headerName: 'Titre',
     width: 150,
     editable: false,
-    flex: 1, // Adicionado
+    flex: 1,
   },
   {
     field: 'Description',
     headerName: 'Description',
     width: 150,
     editable: false,
-    flex: 1, // Adicionado
+    flex: 1,
   },
   {
     field: 'Prix',
@@ -48,15 +48,19 @@ const columns: GridColDef[] = [
     type: 'number',
     width: 110,
     editable: false,
-    flex: 1, // Adicionado
+    headerAlign: 'center',
+    align: 'center',
+    flex: 1,
   },
   {
     field: 'actions',
-    headerName: 'Actions',
+    headerName: '',
     width: 120,
+    flex: 1,
+    headerAlign: 'right',
     renderCell: (params: GridValueGetterParams<RowData, any>) => (
-      <div style={{ display: 'flex', justifyContent: 'flex-end', width: '100%' }}>
-        <IconButton color="secondary" size="small">
+      <div style={{ display: 'flex', justifyContent: 'flex-end', width: '100%'}}>
+          <IconButton color="secondary" size="small">
           <DeleteIcon style={{ color: 'gray' }} />
         </IconButton>
         <IconButton color="primary" size="small">
@@ -66,6 +70,7 @@ const columns: GridColDef[] = [
     ),
   },
 ];
+
 
 const rows: RowData[] = [
   { id: 1, Titre: 'Produit 1', Description: 'Description 1', Prix: 10 },
@@ -87,9 +92,9 @@ export default function ListProduits({ fileCreationDate }: ListProduitsProps) {
     >
       <Box
         sx={{
-          maxWidth: '90%',
-          width: '100%',
-          height: '50%',
+          maxWidth: '100%',
+          width: '90%',
+          height: '100%',
         }}
       >
         <Typography variant="h4" component="h1" align="center" gutterBottom>
@@ -102,21 +107,8 @@ export default function ListProduits({ fileCreationDate }: ListProduitsProps) {
             checkboxSelection
             disableColumnMenu
             disableSelectionOnClick
-            initialState={{
-
-              pagination: {
-  
-                paginationModel: {
-  
-                  pageSize: 10,
-  
-                },
-  
-              },
-  
-            }}
-  
-            pageSizeOptions={[10, 25, 50]}
+            pageSize={10}
+            rowsPerPageOptions={[10, 25, 50]}
           />
           <Button
             variant="contained"
