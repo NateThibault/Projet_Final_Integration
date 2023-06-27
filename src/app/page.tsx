@@ -6,11 +6,15 @@ import { Box } from "@mui/material";
 import { Grid } from "@mui/material";
 import { Typography } from "@mui/material";
 
+import Container from "@mui/material/Container";
+
 export default function Home() {
+ 
   return (
     <>
-      <Box className={styles.main}>
-        <Box sx={{ marginLeft: "80px" }}>
+      <main className={styles.main}>
+      <Container>
+        <Box sx={{ marginLeft: "40px" }}>
           <Header title={"Home"}></Header>
         </Box>
         <Grid
@@ -26,7 +30,7 @@ export default function Home() {
         </Grid>
         <Typography
           sx={{
-            marginLeft: "80px",
+            marginLeft: "15px",
             marginRight: "80px",
             color: "black",
             fontSize: "25px",
@@ -39,7 +43,7 @@ export default function Home() {
         <Typography
           sx={{
             marginTop: "10px",
-            marginLeft: "80px",
+            marginLeft: "15px",
             marginRight: "80px",
             textAlign: "justify",
             color: "black",
@@ -56,7 +60,7 @@ export default function Home() {
         <Typography
           sx={{
             marginTop: "50px",
-            marginLeft: "80px",
+            marginLeft: "15px",
             marginRight: "80px",
             color: "black",
             fontSize: "25px",
@@ -70,7 +74,7 @@ export default function Home() {
         <Typography
           sx={{
             marginTop: "30px",
-            marginLeft: "80px",
+            marginLeft: "15px",
             marginRight: "80px",
             color: "black",
             fontSize: "18px",
@@ -83,9 +87,10 @@ export default function Home() {
           <Box >- Marie-Pier Dubois</Box>
           <Box >- Toufik Dellys</Box>
         </Typography>
-      </Box>
+        </Container>
+      </main>
     </>
   );
 }
 
-export default Home;
+
