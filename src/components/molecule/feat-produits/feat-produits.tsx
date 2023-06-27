@@ -100,7 +100,7 @@ export default function ListProduits({ fileCreationDate }: ListProduitsProps) {
         <Typography variant="h4" component="h1" align="center" gutterBottom>
           Liste des produits
         </Typography>
-        <div style={{ height: '50%', width: '100%', position: 'relative' }}>
+        <div style={{ height: '100%', width: '100%', position: 'relative' }}>
           <DataGrid
             rows={rows}
             columns={columns}
