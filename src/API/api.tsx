@@ -58,7 +58,12 @@ export async function getCategoriesData() {
 import { Category } from "@/app/interface/interface"
 
 export async function getCategoryData(id: string) {
-    const res = await fetch(`https://api-final-qxme.onrender.com/categories/${id}`, { method: "GET"})
+    const res = await fetch(`https://api-final-qxme.onrender.com/categories/${id}`, {
+       method: "GET",
+       headers: {
+        'Cache-Control': 'no-cache'
+      }
+      })
     if (!res.ok) {
         throw new Error('Failed to fetch data')
     }
