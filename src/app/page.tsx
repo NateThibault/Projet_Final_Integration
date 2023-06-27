@@ -25,9 +25,9 @@ const Home = () => {
             color: "black",
           }}
         >
-          Le projet consiste à créer un interface
-          administrateure liée au back-end et à la base de données réalisés
-          durant le court de programmation
+          Le projet consiste à créer une interface
+          administrateur liée au back-end et à la base de données réalisés
+          durant le court de programmation.
         </Typography>
 
         <Typography
