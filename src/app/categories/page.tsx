@@ -1,30 +1,29 @@
 "use client"
 
-import React from 'react';
-import styles from '../page.module.css';
-import { Typography } from '@mui/material';
-import CategoryGrid from '@/components/molecules/feat_categories/categories';
-import BoutonAdd from '@/components/molecules/feat_categories/boutonAdd';
+import React from 'react'
+import styles from '../page.module.css'
+import { Box, Typography } from '@mui/material'
+import CategoryGrid from '@/components/organisms/category-grid/categories-grid'
+import BoutonAdd from '@/components/atoms/my-button/my-button'
 
 
 const Categories = () => {
   return (
-    <main className={styles.main}>
-      <div className={styles.centeredTypo}>
+    <>
+      <Box className={styles.centeredTypo}>
         <Typography variant="h4" fontWeight="500">
           Liste des catégories
         </Typography>
-      </div>
-      <div className={styles.centeredGrid}>
+      </Box>
+      <Box className={styles.centeredGrid}>
         <CategoryGrid />
-        <div className={styles.buttonContainer}>
+        <Box className={styles.buttonContainer}>
           <BoutonAdd />
-        </div>
-      </div>
-     
-    </main>
-  );
-};
-  
+        </Box>
+      </Box>
+    </>
+  )
+}
 
-export default Categories;
+
+export default Categories
