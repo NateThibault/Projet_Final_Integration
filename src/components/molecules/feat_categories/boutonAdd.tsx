@@ -6,7 +6,12 @@ const BoutonAdd = () => {
   };
 
   return (
-    <Button variant="contained" size="large" onClick={handleAddClick}>
+    <Button
+      variant="contained"
+      size="large"
+      onClick={handleAddClick}
+      sx={{ width: '10%',height:"6vh", borderRadius:"1vh" }} // Adjust the width value as per your requirement
+    >
       Ajouter
     </Button>
   );

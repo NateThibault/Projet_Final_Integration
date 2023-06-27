@@ -1,10 +1,4 @@
 /*CSS POUR PAGE CATEGORIE GRID*/
-.centeredGrid {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  margin-top: 1%;
-}
 .centeredTypo{
   display: flex;
   justify-content: center;
@@ -13,11 +7,24 @@
   color: black;
 }
 
-.alignBoutonRight{
+.centeredGrid {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 1%;
+  position: relative;
+}
+
+.buttonContainer {
   display: flex;
   justify-content: flex-end;
-  margin-top: 16px;
+  margin-top: 1%;
+  width: 100%;
+  margin-left: -20%;
+  margin-bottom: 1%;
 }
+
+
 
 /* Enable hover only on non-touch devices */
 @media (hover: hover) and (pointer: fine) {

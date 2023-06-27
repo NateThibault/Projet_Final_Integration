@@ -115,7 +115,7 @@ const CategoryGrid = () => {
   ];
 
   return (
-    <Box sx={{ height: 'auto', maxHeight: '100%',  width: '80%', marginBottom:"5%"}}>
+    <Box sx={{ height: 'auto', maxHeight: '100%',  width: '80%'}}>
       {loading ? (
         <Box sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100%' }}>
           <CircularProgress />
