@@ -34,7 +34,7 @@ const ProductGrid = () => {
   const handleDeleteButtonClick = async (params: GridCellParams) => {
     const productId = params.row.id as string;
   
-    const confirmDelete = window.confirm('Are you sure you want to delete this product?');
+    const confirmDelete = window.confirm('Êtes-vous sûr de vouloir supprimer ce produit ?');
     if (!confirmDelete) {
       return;
     }
@@ -45,11 +45,11 @@ const ProductGrid = () => {
       await deleteProductData(productId);
       setRows((prevRows) => prevRows.filter((row) => row.id !== productId));
       setLoading(false);
-      window.alert('The product has been deleted successfully.');
+      window.alert('Le produit a bien été supprimé');
     } catch (error) {
-      console.error('Error deleting the product:', error);
+      console.error('Erreur lors de la supression du produit:', error);
       setLoading(false);
-      window.alert('Error deleting the product');
+      window.alert('Erreur lors de la supression du produit');
     }
   };
 
@@ -57,7 +57,6 @@ const ProductGrid = () => {
     const productId = params.id as string;
   
     if (isClient) {
-      // Redirect to modify product page
       window.location.href = `/products/${productId}`;
     }
   };
@@ -67,12 +66,14 @@ const ProductGrid = () => {
     {
       field: 'title',
       headerName: 'Title',
-      width: 150,
+      width: 100,
+      flex: 1, 
     },
     {
       field: 'description',
       headerName: 'Description',
       width: 250,
+      flex: 1, 
     },
     {
       field: 'price',
@@ -81,15 +82,12 @@ const ProductGrid = () => {
       width: 110,
       headerAlign: 'center',
       align: 'center',
+      flex: 1, 
     },
     {
       field: 'delete',
       width: 50,
-      renderHeader: (params) => (
-        <span>
-          <DeleteIcon style={{ color: 'grey' }} />
-        </span>
-      ),
+      headerName: '',
       renderCell: (params: GridCellParams) => (
         <button style={{ background: 'none', border: 'none' }} onClick={() => handleDeleteButtonClick(params)}>
           <DeleteIcon style={{ color: 'grey' }} />
@@ -99,14 +97,11 @@ const ProductGrid = () => {
       align: 'center',
       filterable: false,
       sortable: false,
+      minWidth: 50,
     },
     {
       field: 'modify',
-      renderHeader: (params) => (
-        <span>
-          <EditIcon color="primary" style={{ color: '#2196F3' }} />
-        </span>
-      ),
+      headerName: '',
       width: 50,
       renderCell: (params: GridCellParams) => (
         <button style={{ background: 'none', border: 'none' }} onClick={() => handleModifyButtonClick(params)}>
@@ -117,6 +112,7 @@ const ProductGrid = () => {
       align: 'center',
       filterable: false,
       sortable: false,
+      minWidth: 50,
     },
   ];
   return (
@@ -129,6 +125,7 @@ const ProductGrid = () => {
         <DataGrid
           rows={rows}
           columns={columns}
+          autoHeight
           initialState={{
             pagination: {
               paginationModel: {

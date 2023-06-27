@@ -79,10 +79,7 @@ const CategoryGrid = () => {
     {
       field: 'delete',
       width: 50,
-      renderHeader: (params) => (
-        <span>
-        </span>
-      ),
+      headerName: '',
       renderCell: (params: GridCellParams) => (
         <button style={{ background: 'none', border: 'none' }} onClick={() => handleDeleteButtonClick(params)}>
           <DeleteIcon style={{ color: 'grey' }} />
@@ -95,10 +92,7 @@ const CategoryGrid = () => {
     },
     {
       field: 'modify',
-      renderHeader: (params) => (
-        <span>
-        </span>
-      ),
+      headerName: '',
       width: 50,
       renderCell: (params: GridCellParams) => (
         <button style={{ background: 'none', border: 'none' }} onClick={() => handleModifyButtonClick(params)}>
