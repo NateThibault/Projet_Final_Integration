@@ -24,18 +24,11 @@ const pages: MenuItem[] = [
 
 function MyMenu() {
     const [anchorElNav, setAnchorElNav] = React.useState<null | HTMLElement>(null)
-    const [anchorElUser, setAnchorElUser] = React.useState<null | HTMLElement>(null)
     const handleOpenNavMenu = (event: React.MouseEvent<HTMLElement>) => {
         setAnchorElNav(event.currentTarget)
     }
-    const handleOpenUserMenu = (event: React.MouseEvent<HTMLElement>) => {
-        setAnchorElUser(event.currentTarget)
-    }
     const handleCloseNavMenu = () => {
         setAnchorElNav(null)
-    }
-    const handleCloseUserMenu = () => {
-        setAnchorElUser(null)
     }
 
     return (
@@ -91,7 +84,7 @@ function MyMenu() {
                         >
                             {pages.map((page) => (
                                 <MenuItem key={page.label} onClick={handleCloseNavMenu}>
-                                    <Typography textAlign="center">{page.label}</Typography>
+                                    <Typography textAlign="center" component="a" href={page.route}>{page.label}</Typography>
                                 </MenuItem>
                             ))}
                         </Menu>
@@ -103,7 +96,6 @@ function MyMenu() {
                         component="a"
                         href="/"
                         sx={{
-                            mr: 2,
                             display: { xs: 'flex', md: 'none' },
                             flexGrow: 1,
                             fontFamily: 'monospace',
@@ -127,6 +119,9 @@ function MyMenu() {
                             </Button>
                         ))}
                     </Box>
+                    <Typography component="a" href="/fr" style={{ color: "white", marginRight: "3px" }}>FR</Typography>
+                    <Typography>/</Typography>
+                    <Typography component="a" href="/en" style={{ color: "white", marginLeft: "3px" }}>EN</Typography>
                 </Toolbar>
             </Container>
         </AppBar>
