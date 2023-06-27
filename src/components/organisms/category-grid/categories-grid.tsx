@@ -1,73 +1,73 @@
 "use client"
 
 
-import React, { useEffect, useState } from 'react';
-import { DataGrid, GridColDef, GridCellParams } from '@mui/x-data-grid';
-import DeleteIcon from '@mui/icons-material/Delete';
-import EditIcon from '@mui/icons-material/EditSharp';
-import { getCategoriesData, deleteCategoryData } from '../../../api/api';
-import { Box, Button, CircularProgress } from '@mui/material';
+import React, { useEffect, useState } from 'react'
+import { DataGrid, GridColDef, GridCellParams } from '@mui/x-data-grid'
+import DeleteIcon from '@mui/icons-material/Delete'
+import EditIcon from '@mui/icons-material/EditSharp'
+import { getCategoriesData, deleteCategoryData } from '../../../api/api'
+import { Box, CircularProgress } from '@mui/material'
 
 const CategoryGrid = () => {
   
-  const [rows, setRows] = useState<{ id: string; name: string }[]>([]);
-  const [loading, setLoading] = useState(true);
-  const [isClient, setIsClient] = useState(false);
+  const [rows, setRows] = useState<{ id: string; name: string }[]>([])
+  const [loading, setLoading] = useState(true)
+  const [isClient, setIsClient] = useState(false)
 
   useEffect(() => {
-    setIsClient(true);
-  }, []);
+    setIsClient(true)
+  }, [])
 
   useEffect(() => {
-    setLoading(true);
+    setLoading(true)
 
     getCategoriesData()
       .then((data) => {
         const categoryRows = data.map((category: { _id: any; name: any }) => ({
           id: category._id,
           name: category.name,
-        }));
-        setRows(categoryRows);
-        setLoading(false);
+        }))
+        setRows(categoryRows)
+        setLoading(false)
       })
       .catch((error) => {
-        console.error("Erreur dans l'extraction des données :", error);
-        setRows([]);
-        setLoading(false);
-      });
-  }, []);
+        console.error("Erreur dans l'extraction des données :", error)
+        setRows([])
+        setLoading(false)
+      })
+  }, [])
 
   const handleDeleteButtonClick = (params: GridCellParams) => {
-    const categoryId = params.id as string;
+    const categoryId = params.id as string
   
-    const confirmDelete = window.confirm('Êtes-vous sûr de vouloir supprimer cette catégorie ?');
+    const confirmDelete = window.confirm('Êtes-vous sûr de vouloir supprimer cette catégorie ?')
     if (!confirmDelete) {
-      return;
+      return
     }
   
-    setLoading(true);
+    setLoading(true)
   
     deleteCategoryData(categoryId)
       .then(() => {
-        setRows((prevRows) => prevRows.filter((row) => row.id !== categoryId));
-        setLoading(false);
-        window.alert('La catégorie a été supprimée avec succès.');
+        setRows((prevRows) => prevRows.filter((row) => row.id !== categoryId))
+        setLoading(false)
+        window.alert('La catégorie a été supprimée avec succès.')
       })
       .catch((error) => {
-        console.error('Erreur lors de la suppression de la catégorie', error);
-        setLoading(false);
-        window.alert('Erreur lors de la suppression de la catégorie');
-      });
-  };
+        console.error('Erreur lors de la suppression de la catégorie', error)
+        setLoading(false)
+        window.alert('Erreur lors de la suppression de la catégorie')
+      })
+  }
 
   const handleModifyButtonClick = (params: GridCellParams) => {
-    const categoryId = params.id as string;
+    const categoryId = params.id as string
 
     if (isClient) {
       // Redirect to modify category page
-      window.location.href = `/categories/${categoryId}`;
+      window.location.href = `/categories/${categoryId}`
     }
-  };
+  }
 
   const columns: GridColDef[] = [
     {
@@ -112,10 +112,10 @@ const CategoryGrid = () => {
       filterable: false,
       sortable: false,
     },
-  ];
+  ]
 
   return (
-    <Box sx={{ height: 'auto', maxHeight: '100%',  width: '80%'}}>
+    <Box sx={{ height: 'auto', maxHeight: '100%', width: "100%"}}>
       {loading ? (
         <Box sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100%' }}>
           <CircularProgress />
@@ -138,11 +138,8 @@ const CategoryGrid = () => {
         />
       )}
     </Box>
-  );
-};
+  )
+}
 
-
-
-
-export default CategoryGrid;
+export default CategoryGrid
 

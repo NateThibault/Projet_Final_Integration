@@ -38,3 +38,14 @@ export interface ApiCategories {
     _id: string;
     name: string;
 }
+
+export interface RowData {
+    id: number
+    Titre: string
+    Description: string
+    Prix: number
+  }
+  
+  export interface ListProduitsProps {
+    fileCreationDate: string
+  }
