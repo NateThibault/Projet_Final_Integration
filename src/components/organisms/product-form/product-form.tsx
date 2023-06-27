@@ -19,7 +19,6 @@ const schema = yup
 
 export default function ProductForm(props: ProductFormProps) {
   const [loading, setLoading] = React.useState(false)
-  const [response, setResponse] = React.useState("Une erreur est survenue")
   const [category, setCategory] = React.useState(props.productData.categoryId)
   const [isSold, setIsSold] = React.useState(props.productData.isSold)
   const [isSoldDirty, setIsSoldDirty] = React.useState(false)
@@ -37,26 +36,23 @@ export default function ProductForm(props: ProductFormProps) {
     if (!props.productData._id) {
       postProductData(formData)
         .then(() => {
-          setResponse("Produit ajouté avec succès")
-          alert(response)
+          alert("Produit ajouté avec succès")
           window.location.href = "/products"
         })
         .catch(() => {
-          setResponse("Une erreur est survenue")
-          alert(response)
+          alert("Une erreur est survenue")
           setLoading(false)
         })
     } else {
-      try {
-        await putProductData(props.productData._id, formData)
-        setResponse("Produit modifié avec succès")
-        alert(response)
-        window.location.href = "/products"
-      } catch (error) {
-        setResponse("Une erreur est survenue")
-        alert(response)
-        setLoading(false)
-      }
+      putProductData(props.productData._id, formData)
+        .then(() => {
+          alert("Produit modifié avec succès")
+          window.location.href = "/products"
+        })
+        .catch(() => {
+          alert("Une erreur est survenue")
+          setLoading(false)
+        })
     }
   }
   const cancel = () => {
@@ -166,7 +162,7 @@ export default function ProductForm(props: ProductFormProps) {
                   variant="contained"
                   type="submit"
                   disabled={!isValid || !isDirty && !isCategoryDirty && !isSoldDirty}>
-                  Envoyer
+                  Valider
                 </Button>
               </Grid>
             </Grid>
