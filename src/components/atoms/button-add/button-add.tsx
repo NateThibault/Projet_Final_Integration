@@ -1,6 +1,6 @@
 import { Button } from "@mui/material"
 
-const BoutonAdd = () => {
+const ButtonAdd = () => {
   const handleAddClick = () => {
     window.location.href ="/categories/add"
   }
@@ -16,4 +16,4 @@ const BoutonAdd = () => {
   )
 }
 
-export default BoutonAdd
+export default ButtonAdd
