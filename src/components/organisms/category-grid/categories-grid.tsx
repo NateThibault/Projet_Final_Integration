@@ -1,22 +1,18 @@
 "use client"
 
-
 import React, { useEffect, useState } from 'react'
 import { DataGrid, GridColDef, GridCellParams } from '@mui/x-data-grid'
 import DeleteIcon from '@mui/icons-material/Delete'
 import EditIcon from '@mui/icons-material/EditSharp'
 import { getCategoriesData, deleteCategoryData } from '../../../api/api'
-import { Box, CircularProgress } from '@mui/material'
+import {Box, CircularProgress} from '@mui/material'
+
 
 const CategoryGrid = () => {
   
   const [rows, setRows] = useState<{ id: string; name: string }[]>([])
   const [loading, setLoading] = useState(true)
-  const [isClient, setIsClient] = useState(false)
 
-  useEffect(() => {
-    setIsClient(true)
-  }, [])
 
   useEffect(() => {
     setLoading(true)
@@ -38,6 +34,7 @@ const CategoryGrid = () => {
   }, [])
 
   const handleDeleteButtonClick = (params: GridCellParams) => {
+
     const categoryId = params.id as string
   
     const confirmDelete = window.confirm('Êtes-vous sûr de vouloir supprimer cette catégorie ?')
@@ -62,11 +59,7 @@ const CategoryGrid = () => {
 
   const handleModifyButtonClick = (params: GridCellParams) => {
     const categoryId = params.id as string
-
-    if (isClient) {
-      // Redirect to modify category page
-      window.location.href = `/categories/${categoryId}`
-    }
+    window.location.href = `/categories/${categoryId}`
   }
 
   const columns: GridColDef[] = [
@@ -79,10 +72,7 @@ const CategoryGrid = () => {
     {
       field: 'delete',
       width: 50,
-      renderHeader: (params) => (
-        <span>
-        </span>
-      ),
+      headerName: '',
       renderCell: (params: GridCellParams) => (
         <button style={{ background: 'none', border: 'none' }} onClick={() => handleDeleteButtonClick(params)}>
           <DeleteIcon style={{ color: 'grey' }} />
@@ -95,10 +85,7 @@ const CategoryGrid = () => {
     },
     {
       field: 'modify',
-      renderHeader: (params) => (
-        <span>
-        </span>
-      ),
+      headerName: '',
       width: 50,
       renderCell: (params: GridCellParams) => (
         <button style={{ background: 'none', border: 'none' }} onClick={() => handleModifyButtonClick(params)}>
@@ -137,6 +124,8 @@ const CategoryGrid = () => {
       )}
     </Box>
   )
+
+  
 }
 
 export default CategoryGrid
