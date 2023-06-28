@@ -5,7 +5,7 @@ import { DataGrid, GridColDef, GridCellParams } from '@mui/x-data-grid'
 import DeleteIcon from '@mui/icons-material/Delete'
 import EditIcon from '@mui/icons-material/EditSharp'
 import { getCategoriesData, deleteCategoryData } from '../../../api/api'
-import {Box, CircularProgress} from '@mui/material'
+import {Box, Button, CircularProgress} from '@mui/material'
 
 
 const CategoryGrid = () => {
@@ -74,9 +74,24 @@ const CategoryGrid = () => {
       width: 50,
       headerName: '',
       renderCell: (params: GridCellParams) => (
-        <button style={{ background: 'none', border: 'none' }} onClick={() => handleDeleteButtonClick(params)}>
+        <Button
+          style={{
+            background: 'none',
+            border: 'none',
+            transition: 'transform 0.2s ease',
+          }}
+          onClick={() => handleDeleteButtonClick(params)}
+          onMouseEnter={(e) => {
+            const target = e.target as HTMLElement;
+            target.style.transform = 'scale(1.3)';
+          }}
+          onMouseLeave={(e) => {
+            const target = e.target as HTMLElement;
+            target.style.transform = 'scale(1)';
+          }}
+        >
           <DeleteIcon style={{ color: 'grey' }} />
-        </button>
+        </Button>
       ),
       headerAlign: 'center',
       align: 'center',
@@ -88,9 +103,24 @@ const CategoryGrid = () => {
       headerName: '',
       width: 50,
       renderCell: (params: GridCellParams) => (
-        <button style={{ background: 'none', border: 'none' }} onClick={() => handleModifyButtonClick(params)}>
+        <Button
+          style={{
+            background: 'none',
+            border: 'none',
+            transition: 'transform 0.2s ease',
+          }}
+          onClick={() => handleModifyButtonClick(params)}
+          onMouseEnter={(e) => {
+            const target = e.target as HTMLElement;
+            target.style.transform = 'scale(1.3)';
+          }}
+          onMouseLeave={(e) => {
+            const target = e.target as HTMLElement;
+            target.style.transform = 'scale(1)';
+          }}
+        >
           <EditIcon color="primary" style={{ color: '#2196F3' }} />
-        </button>
+        </Button>
       ),
       headerAlign: 'center',
       align: 'center',
