@@ -11,12 +11,7 @@ const ProductGrid = () => {
   
   const [rows, setRows] = useState<{ id: string; title: string; description: string; price: number }[]>([]);
   const [loading, setLoading] = useState(true);
-  const [isClient, setIsClient] = useState(false)
-
-  useEffect(() => {
-    setIsClient(true)
-  }, [])
-
+ 
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -57,10 +52,7 @@ const ProductGrid = () => {
 
   const handleModifyButtonClick = (params: GridCellParams) => {
     const productId = params.id as string;
-  
-    if (isClient) {
-      window.location.href = `/products/${productId}`;
-    }
+    window.location.href = `/products/${productId}`;
   };
 
 

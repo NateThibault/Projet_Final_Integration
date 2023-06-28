@@ -12,11 +12,7 @@ const CategoryGrid = () => {
   
   const [rows, setRows] = useState<{ id: string; name: string }[]>([])
   const [loading, setLoading] = useState(true)
-  const [isClient, setIsClient] = useState(false)
-  
-  useEffect(() => {
-    setIsClient(true)
-  }, [])
+
 
   useEffect(() => {
     setLoading(true)
@@ -63,10 +59,7 @@ const CategoryGrid = () => {
 
   const handleModifyButtonClick = (params: GridCellParams) => {
     const categoryId = params.id as string
-
-    if (isClient) {
-      window.location.href = `/categories/${categoryId}`
-    }
+    window.location.href = `/categories/${categoryId}`
   }
 
   const columns: GridColDef[] = [
