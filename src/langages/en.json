@@ -1,18 +1,16 @@
 {
-    
-        "home":{
-        "page-title":" Home",
-        "subtitle": " INTEGRATION TP3"
+    "menu": {
+        "home": "Home",
+        "products": "Products",
+        "categories": "Categories"
     },
-        "products":{
-        "page-title":" Products ",
-        "subtitle": " Products List"
-
+    "home": {
+        "page-title": " INTEGRATION TP3"
     },
-        "categories":{
-        "page-title":" Categories ",
-        "subtitle": " Categories List"
+    "products": {
+        "page-title": " Products List"
+    },
+    "categories": {
+        "page-title": " Categories List"
     }
-         
 }
-

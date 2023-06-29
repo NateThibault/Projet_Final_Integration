@@ -5,7 +5,9 @@ import MyFooter from '@/components/molecules/my-footer/my-footer'
 
 
 const inter = Inter({ subsets: ['latin'] })
-
+export function generateStaticParams() {
+  return [{locale: 'en'}, {locale: 'fr'}];
+}
 export const metadata = {
   title: 'TP3 Intégration',
   description: 'Created by Nathan Thibault, Priscila Carvalho, Toufik Dellys, Marie-Pier Dubois, William Bitton',
@@ -17,7 +19,7 @@ export default function RootLayout({
   children: React.ReactNode
 }) {
   return (
-    <html lang="fr">
+    <html lang="en">
       <body className={inter.className} style={{ background: "white" }}>
         <header>
           <MyMenu />

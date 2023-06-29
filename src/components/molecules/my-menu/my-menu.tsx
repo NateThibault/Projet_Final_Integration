@@ -11,18 +11,20 @@ import Container from '@mui/material/Container'
 import Button from '@mui/material/Button'
 import MenuItem from '@mui/material/MenuItem'
 import SportsSoccerIcon from '@mui/icons-material/SportsSoccer'
+import { useTranslations } from 'next-intl'
+
+
+    
 
 interface MenuItem {
     label: string
     route: string
 }
 
-const pages: MenuItem[] = [
-    { label: "Produits", route: "/products" },
-    { label: "Catégories", route: "/categories" },
-]
+
 
 function MyMenu() {
+    const t = useTranslations();
     const [anchorElNav, setAnchorElNav] = React.useState<null | HTMLElement>(null)
     const handleOpenNavMenu = (event: React.MouseEvent<HTMLElement>) => {
         setAnchorElNav(event.currentTarget)
@@ -31,11 +33,19 @@ function MyMenu() {
         setAnchorElNav(null)
     }
 
+    const pages: MenuItem[] = [
+        { label: t("menu.home"), route: "/"},
+        { label: t("menu.products"), route: "/products" },
+        { label: t("menu.categories"), route: "/categories" },
+    ]
+
     return (
         <AppBar position="static">
+        
             <Container maxWidth="xl">
                 <Toolbar disableGutters>
                     <SportsSoccerIcon sx={{ display: { xs: 'none', md: 'flex' }, mr: 1 }} />
+                    
                     <Typography
                         variant="h6"
                         noWrap
@@ -127,4 +137,5 @@ function MyMenu() {
         </AppBar>
     )
 }
+
 export default MyMenu

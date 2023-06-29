@@ -11,7 +11,7 @@ const Home = () => {
   return (
   <>
       <Header 
-      title={t("home.page-title")} />
+      title={t("TP3 INTEGRATION")} />
   
       <Box className={styles.main}>
         <Typography
