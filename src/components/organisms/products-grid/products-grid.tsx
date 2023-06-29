@@ -1,120 +1,170 @@
 "use client"
-import * as React from 'react'
-import Box from '@mui/material/Box'
-import { DataGrid, GridColDef, GridValueGetterParams } from '@mui/x-data-grid'
-import IconButton from '@mui/material/IconButton'
+
+import React, { useState, useEffect } from 'react';
+import { DataGrid, GridCellParams, GridColDef } from '@mui/x-data-grid';
 import DeleteIcon from '@mui/icons-material/Delete'
-import EditIcon from '@mui/icons-material/Edit'
-import Typography from '@mui/material/Typography'
-import Button from '@mui/material/Button'
-import { RowData, ListProduitsProps } from '@/interface/interface'
+import EditIcon from '@mui/icons-material/EditSharp'
+import { deleteProductData, getProductsData } from '../../../api/api';
+import { Box, Button, CircularProgress } from '@mui/material';
 
-const columns: GridColDef[] = [
-  {
-    field: 'DateCreation',
-    headerName: 'Date de création',
-    width: 150,
-    valueGetter: (params: GridValueGetterParams<RowData, any>) =>
-      params.rowNode,
-    flex: 1,
-  },
-  {
-    field: 'Titre',
-    headerName: 'Titre',
-    width: 150,
-    editable: false,
-    flex: 1,
-  },
-  {
-    field: 'Description',
-    headerName: 'Description',
-    width: 150,
-    editable: false,
-    flex: 1,
-  },
-  {
-    field: 'Prix',
-    headerName: 'Prix',
-    type: 'number',
-    width: 110,
-    editable: false,
-    headerAlign: 'center',
-    align: 'center',
-    flex: 1,
-  },
-  {
-    field: 'actions',
-    headerName: '',
-    width: 120,
-    flex: 1,
-    headerAlign: 'right',
-    renderCell: () => (
-      <div style={{ display: 'flex', justifyContent: 'flex-end', width: '100%' }}>
-        <IconButton color="secondary" size="small">
-          <DeleteIcon style={{ color: 'gray' }} />
-        </IconButton>
-        <IconButton color="primary" size="small">
-          <EditIcon />
-        </IconButton>
-      </div>
-    )
-  },
-]
+const ProductGrid = () => {
+  
+  const [rows, setRows] = useState<{ id: string; title: string; description: string; price: number }[]>([]);
+  const [loading, setLoading] = useState(true);
+ 
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const data = await getProductsData();
+        setRows(data);
+        setLoading(false);
+      } catch (error) {
+        console.error('Échec de la récupération des données :', error);
+        setRows([]);
+        setLoading(false);
+      }
+    };
+  
+    fetchData();
+  }, []);
+
+  const handleDeleteButtonClick = async (params: GridCellParams) => {
+    const productId = params.row.id as string;
+  
+    const confirmDelete = window.confirm('Êtes-vous sûr de vouloir supprimer ce produit ?');
+    if (!confirmDelete) {
+      return;
+    }
+  
+    setLoading(true);
+  
+    try {
+      await deleteProductData(productId);
+      setRows((prevRows) => prevRows.filter((row) => row.id !== productId));
+      setLoading(false);
+      window.alert('Le produit a bien été supprimé');
+    } catch (error) {
+      console.error('Erreur lors de la supression du produit:', error);
+      setLoading(false);
+      window.alert('Erreur lors de la supression du produit');
+    }
+  };
+
+  const handleModifyButtonClick = (params: GridCellParams) => {
+    const productId = params.id as string;
+    window.location.href = `/products/${productId}`;
+  };
 
 
-const rows: RowData[] = [
-  { id: 1, Titre: 'Produit 1', Description: 'Description 1', Prix: 10 },
-  { id: 2, Titre: 'Produit 2', Description: 'Description 2', Prix: 20 },
-  { id: 3, Titre: 'Produit 3', Description: 'Description 3', Prix: 30 },
-  { id: 4, Titre: 'Produit 4', Description: 'Description 4', Prix: 40 },
-  { id: 5, Titre: 'Produit 5', Description: 'Description 5', Prix: 50 },
-]
-
-export default function ListProduits({ fileCreationDate }: ListProduitsProps) {
+  const columns: GridColDef[] = [
+    {
+      field: 'title',
+      headerName: 'Titre',
+      width: 100,
+      flex: 1, 
+    },
+    {
+      field: 'description',
+      headerName: 'Description',
+      width: 250,
+      flex: 1, 
+    },
+    {
+      field: 'price',
+      headerName: 'Prix',
+      type: 'number',
+      width: 110,
+      headerAlign: 'center',
+      align: 'center',
+      flex: 1, 
+    },
+    {
+      field: 'delete',
+      width: 50,
+      headerName: '',
+      renderCell: (params: GridCellParams) => (
+        <Button
+          style={{
+            background: 'none',
+            border: 'none',
+            transition: 'transform 0.2s ease',
+          }}
+          onClick={() => handleDeleteButtonClick(params)}
+          onMouseEnter={(e) => {
+            const target = e.target as HTMLElement;
+            target.style.transform = 'scale(1.3)';
+          }}
+          onMouseLeave={(e) => {
+            const target = e.target as HTMLElement;
+            target.style.transform = 'scale(1)';
+          }}
+        >
+          <DeleteIcon style={{ color: 'grey' }} />
+        </Button>
+      ),
+      headerAlign: 'center',
+      align: 'center',
+      filterable: false,
+      sortable: false,
+      minWidth: 50,
+    },
+    {
+      field: 'modify',
+      headerName: '',
+      width: 50,
+      renderCell: (params: GridCellParams) => (
+        <Button
+          style={{
+            background: 'none',
+            border: 'none',
+            transition: 'transform 0.2s ease',
+          }}
+          onClick={() => handleModifyButtonClick(params)}
+          onMouseEnter={(e) => {
+            const target = e.target as HTMLElement;
+            target.style.transform = 'scale(1.3)';
+          }}
+          onMouseLeave={(e) => {
+            const target = e.target as HTMLElement;
+            target.style.transform = 'scale(1)';
+          }}
+        >
+          <EditIcon color="primary" style={{ color: '#2196F3' }} />
+        </Button>
+      ),
+      headerAlign: 'center',
+      align: 'center',
+      filterable: false,
+      sortable: false,
+      minWidth: 50,
+    },
+  ];
   return (
-    <Box
-      sx={{
-        width: '100%',
-        display: 'flex',
-        justifyContent: 'center',
-        background: 'white',
-      }}
-    >
-      <Box
-        sx={{
-          maxWidth: '100%',
-          width: '90%',
-          height: '100%',
-        }}
-      >
-        <Typography variant="h4" component="h1" align="center" gutterBottom>
-          Liste des produits
-        </Typography>
-        <div style={{ height: '100%', width: '100%', position: 'relative' }}>
-          <DataGrid
-            rows={rows}
-            columns={columns}
-            checkboxSelection
-            disableColumnMenu
-            disableRowSelectionOnClick
-            initialState={{
-              pagination: {
-                paginationModel: {
-                  pageSize: 10,
-                },
+    <Box sx={{ height: 'auto', maxHeight: '100%', width: "100%" }}>
+      {loading ? (
+        <Box sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100%' }}>
+          <CircularProgress />
+        </Box>
+      ) : (
+        <DataGrid
+          rows={rows}
+          columns={columns}
+          autoHeight
+          initialState={{
+            pagination: {
+              paginationModel: {
+                pageSize: 10,
               },
-            }}
-            pageSizeOptions={[10, 25, 50]}
-          />
-          <Button
-            variant="contained"
-            color="primary"
-            style={{ position: 'absolute', bottom: -50, right: 16, marginTop: '16px' }}
-          >
-            Ajouter
-          </Button>
-        </div>
-      </Box>
+            },
+          }}
+          pageSizeOptions={[10, 25, 50]}
+          loading={loading}
+          disableColumnMenu
+          disableRowSelectionOnClick
+        />
+      )}
     </Box>
   )
 }
+
+export default ProductGrid;

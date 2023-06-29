@@ -2,7 +2,7 @@ import { Button } from "@mui/material"
 
 const BoutonAdd = () => {
   const handleAddClick = () => {
-    window.location.href ="/categories/add"
+    window.location.href ="/products/add"
   }
 
   return (
