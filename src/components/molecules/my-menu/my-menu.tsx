@@ -14,14 +14,10 @@ import SportsSoccerIcon from '@mui/icons-material/SportsSoccer'
 import { useTranslations } from 'next-intl'
 
 
-    
-
 interface MenuItem {
     label: string
     route: string
 }
-
-
 
 function MyMenu() {
     const t = useTranslations();
