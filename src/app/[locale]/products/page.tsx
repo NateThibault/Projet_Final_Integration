@@ -2,7 +2,7 @@
 
 import React from 'react'
 import styles from '../page.module.css'
-import { Box, Typography } from '@mui/material'
+import { Box} from '@mui/material'
 import ProductGrid from '@/components/organisms/products-grid/products-grid'
 import BoutonAdd from "../../../components/atoms/button-add/my-button-product" 
 import Header from '@/components/atoms/header/header'

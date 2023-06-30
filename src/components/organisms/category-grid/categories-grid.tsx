@@ -1,5 +1,6 @@
 "use client"
 
+import styles from "../../../../src/app/page.module.css"
 import React, { useEffect, useState } from 'react'
 import { DataGrid, GridColDef, GridCellParams } from '@mui/x-data-grid'
 import DeleteIcon from '@mui/icons-material/Delete'
@@ -27,7 +28,7 @@ const CategoryGrid = () => {
         setLoading(false)
       })
       .catch((error) => {
-        console.error("Erreur dans l'extraction des données :", error)
+        console.error('Erreur dans l\'extraction des données :', error)
         setRows([])
         setLoading(false)
       })
@@ -75,20 +76,8 @@ const CategoryGrid = () => {
       headerName: '',
       renderCell: (params: GridCellParams) => (
         <Button
-          style={{
-            background: 'none',
-            border: 'none',
-            transition: 'transform 0.2s ease',
-          }}
           onClick={() => handleDeleteButtonClick(params)}
-          onMouseEnter={(e) => {
-            const target = e.target as HTMLElement;
-            target.style.transform = 'scale(1.3)';
-          }}
-          onMouseLeave={(e) => {
-            const target = e.target as HTMLElement;
-            target.style.transform = 'scale(1)';
-          }}
+          className={styles.buttonGrid}
         >
           <DeleteIcon style={{ color: 'grey' }} />
         </Button>
@@ -104,22 +93,10 @@ const CategoryGrid = () => {
       width: 50,
       renderCell: (params: GridCellParams) => (
         <Button
-          style={{
-            background: 'none',
-            border: 'none',
-            transition: 'transform 0.2s ease',
-          }}
           onClick={() => handleModifyButtonClick(params)}
-          onMouseEnter={(e) => {
-            const target = e.target as HTMLElement;
-            target.style.transform = 'scale(1.3)';
-          }}
-          onMouseLeave={(e) => {
-            const target = e.target as HTMLElement;
-            target.style.transform = 'scale(1)';
-          }}
+          className={styles.buttonGrid}
         >
-          <EditIcon color="primary" style={{ color: '#2196F3' }} />
+          <EditIcon style={{ color: '#2196F3' }} />
         </Button>
       ),
       headerAlign: 'center',
