@@ -105,4 +105,14 @@ a {
   footer .MuiTypography-body1 .MuiBox-root {
     font-size: 0.8rem;
   }
+  .MuiButtonBase-root, .css-1djuzfj-MuiButtonBase-root-MuiButton-root {
+    width: 30%;
+    margin-left: 10px;
+    font-size: 0.75rem;
+  }
+}
+
+/* Titres des colonnes dans les grilles de produits et de catégories */
+.css-t89xny-MuiDataGrid-columnHeaderTitle {
+  font-weight: 700;
 }

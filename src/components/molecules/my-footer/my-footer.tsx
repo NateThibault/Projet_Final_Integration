@@ -11,11 +11,9 @@ function MyFooter() {
       <AppBar position="static" sx={{ height: '10%' }}>
         <Toolbar sx={{ justifyContent: 'center' }}>
           <Typography variant="body1" component="div" sx={{ display: 'flex' }}>
-            <Box sx={{ mr: '0.5rem', fontSize: '1rem' }}>Toufik Dellys |</Box>
-            <Box sx={{ mr: '0.5rem', fontSize: '1rem' }}>Nathan Thibault |</Box>
-            <Box sx={{ mr: '0.5rem', fontSize: '1rem' }}>Priscila Carvalho |</Box>
-            <Box sx={{ mr: '0.5rem', fontSize: '1rem' }}>Marie-Pier Dubois |</Box>
-            <Box>William Bitton</Box>
+            <Box sx={{ mr: '0.5rem', fontSize: '1rem', textAlign: 'center' }}>
+              Toufik Dellys | Nathan Thibault | Priscila Carvalho | Marie-Pier Dubois | William Bitton
+            </Box>
           </Typography>
         </Toolbar>
       </AppBar>
