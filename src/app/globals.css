@@ -105,4 +105,8 @@ a {
   footer .MuiTypography-body1 .MuiBox-root {
     font-size: 0.8rem;
   }
+  button {
+    width: 50%;
+    margin-left: 10px;
+  }
 }
