@@ -160,11 +160,15 @@ export default function ProductForm(props: ProductFormProps) {
                 />
               </Grid>
               <Grid item xs={12} sx={{ textAlign: "right" }}>
-                <Button sx={{ marginLeft: "20px", width: "200px" }}
+                <Button sx={{
+                    marginLeft: "20px", width: "100px", backgroundColor: "#F3F3F3", color: "#000000",
+                    "&:hover": {
+                      backgroundColor: "#ECECEC",
+                    },
+                  }}
                   variant="contained"
                   onClick={cancel}
                   disabled={!isDirty && !isCategoryDirty && !isSoldDirty}
-                  // className={styles.formButtons}
                   >
                   Annuler
                 </Button>
