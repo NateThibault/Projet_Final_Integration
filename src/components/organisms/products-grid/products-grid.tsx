@@ -1,5 +1,6 @@
 "use client"
 
+import styles from "../../../../src/app/page.module.css"
 import React, { useState, useEffect } from 'react';
 import { DataGrid, GridCellParams, GridColDef } from '@mui/x-data-grid';
 import DeleteIcon from '@mui/icons-material/Delete'
@@ -84,20 +85,8 @@ const ProductGrid = () => {
       headerName: '',
       renderCell: (params: GridCellParams) => (
         <Button
-          style={{
-            background: 'none',
-            border: 'none',
-            transition: 'transform 0.2s ease',
-          }}
           onClick={() => handleDeleteButtonClick(params)}
-          onMouseEnter={(e) => {
-            const target = e.target as HTMLElement;
-            target.style.transform = 'scale(1.3)';
-          }}
-          onMouseLeave={(e) => {
-            const target = e.target as HTMLElement;
-            target.style.transform = 'scale(1)';
-          }}
+          className={styles.buttonGrid}
         >
           <DeleteIcon style={{ color: 'grey' }} />
         </Button>
@@ -114,22 +103,10 @@ const ProductGrid = () => {
       width: 50,
       renderCell: (params: GridCellParams) => (
         <Button
-          style={{
-            background: 'none',
-            border: 'none',
-            transition: 'transform 0.2s ease',
-          }}
           onClick={() => handleModifyButtonClick(params)}
-          onMouseEnter={(e) => {
-            const target = e.target as HTMLElement;
-            target.style.transform = 'scale(1.3)';
-          }}
-          onMouseLeave={(e) => {
-            const target = e.target as HTMLElement;
-            target.style.transform = 'scale(1)';
-          }}
+          className={styles.buttonGrid}
         >
-          <EditIcon color="primary" style={{ color: '#2196F3' }} />
+          <EditIcon style={{ color: '#2196F3' }} />
         </Button>
       ),
       headerAlign: 'center',
