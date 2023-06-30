@@ -1,15 +1,26 @@
 {
     "menu": {
-        "home": "Home",
         "products": "Products",
         "categories": "Categories"
     },
     "accueil": {
-        "page-title": " INTEGRATION TP3"
+        "page-title": " INTEGRATION TP3",
+        "subTitle":" Project description",
+        "desc": "The project consists in creating an administrator interface linked to the back-end and the database made during the short programming.",
+        "team":"List of team members :"
     },
     "produits": {
-        "page-title": " Products List"
-    },
+        "page-title": " Products List", 
+        "produitmodifier": {
+        "page-title": " Edit Product"
+    }
+    }, 
+    
+    
+    
+    "produitajouter": {
+        "page-title": " Add Product"
+    }, 
     "categories": {
         "page-title": " Categories List"
     }

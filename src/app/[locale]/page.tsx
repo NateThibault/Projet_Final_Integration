@@ -20,7 +20,7 @@ const Home = () => {
             fontSize: "25px",
           }}
         >
-          Description du projet :
+          {t("accueil.subTitle")}
         </Typography>
 
         <Typography
@@ -29,9 +29,7 @@ const Home = () => {
             color: "black",
           }}
         >
-          Le projet consiste à créer une interface
-          administrateur liée au back-end et à la base de données réalisés
-          durant le court de programmation.
+          {t("accueil.desc")}
         </Typography>
 
         <Typography
@@ -41,7 +39,7 @@ const Home = () => {
             fontSize: "25px",
           }}
         >
-          Liste des membres de l'équipe :
+          {t("accueil.team")}
         </Typography>
 
         <Box

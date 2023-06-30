@@ -15,7 +15,7 @@ const Categories = () => {
   return (
     <>
       <Box className={styles.centeredTypo}>
-        <Header title={t("Liste des catégories")} />
+        <Header title={t("categories.page-title")} />
       
       </Box>
       <Box className={styles.centeredGrid}>

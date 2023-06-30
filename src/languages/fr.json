@@ -1,14 +1,23 @@
 {
     "menu": {
-        "home": "Acceuil",
         "products": "Produits",
         "categories": "Categories"
     },
     "accueil": {
-        "page-title": "TP3 INTEGRATION"
+        "page-title": "TP3 INTEGRATION",
+        "subTitle":"Description du project",
+        "desc":"Le projet consiste à créer une interface administrateur liée au back-end et à la base de données réalisés durant le cours de programmation.",
+        "team":"Liste des membres de l'équipe :"
     },
     "produits": {
-        "page-title": "Liste des produits"
+        "page-title": "Liste des produits",
+        "produitmodifier": {
+        "page-title": " Produit Modifier"
+    }
+    },
+    
+    "produitajouter": {
+        "page-title": " Produit Ajouter"
     },
     "categories": {
         "page-title": "Liste des categories"

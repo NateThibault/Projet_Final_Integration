@@ -2,10 +2,10 @@
 import { getCategoriesData } from "@/api/api"
 import Header from "@/components/atoms/header/header"
 import ProductForm from "@/components/organisms/product-form/product-form"
+import { useTranslations } from "next-intl"
 
-
-export default async function addProduct() {
-  
+export default async function AddProduct() {
+  const t = useTranslations();
   const categoriesData = await getCategoriesData()
   const productData = {
     categoryId: "",
@@ -18,7 +18,7 @@ export default async function addProduct() {
 
   return (
     <>
-      <Header title={"Ajouter un produit"} />
+      <Header title={t("produits.produitmodifier.page-title")} />
       <ProductForm productData={productData} categoriesData={categoriesData} />
     </>
   )

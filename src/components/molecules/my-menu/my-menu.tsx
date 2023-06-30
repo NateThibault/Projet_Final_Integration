@@ -30,7 +30,7 @@ function MyMenu() {
     }
 
     const pages: MenuItem[] = [
-        { label: t("menu.home"), route: "/"},
+        
         { label: t("menu.products"), route: "/products" },
         { label: t("menu.categories"), route: "/categories" },
     ]
