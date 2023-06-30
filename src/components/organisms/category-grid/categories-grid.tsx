@@ -31,7 +31,7 @@ const CategoryGrid = () => {
         setLoading(false)
       })
       .catch((error) => {
-        console.error("Erreur dans l'extraction des données :", error)
+        console.error('Erreur dans l\'extraction des données :', error)
         setRows([])
         setLoading(false)
       })

@@ -100,7 +100,7 @@ export default function ProductForm(props: ProductFormProps) {
               <Grid item xs={12}>
                 <TextField sx={{ backgroundColor: "white", borderRadius: "5px" }}
                   id="title"
-                  label="Title"
+                  label="Titre"
                   variant="outlined"
                   fullWidth
                   {...register("title")}
@@ -112,7 +112,7 @@ export default function ProductForm(props: ProductFormProps) {
               <Grid item xs={12}>
                 <TextField sx={{ backgroundColor: "white", borderRadius: "5px" }}
                   id="price"
-                  label="Price"
+                  label="Prix"
                   variant="outlined"
                   fullWidth
                   {...register("price")}
@@ -160,10 +160,12 @@ export default function ProductForm(props: ProductFormProps) {
                 />
               </Grid>
               <Grid item xs={12} sx={{ textAlign: "right" }}>
-                <Button sx={{ marginLeft: "20px", width: "100px" }}
+                <Button sx={{ marginLeft: "20px", width: "200px" }}
                   variant="contained"
                   onClick={cancel}
-                  disabled={!isDirty && !isCategoryDirty && !isSoldDirty}>
+                  disabled={!isDirty && !isCategoryDirty && !isSoldDirty}
+                  // className={styles.formButtons}
+                  >
                   Annuler
                 </Button>
                 <Button sx={{ marginLeft: "20px", width: "100px" }}
