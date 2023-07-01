@@ -1,11 +1,29 @@
 "use client"
-import * as React from 'react'
-import { Box, Button, Checkbox, CircularProgress, Container, FormControl, FormControlLabel, Grid, InputLabel, MenuItem, Select, SelectChangeEvent, TextField } from "@mui/material"
-import { useForm } from "react-hook-form"
-import { yupResolver } from "@hookform/resolvers/yup"
-import * as yup from "yup"
-import { postProductData, putProductData } from "@/api/api"
-import { ProductFormProps, Product } from '@/interface/interface'
+import * as React from 'react';
+import {
+  Box,
+  Button,
+  Checkbox,
+  CircularProgress,
+  Container,
+  FormControl,
+  FormControlLabel,
+  Grid,
+  InputLabel,
+  MenuItem,
+  Select,
+  SelectChangeEvent,
+  TextField,
+  Alert,
+  AlertTitle,
+  Snackbar,
+} from "@mui/material";
+import { useForm } from "react-hook-form";
+import { yupResolver } from "@hookform/resolvers/yup";
+import * as yup from "yup";
+import { postProductData, putProductData } from "@/api/api";
+import { ProductFormProps, Product } from '@/interface/interface';
+import { useState } from 'react';
 
 const schema = yup
   .object({
@@ -15,61 +33,67 @@ const schema = yup
     categoryId: yup.string().required(),
     isSold: yup.boolean()
   })
-  .required()
+  .required();
 
 export default function ProductForm(props: ProductFormProps) {
-  const [loading, setLoading] = React.useState(false)
-  const [category, setCategory] = React.useState(props.productData.categoryId)
-  const [isSold, setIsSold] = React.useState(props.productData.isSold)
-  const [isSoldDirty, setIsSoldDirty] = React.useState(false)
-  const [isCategoryDirty, setIsCategoryDirty] = React.useState(false)
+  const [loading, setLoading] = React.useState(false);
+  const [category, setCategory] = React.useState(props.productData.categoryId);
+  const [isSold, setIsSold] = React.useState(props.productData.isSold);
+  const [isSoldDirty, setIsSoldDirty] = React.useState(false);
+  const [isCategoryDirty, setIsCategoryDirty] = React.useState(false);
+  const [alertMessage, setAlertMessage] = React.useState<string | null>(null);
+  const [alertSeverity, setAlertSeverity] = useState<'error' | 'warning' | 'info' | 'success'>('success');
+  const [alertOpen, setAlertOpen] = useState(false);
+
   const handleChangeCategoryId = (event: SelectChangeEvent) => {
-    setCategory(event.target.value)
-    if (event.target.value == props.productData.categoryId) {
-      setIsCategoryDirty(false)
-    } else {
-      setIsCategoryDirty(true)
-    }
-  }
+    setCategory(event.target.value);
+    setIsCategoryDirty(event.target.value !== props.productData.categoryId);
+  };
+
   const handleChangeCheckbox = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setIsSold(event.target.checked)
-    if (event.target.checked == props.productData.isSold) {
-      setIsSoldDirty(false)
-    } else {
-      setIsSoldDirty(true)
-    }
-  }
+    setIsSold(event.target.checked);
+    setIsSoldDirty(event.target.checked !== props.productData.isSold);
+  };
+
   const submit = async (formData: Product) => {
-    setLoading(true)
-    if (!props.productData._id) {
-      postProductData(formData)
-        .then(() => {
-          alert("Produit ajouté avec succès")
-          window.location.href = "/products"
-        })
-        .catch(() => {
-          alert("Une erreur est survenue")
-          setLoading(false)
-        })
-    } else {
-      putProductData(props.productData._id, formData)
-        .then(() => {
-          alert("Produit modifié avec succès")
-          window.location.href = "/products"
-        })
-        .catch(() => {
-          alert("Une erreur est survenue")
-          setLoading(false)
-        })
+    setLoading(true);
+
+    try {
+      if (!props.productData._id) {
+        await postProductData(formData);
+        setAlertMessage("Produit ajouté avec succès");
+
+        setTimeout(() => {
+          setAlertMessage(null);
+          window.location.href = "/products";
+        }, 1500); 
+      } else {
+        await putProductData(props.productData._id, formData);
+        setAlertSeverity('success');
+        setAlertMessage("Produit modifié avec succès");
+        setAlertOpen(true);
+        setTimeout(() => {
+          setAlertMessage(null);
+          window.location.href = "/products";
+        }, 1500);
+      }
+    } catch (error) {
+      setAlertMessage("Une erreur est survenue");
+      setAlertOpen(true);
+      setAlertSeverity('error');
+    } finally {
+      setLoading(false);
     }
-  }
+  };
+
   const cancel = () => {
-    reset()
-    setCategory(props.productData.categoryId)
-    setIsCategoryDirty(false)
-    setIsSold(props.productData.isSold)
-    setIsSoldDirty(false)
-  }
+    reset();
+    setCategory(props.productData.categoryId);
+    setIsCategoryDirty(false);
+    setIsSold(props.productData.isSold);
+    setIsSoldDirty(false);
+  };
+
   const {
     register,
     reset,
@@ -85,7 +109,7 @@ export default function ProductForm(props: ProductFormProps) {
     },
     mode: "onBlur",
     resolver: yupResolver(schema),
-  })
+  });
 
   return (
     <>
@@ -100,7 +124,7 @@ export default function ProductForm(props: ProductFormProps) {
               <Grid item xs={12}>
                 <TextField sx={{ backgroundColor: "white", borderRadius: "5px" }}
                   id="title"
-                  label="Titre"
+                  label="Title"
                   variant="outlined"
                   fullWidth
                   {...register("title")}
@@ -112,7 +136,7 @@ export default function ProductForm(props: ProductFormProps) {
               <Grid item xs={12}>
                 <TextField sx={{ backgroundColor: "white", borderRadius: "5px" }}
                   id="price"
-                  label="Prix"
+                  label="Price"
                   variant="outlined"
                   fullWidth
                   {...register("price")}
@@ -160,16 +184,10 @@ export default function ProductForm(props: ProductFormProps) {
                 />
               </Grid>
               <Grid item xs={12} sx={{ textAlign: "right" }}>
-                <Button sx={{
-                    marginLeft: "20px", width: "100px", backgroundColor: "#F3F3F3", color: "#000000",
-                    "&:hover": {
-                      backgroundColor: "#ECECEC",
-                    },
-                  }}
+                <Button sx={{ marginLeft: "20px", width: "100px" }}
                   variant="contained"
                   onClick={cancel}
-                  disabled={!isDirty && !isCategoryDirty && !isSoldDirty}
-                  >
+                  disabled={!isDirty && !isCategoryDirty && !isSoldDirty}>
                   Annuler
                 </Button>
                 <Button sx={{ marginLeft: "20px", width: "100px" }}
@@ -183,6 +201,20 @@ export default function ProductForm(props: ProductFormProps) {
           </form>
         </Container>
       )}
+
+      {alertMessage && (
+        <Snackbar
+        open={alertOpen}
+        autoHideDuration={3000}
+        onClose={() => setAlertOpen(false)}
+        anchorOrigin={{ vertical: 'top', horizontal: 'center' }}
+      >
+        <Alert severity={alertSeverity}>
+          <AlertTitle>{alertSeverity}</AlertTitle>
+          {alertMessage}
+        </Alert>
+      </Snackbar>
+      )}
     </>
-  )
+  );
 }

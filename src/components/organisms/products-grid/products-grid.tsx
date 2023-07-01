@@ -175,7 +175,7 @@ const ProductGrid = () => {
           {alertMessage}
         </Alert>
       </Snackbar>
-      
+    
     </Box>
   );
 };
