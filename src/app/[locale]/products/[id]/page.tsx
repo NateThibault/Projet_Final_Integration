@@ -13,7 +13,7 @@ export default async function EditProduct({ params }: { params: { id: string } }
 
   return (
     <>
-      <Header title={t("ProduitAjouter.page-title")} />
+      <Header title={t("produitmodifier.page-title")} />
       <ProductForm productData={productData} categoriesData={categoriesData} />
     </>
   )

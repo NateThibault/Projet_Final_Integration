@@ -10,14 +10,11 @@
         "team":"List of team members :"
     },
     "produits": {
-        "page-title": " Products List", 
-        "produitmodifier": {
-        "page-title": " Edit Product"
-    }
+        "page-title": " Products List"    
     }, 
-    
-    
-    
+    "produitmodifier": {
+        "page-title": " Edit Product"
+    },
     "produitajouter": {
         "page-title": " Add Product"
     }, 

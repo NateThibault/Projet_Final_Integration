@@ -10,12 +10,12 @@
         "team":"Liste des membres de l'équipe :"
     },
     "produits": {
-        "page-title": "Liste des produits",
-        "produitmodifier": {
-        "page-title": " Produit Modifier"
-    }
+        "page-title": "Liste des produits"
+        
     },
-    
+    "produitmodifier": {
+        "page-title": " Produit Modifier"
+    },
     "produitajouter": {
         "page-title": " Produit Ajouter"
     },

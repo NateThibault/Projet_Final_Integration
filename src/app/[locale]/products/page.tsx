@@ -1,5 +1,5 @@
 "use client"
-import styles from "../../page.module.css"
+import styles from "../page.module.css"
 import React from 'react'
 import { Box} from '@mui/material'
 import ProductGrid from '@/components/organisms/products-grid/products-grid'

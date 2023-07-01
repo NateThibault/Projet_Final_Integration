@@ -1,6 +1,6 @@
 "use client"
 
-import styles from "../../../../src/app/page.module.css"
+import styles from "../../../app/[locale]/page.module.css"
 import React, { useState, useEffect } from 'react';
 import { DataGrid, GridCellParams, GridColDef } from '@mui/x-data-grid';
 import DeleteIcon from '@mui/icons-material/Delete'
