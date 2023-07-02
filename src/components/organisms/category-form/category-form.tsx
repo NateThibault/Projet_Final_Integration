@@ -2,7 +2,7 @@
 
 import * as React from 'react';
 import { Alert, AlertTitle, Box, Button, CircularProgress, Container, Grid, Snackbar, TextField } from "@mui/material";
-import { useForm } from "react-hook-form";
+import { useForm, useWatch } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 import { CategoryFormProps, Category } from '@/interface/interface';
@@ -21,11 +21,13 @@ export default function CategoryForm(props: CategoryFormProps) {
   const [alertSeverity, setAlertSeverity] = useState<'error' | 'warning' | 'info' | 'success'>('success');
   const [alertOpen, setAlertOpen] = useState(false);
   const [categoryData, setCategoryData] = useState<Category | null>(null); // Add state for category data
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
   const {
     register,
     reset,
     handleSubmit,
+    control,
     formState: { errors, isValid, isDirty },
   } = useForm<Category>({
     defaultValues: {
@@ -33,6 +35,12 @@ export default function CategoryForm(props: CategoryFormProps) {
     },
     mode: "onBlur",
     resolver: yupResolver(schema),
+  });
+
+  const watchName = useWatch({
+    control,
+    name: "name",
+    defaultValue: categoryData?.name || ""
   });
 
   useEffect(() => {
@@ -55,6 +63,7 @@ export default function CategoryForm(props: CategoryFormProps) {
   }, [categoryData, reset]);
 
   const submit = async (formData: Category) => {
+    setIsSubmitting(true);
     setLoading(true);
 
     if (!props.categoryData._id) {
@@ -104,11 +113,12 @@ export default function CategoryForm(props: CategoryFormProps) {
 
   return (
     <>
-      {loading ? (
-        <Box sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100vh' }}>
+      {isSubmitting ? (
+        <Box sx={{ display: 'flex',justifyContent: 'center',alignItems: 'center',position: 'fixed',top: 0,left: 0,right: 0,bottom: 0,zIndex: 9999, }}>
           <CircularProgress />
         </Box>
       ) : (
+        !loading && (
         <Container sx={{ backgroundColor: "lightgrey", padding: "50px", borderRadius: "5px", marginTop: "30px" }}>
           <form onSubmit={handleSubmit(submit)}>
             <Grid container rowSpacing={3}>
@@ -123,7 +133,9 @@ export default function CategoryForm(props: CategoryFormProps) {
                   error={!!errors.name}
                   helperText={errors.name?.message}
                   required
-                  InputLabelProps={{ shrink: true }} // Add this line
+                  InputLabelProps={{
+                    shrink: Boolean(watchName)
+                  }}
                 />
               </Grid>
               <Grid item xs={12} sx={{ textAlign: "right" }}>
@@ -153,7 +165,8 @@ export default function CategoryForm(props: CategoryFormProps) {
             </Grid>
           </form>
         </Container>
-      )}
+      ))}
+
       {alertMessage && (
         <Snackbar
           open={alertOpen}

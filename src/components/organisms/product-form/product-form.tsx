@@ -21,9 +21,9 @@ import {
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
-import { postProductData, putProductData } from "@/api/api";
+import { getProductsData, postProductData, putProductData } from "@/api/api";
 import { ProductFormProps, Product } from '@/interface/interface';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 const schema = yup
   .object({
@@ -36,6 +36,7 @@ const schema = yup
   .required();
 
 export default function ProductForm(props: ProductFormProps) {
+
   const [loading, setLoading] = React.useState(false);
   const [category, setCategory] = React.useState(props.productData.categoryId);
   const [isSold, setIsSold] = React.useState(props.productData.isSold);
@@ -44,6 +45,24 @@ export default function ProductForm(props: ProductFormProps) {
   const [alertMessage, setAlertMessage] = React.useState<string | null>(null);
   const [alertSeverity, setAlertSeverity] = useState<'error' | 'warning' | 'info' | 'success'>('success');
   const [alertOpen, setAlertOpen] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
+
+  const {
+    register,
+    reset,
+    handleSubmit,
+    formState: { errors, isValid, isDirty },
+  } = useForm<Product>({
+    defaultValues: {
+      title: props.productData.title || '', // Update the default value with the title from props
+      price: props.productData.price || 0, // Update the default value with the price from props
+      description: props.productData.description || '', // Update the default value with the description from props
+      categoryId: props.productData.categoryId || '', // Update the default value with the categoryId from props
+      isSold: props.productData.isSold || false, // Update the default value with the isSold from props
+    },
+    mode: "onBlur",
+    resolver: yupResolver(schema),
+  });
 
   const handleChangeCategoryId = (event: SelectChangeEvent) => {
     setCategory(event.target.value);
@@ -56,6 +75,7 @@ export default function ProductForm(props: ProductFormProps) {
   };
 
   const submit = async (formData: Product) => {
+    setIsSubmitting(true);
     setLoading(true);
   
     try {
@@ -99,30 +119,16 @@ export default function ProductForm(props: ProductFormProps) {
     setIsSoldDirty(false);
   };
 
-  const {
-    register,
-    reset,
-    handleSubmit,
-    formState: { errors, isValid, isDirty },
-  } = useForm<Product>({
-    defaultValues: {
-      title: props.productData.title,
-      price: props.productData.price,
-      description: props.productData.description,
-      categoryId: props.productData.categoryId,
-      isSold: props.productData.isSold
-    },
-    mode: "onBlur",
-    resolver: yupResolver(schema),
-  });
+  
 
   return (
     <>
-      {loading ? (
-        <Box sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100vh' }}>
+      {isSubmitting ? (
+        <Box sx={{ display: 'flex',justifyContent: 'center',alignItems: 'center',position: 'fixed',top: 0,left: 0,right: 0,bottom: 0,zIndex: 9999, }}>
           <CircularProgress />
         </Box>
       ) : (
+        !loading && (
         <Container sx={{ backgroundColor: "lightgrey", padding: "24px", borderRadius: "5px", marginTop: "30px" }}>
           <form onSubmit={handleSubmit(submit)} action="/products">
             <Grid container rowSpacing={3}>
@@ -205,7 +211,7 @@ export default function ProductForm(props: ProductFormProps) {
             </Grid>
           </form>
         </Container>
-      )}
+      ))}
 
       {alertMessage && (
         <Snackbar

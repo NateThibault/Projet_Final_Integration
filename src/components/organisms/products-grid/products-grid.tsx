@@ -19,19 +19,24 @@ const ProductGrid = () => {
   const [alertMessage, setAlertMessage] = useState('');
 
   useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const data = await getProductsData();
-        setRows(data);
+    setLoading(true);
+
+    getProductsData("id title description price")
+      .then((data) => {
+        const productsRows = data.map((products: { _id: any; title: any; description:any; price:any; }) => ({
+          id: products._id,
+          title: products.title,
+          description: products.description,
+          price: products.price,
+        }));
+        setRows(productsRows);
         setLoading(false);
-      } catch (error) {
-        console.error('Échec de la récupération des données :', error);
+      })
+      .catch((error) => {
+        console.error("Erreur dans l'extraction des données :", error);
         setRows([]);
         setLoading(false);
-      }
-    };
-
-    fetchData();
+      });
   }, []);
 
   const handleDeleteButtonClick = (params: GridCellParams) => {

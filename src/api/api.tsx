@@ -3,25 +3,17 @@ import { Product, Category } from "@/interface/interface"
 
 
 
-export async function getProductsData(id?: string) {
-  const url = id ? `https://api-final-qxme.onrender.com/products/${id}` : `https://api-final-qxme.onrender.com/products`;
-
-  const res = await fetch(url, {
+export async function getProductsData(id: string) {
+  const res = await fetch(`https://api-final-qxme.onrender.com/products`, {
     method: "GET",
     headers: {
-      'Cache-Control': 'no-cache'
-    }
-  });
-
-  if (!res.ok) {
-    throw new Error('Échech de la récupération des données');
-  }
-
-  const data = await res.json();
-
-  const products = Array.isArray(data) ? data.map(product => ({ ...product, id: product._id })) : [];
-
-  return products;
+     'Cache-Control': 'no-cache'
+   }
+   })
+ if (!res.ok) {
+     throw new Error('Échec de la récupération des données')
+ }
+ return res.json()
 }
 
 export async function getProductData(id: string) {
@@ -35,6 +27,7 @@ export async function getProductData(id: string) {
     throw new Error('Échec de la récupération des données')
   }
   return res.json()
+  
 }
 
 export async function deleteProductData(productId: string) {
