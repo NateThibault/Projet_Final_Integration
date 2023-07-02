@@ -1,5 +1,5 @@
 "use client"
-import styles from '../../page.module.css'
+import styles from '../page.module.css'
 import React from 'react'
 import { Box, Typography } from '@mui/material'
 import CategoryGrid from '@/components/organisms/category-grid/categories-grid'

@@ -7,7 +7,7 @@ import { yupResolver } from "@hookform/resolvers/yup"
 import * as yup from "yup"
 import { CategoryFormProps, Category } from '@/interface/interface'
 import { postCategoryData, putCategoryData } from '@/api/api'
-
+import { useTranslation } from 'react-i18next'
 const schema = yup
   .object({
     name: yup.string().min(2, "Le nom de la catégories doit contenir un minimum de 2 caractères").max(50, "Le nom de la catégorie ne doit pas contenir plus de 50 caractères").required(),
@@ -15,6 +15,7 @@ const schema = yup
   .required()
 
 export default function CategoryForm(props: CategoryFormProps) {
+  const { t } = useTranslation()
   const [loading, setLoading] = React.useState(false)
 
   const submit = async (formData: Category) => {
@@ -73,7 +74,7 @@ export default function CategoryForm(props: CategoryFormProps) {
               <Grid item xs={12}>
                 <TextField sx={{ backgroundColor: "white", borderRadius: "5px" }}
                   id="name"
-                  label="Nom de la catégorie"
+                  label={t("categories-form.name")}
                   variant="outlined"
                   fullWidth
                   {...register("name")}
