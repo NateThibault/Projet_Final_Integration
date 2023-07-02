@@ -144,12 +144,13 @@ const ProductGrid = () => {
           disableRowSelectionOnClick
           
         />
-        /*  {t("produits-grid.rowsPerPage")}*/
+          
 
       )
-      }
+      }  {/* {t("produits-grid.rowsPerPage")} */}
     </Box>
   )
+  
 }
 
 export default ProductGrid;
