@@ -57,30 +57,35 @@ export default function ProductForm(props: ProductFormProps) {
 
   const submit = async (formData: Product) => {
     setLoading(true);
-
+  
     try {
       if (!props.productData._id) {
         await postProductData(formData);
+        setAlertSeverity('success');
         setAlertMessage("Produit ajouté avec succès");
-
+        setAlertOpen(true);
+  
         setTimeout(() => {
           setAlertMessage(null);
+          setAlertOpen(false);
           window.location.href = "/products";
-        }, 1500); 
+        }, 2500);
       } else {
         await putProductData(props.productData._id, formData);
         setAlertSeverity('success');
         setAlertMessage("Produit modifié avec succès");
         setAlertOpen(true);
+  
         setTimeout(() => {
           setAlertMessage(null);
+          setAlertOpen(false);
           window.location.href = "/products";
-        }, 1500);
+        }, 2500);
       }
     } catch (error) {
+      setAlertSeverity('error');
       setAlertMessage("Une erreur est survenue");
       setAlertOpen(true);
-      setAlertSeverity('error');
     } finally {
       setLoading(false);
     }
@@ -124,7 +129,7 @@ export default function ProductForm(props: ProductFormProps) {
               <Grid item xs={12}>
                 <TextField sx={{ backgroundColor: "white", borderRadius: "5px" }}
                   id="title"
-                  label="Title"
+                  label="Titre"
                   variant="outlined"
                   fullWidth
                   {...register("title")}
@@ -136,7 +141,7 @@ export default function ProductForm(props: ProductFormProps) {
               <Grid item xs={12}>
                 <TextField sx={{ backgroundColor: "white", borderRadius: "5px" }}
                   id="price"
-                  label="Price"
+                  label="Prix"
                   variant="outlined"
                   fullWidth
                   {...register("price")}
