@@ -1,0 +1,58 @@
+{
+    "menu": {
+        "products": "Products",
+        "categories": "Categories"
+    },
+    "accueil": {
+        "page-title": " INTEGRATION TP3",
+        "subTitle": " Project description",
+        "desc": "The project consists in creating an administrator interface linked to the back-end and the database made during the short programming.",
+        "team": "List of team members :"
+    },
+    "produits": {
+        "page-title": " Products List"
+    },
+    "produits-grid": {
+        "title": "Title",
+        "description": "Description",
+        "price": "Price",
+        "add": "ADD",
+        "rowsPerPage": "Rows per page"
+    },
+    "produits-form": {
+        "title": "Title",
+        "description": "Description",
+        "price": "Price",
+        "categorie *": "Category",
+        "submit": "SUBMIT",
+        "cancel": "CANCEL",
+        "isSold":"Is the product sold ?"
+    },
+    "produitajouter": {
+        "page-title": " Add Product"
+    },
+    "produitmodifier": {
+        "page-title": " Edit Product"
+    },
+    "categories": {
+        "page-title": " Categories List"
+    },
+    "categoriesajouter": {
+        "page-title": " Add Category"
+    },
+    "categoriesmodifier": {
+        "page-title": "Edit Categories "
+    },
+    "categories-grid": {
+        "name": "Name of the category",
+        "description": "Description",
+        "add": "ADD",
+        "rowsPerPage": "Rows per page"
+    },
+    "categories-form": {
+        "name": "Name of the category",
+        "description": "Description",
+        "submit": "SUBMIT",
+        "cancel": "CANCEL"
+    }
+}

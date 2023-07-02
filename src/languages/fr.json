@@ -1,0 +1,59 @@
+{
+    "menu": {
+        "products": "Produits",
+        "categories": "Categories"
+    },
+    "accueil": {
+        "page-title": "TP3 INTEGRATION",
+        "subTitle": "Description du project",
+        "desc": "Le projet consiste à créer une interface administrateur liée au back-end et à la base de données réalisés durant le cours de programmation.",
+        "team": "Liste des membres de l'équipe :"
+    },
+    "produits": {
+        "page-title": "Liste des produits"
+    },
+    "produits-grid": {
+        "title": "Titre",
+        "description": "Description",
+        "price": "Prix",
+        "add": "AJ",
+        "rowsPerPage": "Lignes par page"
+    },
+    "produits-form": {
+        "title": "Titre",
+        "description": "Description",
+        "price": "Prix",
+        "categorie *": "Categorie",
+        "submit": "VALIDER",
+        "cancel": "ANNULER",
+        "isSold":"Est-ce que le produit est vendu ?"
+    },
+    "produitajouter": {
+        "page-title": " Produit Ajouter"
+    },
+    "produitmodifier": {
+        "page-title": " Produit Modifier"
+    },
+    "categories": {
+        "page-title": "Liste des categories"
+    },
+    "categoriesajouter": {
+        "page-title": " Categories Ajouter"
+    },
+    "categoriesmodifier": {
+        "page-title": " Categories Modifier"
+    },
+    "categories-grid": {
+        "name": "Nom de la categorie",
+        "description": "Description",
+        "add": "AJOUTER",
+        "rowsPerPage": "Lignes par page"
+    },
+    "categories-form": {
+        "name": "Nom de la categorie",
+        "description": "Description",
+        "submit": "VALIDER",
+        "cancel": "ANNULER"
+    }
+
+}

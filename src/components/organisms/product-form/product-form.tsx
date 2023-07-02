@@ -6,6 +6,9 @@ import { yupResolver } from "@hookform/resolvers/yup"
 import * as yup from "yup"
 import { postProductData, putProductData } from "@/api/api"
 import { ProductFormProps, Product } from '@/interface/interface'
+import { useTranslations } from 'next-intl'
+
+
 
 const schema = yup
   .object({
@@ -18,6 +21,7 @@ const schema = yup
   .required()
 
 export default function ProductForm(props: ProductFormProps) {
+  const t = useTranslations();
   const [loading, setLoading] = React.useState(false)
   const [category, setCategory] = React.useState(props.productData.categoryId)
   const [isSold, setIsSold] = React.useState(props.productData.isSold)
@@ -31,6 +35,7 @@ export default function ProductForm(props: ProductFormProps) {
       setIsCategoryDirty(true)
     }
   }
+ 
   const handleChangeCheckbox = (event: React.ChangeEvent<HTMLInputElement>) => {
     setIsSold(event.target.checked)
     if (event.target.checked == props.productData.isSold) {
@@ -100,19 +105,20 @@ export default function ProductForm(props: ProductFormProps) {
               <Grid item xs={12}>
                 <TextField sx={{ backgroundColor: "white", borderRadius: "5px" }}
                   id="title"
-                  label="Titre"
+                  label={t("produits-form.title")}
                   variant="outlined"
                   fullWidth
                   {...register("title")}
                   error={!!errors.title}
                   helperText={errors.title?.message}
                   required
+                 
                 />
               </Grid>
               <Grid item xs={12}>
                 <TextField sx={{ backgroundColor: "white", borderRadius: "5px" }}
                   id="price"
-                  label="Prix"
+                  label={t("produits-form.price")}
                   variant="outlined"
                   fullWidth
                   {...register("price")}
@@ -123,12 +129,12 @@ export default function ProductForm(props: ProductFormProps) {
               </Grid>
               <Grid item xs={12}>
                 <FormControl fullWidth required>
-                  <InputLabel id="labelCategories">Catégorie</InputLabel>
+                  <InputLabel id="labelCategories">{t("produits-form.categorie *")}</InputLabel>
                   <Select sx={{ backgroundColor: "white", borderRadius: "5px" }}
                     labelId="labelCategories"
                     id="categoryId"
                     value={category}
-                    label="Catégorie *"
+                    label="Catégorie"
                     {...register("categoryId")}
                     onChange={handleChangeCategoryId}
                   >
@@ -143,7 +149,7 @@ export default function ProductForm(props: ProductFormProps) {
                   multiline={true}
                   rows={4}
                   id="description"
-                  label="Description"
+                  label={t("produits-form.description")}
                   variant="outlined"
                   fullWidth
                   {...register("description")}
@@ -155,7 +161,7 @@ export default function ProductForm(props: ProductFormProps) {
               <Grid item xs={12}>
                 <FormControlLabel sx={{ color: "black" }}
                   id="isSold"
-                  label="Est-ce que le produit est vendu ?"
+                  label={t("produits-form.isSold")}
                   control={<Checkbox disabled={!props.productData._id} checked={isSold} {...register("isSold")} onChange={handleChangeCheckbox} />}
                 />
               </Grid>
@@ -170,13 +176,13 @@ export default function ProductForm(props: ProductFormProps) {
                   onClick={cancel}
                   disabled={!isDirty && !isCategoryDirty && !isSoldDirty}
                   >
-                  Annuler
+                 {t("produits-form.cancel")}
                 </Button>
                 <Button sx={{ marginLeft: "20px", width: "100px" }}
                   variant="contained"
                   type="submit"
                   disabled={!isValid || !isDirty && !isCategoryDirty && !isSoldDirty}>
-                  Valider
+                  {t("produits-form.submit")}
                 </Button>
               </Grid>
             </Grid>

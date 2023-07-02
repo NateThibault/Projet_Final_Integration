@@ -1,15 +1,16 @@
 "use client"
 
-import styles from "../../../../src/app/page.module.css"
+import styles from "../../../../src/app/[locale]/page.module.css"
 import React, { useEffect, useState } from 'react'
 import { DataGrid, GridColDef, GridCellParams } from '@mui/x-data-grid'
 import DeleteIcon from '@mui/icons-material/Delete'
 import EditIcon from '@mui/icons-material/EditSharp'
 import { getCategoriesData, deleteCategoryData } from '../../../api/api'
 import {Box, Button, CircularProgress} from '@mui/material'
-
+import { useTranslations } from 'next-intl'
 
 const CategoryGrid = () => {
+  const t = useTranslations()
   
   const [rows, setRows] = useState<{ id: string; name: string }[]>([])
   const [loading, setLoading] = useState(true)
@@ -66,7 +67,7 @@ const CategoryGrid = () => {
   const columns: GridColDef[] = [
     {
       field: 'name',
-      headerName: 'Nom de la Catégorie',
+      headerName: t("categories-grid.name"),
       flex: 1,
       editable: false,
     },
@@ -96,6 +97,7 @@ const CategoryGrid = () => {
           onClick={() => handleModifyButtonClick(params)}
           className={styles.buttonGrid}
         >
+          {t("categories-grid.add")}
           <EditIcon style={{ color: '#2196F3' }} />
         </Button>
       ),
@@ -128,7 +130,7 @@ const CategoryGrid = () => {
           disableColumnMenu
           disableRowSelectionOnClick
         />
-      )}
+      )}  {/* {t("produits-grid.rowsPerPage")} */}
     </Box>
   )
 
