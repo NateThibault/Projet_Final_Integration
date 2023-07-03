@@ -94,7 +94,7 @@ export default function CategoryForm(props: CategoryFormProps) {
                   variant="contained"
                   onClick={cancel}
                   disabled={!isDirty}>
-                  Annuler
+                 {t("categories-form.cancel")}
                 </Button>
                 <Button
                   sx={{ marginLeft: "20px", width: "100px" }}
@@ -102,7 +102,7 @@ export default function CategoryForm(props: CategoryFormProps) {
                   type="submit"
                   disabled={!isValid || !isDirty}
                   color="primary">
-                  Envoyer
+                 {t("categories-form.send")}
                 </Button>
               </Grid>
             </Grid>

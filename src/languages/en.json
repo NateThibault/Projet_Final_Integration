@@ -73,6 +73,7 @@
         "message":"Category added successfully",
         "error":"An error has occurred",
         "message1":"Category changed successfully",
-        "error1":"An error has occurred"
+        "error1":"An error has occurred",
+        "send":"SEND"
     }
 }

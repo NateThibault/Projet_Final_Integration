@@ -91,7 +91,7 @@ const ProductGrid = () => {
           onClick={() => handleDeleteButtonClick(params)}
           className={styles.buttonGrid}
         >
-          {/* {t("produits-grid.add")} */}
+     
           <DeleteIcon style={{ color: "grey" }} />
         </Button>
       ),

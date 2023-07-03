@@ -82,18 +82,15 @@
   html,
   body {
     max-width: 100vw;
-  }
-   
+  } 
   body {
     color: rgb(var(--foreground-rgb));
     background-color: white;
   }
-   
   a {
     color: inherit;
     text-decoration: none;
   }
-   
   @media (prefers-color-scheme: dark) {
     html {
       color-scheme: dark;

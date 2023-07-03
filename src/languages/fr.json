@@ -74,7 +74,8 @@
         "message":"Categorie ajouter avec succès",
         "error":"Une erreur est survenue",
         "message1":"Categorie modifié avec succès",
-        "error1":"Une erreur est survenue"
+        "error1":"Une erreur est survenue",
+        "send":"ENVOYER"
     }
 
 }
