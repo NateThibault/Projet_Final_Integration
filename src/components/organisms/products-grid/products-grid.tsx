@@ -1,21 +1,18 @@
 "use client"
 
-import styles from "../../../app/[locale]/page.module.css"
+import styles from "../../../../src/app/page.module.css"
 import React, { useState, useEffect } from 'react';
 import { DataGrid, GridCellParams, GridColDef } from '@mui/x-data-grid';
 import DeleteIcon from '@mui/icons-material/Delete'
 import EditIcon from '@mui/icons-material/EditSharp'
 import { deleteProductData, getProductsData } from '../../../api/api';
 import { Box, Button, CircularProgress } from '@mui/material';
-import { useTranslations } from 'next-intl';
-
 
 const ProductGrid = () => {
-  const t= useTranslations();
-  const [rows, setRows] = useState<{ id: string;title: string; description: string; price: number }[]>([]);
+  
+  const [rows, setRows] = useState<{ id: string; title: string; description: string; price: number }[]>([]);
   const [loading, setLoading] = useState(true);
-  
-  
+ 
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -63,19 +60,19 @@ const ProductGrid = () => {
   const columns: GridColDef[] = [
     {
       field: 'title',
-      headerName: t("produits-grid.title"),
+      headerName: 'Titre',
       width: 100,
       flex: 1, 
     },
     {
       field: 'description',
-      headerName: t("produits-grid.description"),
+      headerName: 'Description',
       width: 250,
       flex: 1, 
     },
     {
       field: 'price',
-      headerName:t("produits-grid.price"),
+      headerName: 'Prix',
       type: 'number',
       width: 110,
       headerAlign: 'center',
@@ -91,7 +88,6 @@ const ProductGrid = () => {
           onClick={() => handleDeleteButtonClick(params)}
           className={styles.buttonGrid}
         >
-          {t("produits-grid.add")}
           <DeleteIcon style={{ color: 'grey' }} />
         </Button>
       ),
@@ -142,15 +138,10 @@ const ProductGrid = () => {
           loading={loading}
           disableColumnMenu
           disableRowSelectionOnClick
-          
         />
-          
-
-      )
-      }  {/* {t("produits-grid.rowsPerPage")} */}
+      )}
     </Box>
   )
-  
 }
 
 export default ProductGrid;
