@@ -49,21 +49,21 @@ export default function ProductForm(props: ProductFormProps) {
     if (!props.productData._id) {
       postProductData(formData)
         .then(() => {
-          alert("Produit ajouté avec succès")
+          alert(t("produits-form.message"));
           window.location.href = "/products"
         })
         .catch(() => {
-          alert("Une erreur est survenue")
+          alert(t("produits-form.error"))
           setLoading(false)
         })
     } else {
       putProductData(props.productData._id, formData)
         .then(() => {
-          alert("Produit modifié avec succès")
+          alert(t("produits-form.message1"));
           window.location.href = "/products"
         })
         .catch(() => {
-          alert("Une erreur est survenue")
+          alert(t("produits-form.error1"))
           setLoading(false)
         })
     }

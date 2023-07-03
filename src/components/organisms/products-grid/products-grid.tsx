@@ -35,9 +35,10 @@ const ProductGrid = () => {
   const handleDeleteButtonClick = async (params: GridCellParams) => {
     const productId = params.row.id as string;
 
-    const confirmDelete = window.confirm(
-      "Êtes-vous sûr de vouloir supprimer ce produit ?"
-    );
+    const confirmDelete = window.confirm(t("produits-grid.confirmDelete"));
+    
+     
+    
     if (!confirmDelete) {
       return;
     }
@@ -48,11 +49,11 @@ const ProductGrid = () => {
       await deleteProductData(productId);
       setRows((prevRows) => prevRows.filter((row) => row.id !== productId));
       setLoading(false);
-      window.alert("Le produit a bien été supprimé");
+      window.alert(t("produits-grid.delete"));
     } catch (error) {
       console.error("Erreur lors de la supression du produit:", error);
       setLoading(false);
-      window.alert("Erreur lors de la supression du produit");
+      window.alert(t("produits-grid.DeleteError"));
     }
   };
 

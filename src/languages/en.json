@@ -16,8 +16,10 @@
         "title": "Title",
         "description": "Description",
         "price": "Price",
-        "add": "ADD",
-        "rowsPerPage": "Rows per page"
+        "rowsPerPage": "Rows per page",
+        "delete": "The product has been deleted",
+        "deleteError": "An error occurred while deleting the product",
+        "confirmDelete":"Are you sure you want to delete this product ?"
     },
     "produits-form": {
         "title": "Title",
@@ -26,7 +28,11 @@
         "categorie *": "Category",
         "submit": "SUBMIT",
         "cancel": "CANCEL",
-        "isSold":"Is the product sold ?"
+        "isSold":"Is the product sold ?",
+        "message":"Product added successfully",
+        "error":"An error has occurred",
+        "message1":"Product changed successfully",
+        "error1":"An error has occurred"
     },
     "produitajouter": {
         "page-title": " Add A Product"
