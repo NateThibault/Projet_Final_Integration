@@ -41,13 +41,12 @@
         "page-title": " Add Category"
     },
     "categoriesmodifier": {
-        "page-title": "Edit Categories "
+        "page-title": "Edit Category "
     },
     "categories-grid": {
         "name": "Name of the category",
         "description": "Description",
-        "add": "ADD",
-        "rowsPerPage": "Rows per page"
+        "add": "ADD"
     },
     "categories-form": {
         "name": "Name of the category",

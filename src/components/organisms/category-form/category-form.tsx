@@ -6,7 +6,7 @@ import { useForm } from "react-hook-form"
 import { yupResolver } from "@hookform/resolvers/yup"
 import * as yup from "yup"
 import { CategoryFormProps, Category } from '@/interface/interface'
-import { postCategoryData, putCategoryData } from '@/API/api'
+import { postCategoryData, putCategoryData } from '@/api/api'
 import { useTranslations } from 'next-intl'
 import { useState } from 'react';
 
@@ -23,7 +23,6 @@ export default function CategoryForm(props: CategoryFormProps) {
   const [alertMessage, setAlertMessage] = React.useState<string | null>(null);
   const [alertSeverity, setAlertSeverity] = useState<'error' | 'warning' | 'info' | 'success'>('success');
   const [alertOpen, setAlertOpen] = useState(false);
-  const [categoryData, setCategoryData] = useState<Category | null>(null); // Add state for category data
   const [isSubmitting, setIsSubmitting] = useState(false);
 
   const submit = async (formData: Category) => {

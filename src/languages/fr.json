@@ -29,25 +29,24 @@
         "isSold":"Est-ce que le produit est vendu ?"
     },
     "produitajouter": {
-        "page-title": " Produit Ajouter"
+        "page-title": " Ajouter un produit"
     },
     "produitmodifier": {
-        "page-title": " Produit Modifier"
+        "page-title": " Modifier un produit"
     },
     "categories": {
-        "page-title": "Liste des categories"
+        "page-title": "Liste des catégories"
     },
     "categoriesajouter": {
-        "page-title": " Categories Ajouter"
+        "page-title": " Ajouter une catégorie"
     },
     "categoriesmodifier": {
-        "page-title": " Categories Modifier"
+        "page-title": " Modifier une catégorie"
     },
     "categories-grid": {
         "name": "Nom de la categorie",
         "description": "Description",
-        "add": "AJOUTER",
-        "rowsPerPage": "Lignes par page"
+        "add": "AJOUTER"
     },
     "categories-form": {
         "name": "Nom de la categorie",
