@@ -3,7 +3,7 @@ import { Product, Category } from "@/interface/interface"
 
 
 
-export async function getProductsData(id: string) {
+export async function getProductsData() {
   const res = await fetch(`https://api-final-qxme.onrender.com/products`, {
     method: "GET",
     headers: {

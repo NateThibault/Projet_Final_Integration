@@ -21,19 +21,19 @@ import {
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
-import { getProductsData, postProductData, putProductData } from "@/api/api";
+import { getProductData, postProductData, putProductData } from "@/api/api";
 import { ProductFormProps, Product } from '@/interface/interface';
 import { useEffect, useState } from 'react';
 
 const schema = yup
-  .object({
-    title: yup.string().min(2, "Le titre doit contenir un minimum de 2 caractères").max(50, "Le titre ne doit pas contenir plus de 50 caractères").required(),
-    description: yup.string().max(255, "La description ne doit pas contenir plus de 255 caractères").required("La description est requise"),
-    price: yup.number().typeError("Le prix est requis et ne peut contenir que des chiffres").required(),
-    categoryId: yup.string().required(),
-    isSold: yup.boolean()
-  })
-  .required();
+.object({
+  title: yup.string().min(2, "Le titre doit contenir un minimum de 2 caractères").max(50, "Le titre ne doit pas contenir plus de 50 caractères").required(),
+  description: yup.string().max(255, "La description ne doit pas contenir plus de 255 caractères").required("La description est requise"),
+  price: yup.number().typeError("Le prix est requis et ne peut contenir que des chiffres").required(),
+  categoryId: yup.string().required(),
+  isSold: yup.boolean()
+})
+.required();
 
 export default function ProductForm(props: ProductFormProps) {
 
@@ -54,15 +54,39 @@ export default function ProductForm(props: ProductFormProps) {
     formState: { errors, isValid, isDirty },
   } = useForm<Product>({
     defaultValues: {
-      title: props.productData.title || '', // Update the default value with the title from props
-      price: props.productData.price || 0, // Update the default value with the price from props
-      description: props.productData.description || '', // Update the default value with the description from props
-      categoryId: props.productData.categoryId || '', // Update the default value with the categoryId from props
-      isSold: props.productData.isSold || false, // Update the default value with the isSold from props
+      title: props.productData.title || '', 
+      price: props.productData.price || 0, 
+      description: props.productData.description || '', 
+      categoryId: props.productData.categoryId || '', 
+      isSold: props.productData.isSold || false, 
     },
     mode: "onBlur",
     resolver: yupResolver(schema),
   });
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const productData = await getProductData(props.productData._id);
+        reset({
+          title: productData.title || "",
+          price: productData.price || 0,
+          description: productData.description || "",
+          categoryId: productData.categoryId || "",
+          isSold: productData.isSold || false,
+        });
+        setCategory(productData.categoryId);
+        setIsCategoryDirty(false);
+        setIsSold(productData.isSold);
+        setIsSoldDirty(false);
+      } catch (error) {
+        console.error("Échec de l'extraction des données sur les produits :", error);
+      }
+    };
+
+    fetchData();
+  }, [props.productData._id]);
+
 
   const handleChangeCategoryId = (event: SelectChangeEvent) => {
     setCategory(event.target.value);
@@ -75,6 +99,7 @@ export default function ProductForm(props: ProductFormProps) {
   };
 
   const submit = async (formData: Product) => {
+    
     setIsSubmitting(true);
     setLoading(true);
   
@@ -119,8 +144,6 @@ export default function ProductForm(props: ProductFormProps) {
     setIsSoldDirty(false);
   };
 
-  
-
   return (
     <>
       {isSubmitting ? (
@@ -163,7 +186,7 @@ export default function ProductForm(props: ProductFormProps) {
                     labelId="labelCategories"
                     id="categoryId"
                     value={category}
-                    label="Catégorie *"
+                    label="Catégorie"
                     {...register("categoryId")}
                     onChange={handleChangeCategoryId}
                   >
