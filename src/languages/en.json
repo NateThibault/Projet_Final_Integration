@@ -59,7 +59,6 @@
     "categories-grid": {
         "name": "Name of the category",
         "description": "Description",
-        "add": "ADD",
         "rowsPerPage": "Rows per page",
         "delete": "The category has been deleted",
         "deleteError": "An error occurred while deleting the category",

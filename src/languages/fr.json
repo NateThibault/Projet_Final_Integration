@@ -60,7 +60,6 @@
     "categories-grid": {
         "name": "Nom de la categorie",
         "description": "Description",
-        "add": "AJOUTER",
         "rowsPerPage": "Lignes par page",
         "delete": "La categorie a bien été supprimé",
         "deleteError": "Une erreur est survenue lors de la suppression du la categorie",
