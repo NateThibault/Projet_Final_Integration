@@ -6,7 +6,7 @@
     "accueil": {
         "page-title": " INTEGRATION TP3",
         "subTitle": " Project description",
-        "desc": "The project consists in creating an administrator interface linked to the back-end and the database made during the short programming.",
+        "desc": "The project consists in creating an administrator interface linked to the back-end and the database made during our Web Integration class.",
         "team": "List of team members :"
     },
     "produits": {
@@ -29,19 +29,26 @@
         "isSold":"Is the product sold ?"
     },
     "produitajouter": {
-        "page-title": " Add Product"
+        "page-title": " Add A Product"
     },
     "produitmodifier": {
-        "page-title": " Edit Product"
+        "page-title": " Edit A Product"
+    },
+    
+    "my-buton-product":{
+        "add": "ADD"
     },
     "categories": {
         "page-title": " Categories List"
     },
-    "categoriesajouter": {
+    "categorieajouter": {
         "page-title": " Add Category"
     },
-    "categoriesmodifier": {
-        "page-title": "Edit Categories "
+    "categoriemodifier": {
+        "page-title": "Edit A Category "
+    },
+    "buton-add": {
+        "add": "ADD"
     },
     "categories-grid": {
         "name": "Name of the category",

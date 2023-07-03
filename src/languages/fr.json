@@ -6,7 +6,7 @@
     "accueil": {
         "page-title": "TP3 INTEGRATION",
         "subTitle": "Description du project",
-        "desc": "Le projet consiste à créer une interface administrateur liée au back-end et à la base de données réalisés durant le cours de programmation.",
+        "desc": "Le projet consiste à créer une interface administrateur liée au back-end et à la base de données réalisés durant le cours d'intégration web.",
         "team": "Liste des membres de l'équipe :"
     },
     "produits": {
@@ -29,19 +29,26 @@
         "isSold":"Est-ce que le produit est vendu ?"
     },
     "produitajouter": {
-        "page-title": " Produit Ajouter"
+        "page-title": "Ajouter un Produit "
     },
     "produitmodifier": {
-        "page-title": " Produit Modifier"
+        "page-title": "Modifier un Produit "
+    },
+    
+    "my-buton-product":{
+        "add": "AJOUTER"
     },
     "categories": {
         "page-title": "Liste des categories"
     },
-    "categoriesajouter": {
-        "page-title": " Categories Ajouter"
+    "categorieajouter": {
+        "page-title": "Ajouter une Categories "
     },
-    "categoriesmodifier": {
-        "page-title": " Categories Modifier"
+    "categoriemodifier": {
+        "page-title": "Modifier une Categories "
+    },
+    "buton-add": {
+        "add": "AJOUTER"
     },
     "categories-grid": {
         "name": "Nom de la categorie",

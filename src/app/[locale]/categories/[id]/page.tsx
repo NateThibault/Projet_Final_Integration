@@ -11,7 +11,7 @@ export default async function EditCategory({ params }: { params: { id: string } 
 
     return (
         <>
-            <Header title={t("Modifier une catégorie")} />
+            <Header title={t("categoriemodifier.page-title")} />
             <CategoryForm categoryData={categoryData} />
         </>
     )
