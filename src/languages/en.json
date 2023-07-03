@@ -60,12 +60,19 @@
         "name": "Name of the category",
         "description": "Description",
         "add": "ADD",
-        "rowsPerPage": "Rows per page"
+        "rowsPerPage": "Rows per page",
+        "delete": "The category has been deleted",
+        "deleteError": "An error occurred while deleting the category",
+        "confirmDelete":"Are you sure you want to delete this category ?"
     },
     "categories-form": {
         "name": "Name of the category",
         "description": "Description",
         "submit": "SUBMIT",
-        "cancel": "CANCEL"
+        "cancel": "CANCEL",
+        "message":"Category added successfully",
+        "error":"An error has occurred",
+        "message1":"Category changed successfully",
+        "error1":"An error has occurred"
     }
 }

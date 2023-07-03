@@ -36,9 +36,7 @@ const ProductGrid = () => {
     const productId = params.row.id as string;
 
     const confirmDelete = window.confirm(t("produits-grid.confirmDelete"));
-    
-     
-    
+
     if (!confirmDelete) {
       return;
     }

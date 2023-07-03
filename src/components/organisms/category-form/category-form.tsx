@@ -24,21 +24,21 @@ export default function CategoryForm(props: CategoryFormProps) {
     if (!props.categoryData._id) {
       postCategoryData(formData)
         .then(() => {
-          alert("Catégorie ajoutée avec succès")
+          alert(t("Catégories-form.message"))
           window.location.href = "/categories"
         })
         .catch(() => {
-          alert("Une erreur est survenue")
+          alert(t("Catégories-form.error"))
           setLoading(false)
         })
     } else {
       putCategoryData(props.categoryData._id, formData)
         .then(() => {
-          alert("Catégorie modifiée avec succès")
+          alert(t("Catégories-form.message1"))
           window.location.href = "/categories"
         })
         .catch(() => {
-          alert("Une erreur est survenue")
+          alert(t("Catégories-form.error1"))
           setLoading(false)
         })
     }

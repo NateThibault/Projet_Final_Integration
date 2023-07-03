@@ -49,10 +49,10 @@
         "page-title": "Liste des categories"
     },
     "categorieajouter": {
-        "page-title": "Ajouter une Categories "
+        "page-title": "Ajouter une Categorie "
     },
     "categoriemodifier": {
-        "page-title": "Modifier une Categories "
+        "page-title": "Modifier une Categorie "
     },
     "buton-add": {
         "add": "AJOUTER"
@@ -61,13 +61,20 @@
         "name": "Nom de la categorie",
         "description": "Description",
         "add": "AJOUTER",
-        "rowsPerPage": "Lignes par page"
+        "rowsPerPage": "Lignes par page",
+        "delete": "La categorie a bien été supprimé",
+        "deleteError": "Une erreur est survenue lors de la suppression du la categorie",
+        "confirmDelete": "Êtes-vous sûr de vouloir supprimer cette categorie ?"
     },
     "categories-form": {
         "name": "Nom de la categorie",
         "description": "Description",
         "submit": "VALIDER",
-        "cancel": "ANNULER"
+        "cancel": "ANNULER",
+        "message":"Categorie ajouter avec succès",
+        "error":"Une erreur est survenue",
+        "message1":"Categorie modifié avec succès",
+        "error1":"Une erreur est survenue"
     }
 
 }

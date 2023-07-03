@@ -39,7 +39,8 @@ const CategoryGrid = () => {
 
     const categoryId = params.id as string
   
-    const confirmDelete = window.confirm('Êtes-vous sûr de vouloir supprimer cette catégorie ?')
+    const confirmDelete = window.confirm(t("categories-grid.confirmDelete"));
+
     if (!confirmDelete) {
       return
     }
@@ -50,12 +51,12 @@ const CategoryGrid = () => {
       .then(() => {
         setRows((prevRows) => prevRows.filter((row) => row.id !== categoryId))
         setLoading(false)
-        window.alert('La catégorie a été supprimée avec succès.')
+        window.alert(t("categories-grid.delete"))
       })
       .catch((error) => {
         console.error('Erreur lors de la suppression de la catégorie', error)
         setLoading(false)
-        window.alert('Erreur lors de la suppression de la catégorie')
+        window.alert(t("categories-grid.DeleteError"))
       })
   }
 
