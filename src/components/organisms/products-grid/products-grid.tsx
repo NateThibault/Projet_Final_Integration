@@ -91,8 +91,8 @@ const ProductGrid = () => {
           onClick={() => handleDeleteButtonClick(params)}
           className={styles.buttonGrid}
         >
-     
-          <DeleteIcon style={{ color: "grey" }} />
+          
+          <DeleteIcon style={{ color: 'grey' }} />
         </Button>
       ),
       headerAlign: "center",

@@ -13,7 +13,6 @@ const Products = () => {
     <>
       <Box className={styles.centeredTypo}>
         <Header title={t("produits.page-title")} />
-       
       </Box>
       <Box className={styles.centeredGrid}>
         <ProductGrid />

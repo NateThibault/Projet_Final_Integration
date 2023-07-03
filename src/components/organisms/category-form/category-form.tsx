@@ -16,6 +16,7 @@ const schema = yup
 
 export default function CategoryForm(props: CategoryFormProps) {
   const  t  = useTranslations()
+  const t = useTranslations()
   const [loading, setLoading] = React.useState(false)
 
   const submit = async (formData: Category) => {
