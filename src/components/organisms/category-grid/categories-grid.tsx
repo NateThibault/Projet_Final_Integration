@@ -97,7 +97,7 @@ const CategoryGrid = () => {
           onClick={() => handleModifyButtonClick(params)}
           className={styles.buttonGrid}
         >
-          {t("categories-grid.add")}
+
           <EditIcon style={{ color: '#2196F3' }} />
         </Button>
       ),
