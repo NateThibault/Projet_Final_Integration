@@ -8,7 +8,7 @@ export interface Product {
 
 export interface ProductFormProps {
     productData: ApiProduct
-    categoriesData: Categories[]
+    categoriesData: Categories
 }
 
 export interface ApiProduct {

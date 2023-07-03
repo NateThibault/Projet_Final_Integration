@@ -27,7 +27,6 @@ export async function getProductData(id: string) {
     throw new Error('Échec de la récupération des données')
   }
   return res.json()
-  
 }
 
 export async function deleteProductData(productId: string) {

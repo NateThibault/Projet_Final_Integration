@@ -87,6 +87,9 @@ export default function ProductForm(props: ProductFormProps) {
     fetchData();
   }, [props.productData._id]);
 
+  useEffect(() => {
+    setCategory(props.productData.categoryId);
+  }, [props.productData.categoryId]);
 
   const handleChangeCategoryId = (event: SelectChangeEvent) => {
     setCategory(event.target.value);

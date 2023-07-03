@@ -21,7 +21,7 @@ const ProductGrid = () => {
   useEffect(() => {
     setLoading(true);
 
-    getProductsData("id title description price")
+    getProductsData()
       .then((data) => {
         const productsRows = data.map((products: { _id: any; title: any; description:any; price:any; }) => ({
           id: products._id,
