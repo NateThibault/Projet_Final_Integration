@@ -21,7 +21,7 @@ import {
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
-import { getProductData, postProductData, putProductData } from "@/api/api";
+import { getCategoriesData, getProductData, postProductData, putProductData } from "@/api/api";
 import { ProductFormProps, Product } from '@/interface/interface';
 import { useEffect, useState } from 'react';
 
@@ -47,6 +47,8 @@ export default function ProductForm(props: ProductFormProps) {
   const [alertOpen, setAlertOpen] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
 
+  
+
   const {
     register,
     reset,
@@ -55,9 +57,9 @@ export default function ProductForm(props: ProductFormProps) {
   } = useForm<Product>({
     defaultValues: {
       title: props.productData.title || '', 
-      price: props.productData.price || 0, 
+      price: props.productData.price, 
       description: props.productData.description || '', 
-      categoryId: props.productData.categoryId || '', 
+      categoryId: props.productData.categoryId, 
       isSold: props.productData.isSold || false, 
     },
     mode: "onBlur",
@@ -70,9 +72,9 @@ export default function ProductForm(props: ProductFormProps) {
         const productData = await getProductData(props.productData._id);
         reset({
           title: productData.title || "",
-          price: productData.price || 0,
+          price: productData.price ,
           description: productData.description || "",
-          categoryId: productData.categoryId || "",
+          categoryId: productData.categoryId ,
           isSold: productData.isSold || false,
         });
         setCategory(productData.categoryId);

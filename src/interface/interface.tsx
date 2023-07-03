@@ -21,6 +21,7 @@ export interface ApiProduct {
 }
 
 export interface Categories {
+    categoryId: string
     map(arg0: (result: Categories) => void): React.ReactNode
     _id: string
     name: string
