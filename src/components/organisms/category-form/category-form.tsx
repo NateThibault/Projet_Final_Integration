@@ -25,6 +25,12 @@ export default function CategoryForm(props: CategoryFormProps) {
   const [alertOpen, setAlertOpen] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
 
+  const schema = yup.object({
+    name: yup.string().min(2, t("validationCategoryForm.nameMin")).max(50, t("validationCategoryForm.nameMax")).required(),
+  }).required()
+  
+  
+
   const submit = async (formData: Category) => {
     setIsSubmitting(true);
     setLoading(true);

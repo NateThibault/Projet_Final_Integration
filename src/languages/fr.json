@@ -1,12 +1,12 @@
 {
     "menu": {
         "products": "Produits",
-        "categories": "Categories"
+        "categories": "Catégories"
     },
     "accueil": {
-        "page-title": "TP3 INTEGRATION",
-        "subTitle": "Description du project",
-        "desc": "Le projet consiste à créer une interface administrateur liée au back-end et à la base de données réalisés durant le cours de programmation.",
+        "page-title": "TP3 INTÉGRATION",
+        "subTitle": "Description du projet",
+        "desc": "Le projet consiste à créer une interface administrateur liée au back-end et à la base de données réalisées durant le cours de programmation.",
         "team": "Liste des membres de l'équipe :"
     },
     "produits": {
@@ -15,15 +15,9 @@
     "produits-grid": {
         "title": "Titre",
         "description": "Description",
-        "price": "Prix",
-        "add": "AJ",
-        "rowsPerPage": "Lignes par page"
+        "price": "Prix"
     },
     "produits-form": {
-        "title": "Titre",
-        "description": "Description",
-        "price": "Prix",
-        "categorie *": "Categorie",
         "submit": "VALIDER",
         "cancel": "ANNULER",
         "isSold":"Est-ce que le produit est vendu ?"
@@ -49,10 +43,25 @@
         "add": "AJOUTER"
     },
     "categories-form": {
-        "name": "Nom de la categorie",
-        "description": "Description",
         "submit": "VALIDER",
         "cancel": "ANNULER"
+    },
+    "validationProductForm":{
+        "titleMin": "Le titre doit contenir un minimum de 2 caractères",
+        "titleMax": "Le titre ne doit pas contenir plus de 50 caractères",
+        "descriptionMax": "La description ne doit pas contenir plus de 255 caractères",
+        "descriptionRequired": "La description est requise !",
+        "price": "Le prix est requis et ne peut contenir que des chiffres",
+        "categorie": "La catégorie doit être sélectionnée"
+    },
+    "validationCategoryForm":{
+        "nameMin": "Le nom doit contenir un minimum de 2 caractères",
+        "nameMax": "Le nom ne doit pas contenir plus de 50 caractères"
+    },
+    "buttonAddProduct":{
+        "add": "AJOUTER"
+    },
+    "buttonAddCategory":{
+        "add": "AJOUTER"
     }
-
 }

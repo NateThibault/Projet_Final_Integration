@@ -27,17 +27,6 @@ import { useTranslations } from 'next-intl'
 import { useState } from 'react';
 
 
-
-const schema = yup
-.object({
-  title: yup.string().min(2, "Le titre doit contenir un minimum de 2 caractères").max(50, "Le titre ne doit pas contenir plus de 50 caractères").required(),
-  description: yup.string().max(255, "La description ne doit pas contenir plus de 255 caractères").required("La description est requise"),
-  price: yup.number().typeError("Le prix est requis et ne peut contenir que des chiffres").required(),
-  categoryId: yup.string().required(),
-  isSold: yup.boolean()
-})
-.required()
-
 export default function ProductForm(props: ProductFormProps) {
   const t = useTranslations();
   const [loading, setLoading] = React.useState(false)
@@ -49,6 +38,14 @@ export default function ProductForm(props: ProductFormProps) {
   const [alertSeverity, setAlertSeverity] = useState<'error' | 'warning' | 'info' | 'success'>('success');
   const [alertOpen, setAlertOpen] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
+
+  const schema = yup.object({
+    title: yup.string().min(2, t("validationProductForm.titleMin")).max(50, t("validationProductForm.titleMax")).required(),
+    description: yup.string().max(255, t("validationProductForm.descriptionMax")).required(t("validationProductForm.descriptionRequired")),
+    price: yup.number().typeError(t("validationProductForm.price")).required(),
+    categoryId: yup.string().required(t("validationProductForm.categorie")).required(),
+    isSold: yup.boolean(),
+  }).required();
 
   React.useEffect(() => {
     setCategory(props.productData.categoryId);

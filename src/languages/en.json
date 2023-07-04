@@ -6,7 +6,7 @@
     "accueil": {
         "page-title": " INTEGRATION TP3",
         "subTitle": " Project description",
-        "desc": "The project consists in creating an administrator interface linked to the back-end and the database made during the short programming.",
+        "desc": "The project involves creating an administrator interface linked to the back-end and database created during the integration course.",
         "team": "List of team members :"
     },
     "produits": {
@@ -15,9 +15,7 @@
     "produits-grid": {
         "title": "Title",
         "description": "Description",
-        "price": "Price",
-        "add": "ADD",
-        "rowsPerPage": "Rows per page"
+        "price": "Price"
     },
     "produits-form": {
         "title": "Title",
@@ -29,29 +27,46 @@
         "isSold":"Is the product sold ?"
     },
     "produitajouter": {
-        "page-title": " Add Product"
+        "page-title": " Add product"
     },
     "produitmodifier": {
-        "page-title": " Edit Product"
+        "page-title": " Edit product"
     },
     "categories": {
         "page-title": " Categories List"
     },
     "categoriesajouter": {
-        "page-title": " Add Category"
+        "page-title": " Add category"
     },
     "categoriesmodifier": {
-        "page-title": "Edit Category "
+        "page-title": "Edit category "
     },
     "categories-grid": {
         "name": "Name of the category",
-        "description": "Description",
-        "add": "ADD"
+        "description": "Description"
     },
     "categories-form": {
         "name": "Name of the category",
         "description": "Description",
         "submit": "SUBMIT",
         "cancel": "CANCEL"
+    },
+    "validationProductForm":{
+        "titleMin": "The title must contain a minimum of 2 characters",
+        "titleMax": "The title must not contain more than 50 characters",
+        "descriptionMax": "Description must not contain more than 255 characters",
+        "descriptionRequired": "Description required !",
+        "price": "The price is required and may only contain numbers.",
+        "categorie": "La catégorie doit être sélectionnée"
+    },
+    "validationCategoryForm":{
+        "nameMin": "The name must contain a minimum of 2 characters",
+        "nameMax": "The name must not contain more than 50 characters"
+    },
+    "buttonAddProduct":{
+        "add": "ADD"
+    },
+    "buttonAddCategory":{
+        "add": "ADD"
     }
 }
