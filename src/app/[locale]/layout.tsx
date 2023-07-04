@@ -35,16 +35,13 @@ export default async function RootLayout({
   }
   return (
     <html lang={params.locale}>
-      <body className={inter.className} style={{ background: "white" }}>
+      <body className={inter.className}>
         <NextIntlClientProvider locale={params.locale} messages={translations}>
           <MyMenu />
-          {/* {children} */}
-          <main style={{ width: "80%", margin: "0 auto" }}>
+          <main style={{ width: "80%", margin: "0 auto", marginBottom: "80px" }}>
             {children}
           </main>
-          <footer
-            style={{ position: "fixed", left: 0, bottom: 0, width: "100%" }}
-          >
+          <footer style={{ position: "fixed", left: 0, bottom: 0, width: "100%" }}>
             <MyFooter />
           </footer>
         </NextIntlClientProvider>
