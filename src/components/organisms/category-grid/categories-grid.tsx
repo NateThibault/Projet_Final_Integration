@@ -123,6 +123,7 @@ const CategoryGrid = () => {
         <DataGrid
           rows={rows}
           columns={columns}
+          autoHeight
           initialState={{
             pagination: {
               paginationModel: {
