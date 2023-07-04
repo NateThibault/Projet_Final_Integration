@@ -1,32 +1,57 @@
 "use client"
 import * as React from 'react'
-import { Box, Button, Checkbox, CircularProgress, Container, FormControl, FormControlLabel, Grid, InputLabel, MenuItem, Select, SelectChangeEvent, TextField } from "@mui/material"
+import {
+  Box,
+  Button,
+  Checkbox,
+  CircularProgress,
+  Container,
+  FormControl,
+  FormControlLabel,
+  Grid,
+  InputLabel,
+  MenuItem,
+  Select,
+  SelectChangeEvent,
+  TextField,
+  Alert,
+  AlertTitle,
+  Snackbar,
+} from "@mui/material";
 import { useForm } from "react-hook-form"
 import { yupResolver } from "@hookform/resolvers/yup"
 import * as yup from "yup"
 import { postProductData, putProductData } from "@/api/api"
 import { ProductFormProps, Product } from '@/interface/interface'
 import { useTranslations } from 'next-intl'
+import { useState } from 'react';
 
-
-
-const schema = yup
-  .object({
-    title: yup.string().min(2, "Le titre doit contenir un minimum de 2 caractères").max(50, "Le titre ne doit pas contenir plus de 50 caractères").required(),
-    description: yup.string().max(255, "La description ne doit pas contenir plus de 255 caractères").required("La description est requise"),
-    price: yup.number().typeError("Le prix est requis et ne peut contenir que des chiffres").required(),
-    categoryId: yup.string().required(),
-    isSold: yup.boolean()
-  })
-  .required()
 
 export default function ProductForm(props: ProductFormProps) {
   const t = useTranslations();
   const [loading, setLoading] = React.useState(false)
-  const [category, setCategory] = React.useState(props.productData.categoryId)
-  const [isSold, setIsSold] = React.useState(props.productData.isSold)
+  const [category, setCategory] = React.useState("")
+  const [isSold, setIsSold] = React.useState(false)
   const [isSoldDirty, setIsSoldDirty] = React.useState(false)
   const [isCategoryDirty, setIsCategoryDirty] = React.useState(false)
+  const [alertMessage, setAlertMessage] = React.useState<string | null>(null);
+  const [alertSeverity, setAlertSeverity] = useState<'error' | 'warning' | 'info' | 'success'>('success');
+  const [alertOpen, setAlertOpen] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
+
+  const schema = yup.object({
+    title: yup.string().min(2, t("validationProductForm.titleMin")).max(50, t("validationProductForm.titleMax")).required(),
+    description: yup.string().max(255, t("validationProductForm.descriptionMax")).required(t("validationProductForm.descriptionRequired")),
+    price: yup.number().typeError(t("validationProductForm.price")).required(),
+    categoryId: yup.string().required(t("validationProductForm.categorie")).required(),
+    isSold: yup.boolean(),
+  }).required();
+
+  React.useEffect(() => {
+    setCategory(props.productData.categoryId);
+    setIsSold(props.productData.isSold);
+  }, [props.productData.categoryId,props.productData.isSold]);
+
   const handleChangeCategoryId = (event: SelectChangeEvent) => {
     setCategory(event.target.value)
     if (event.target.value == props.productData.categoryId) {
@@ -45,36 +70,51 @@ export default function ProductForm(props: ProductFormProps) {
     }
   }
   const submit = async (formData: Product) => {
-    setLoading(true)
-    if (!props.productData._id) {
-      postProductData(formData)
-        .then(() => {
-          alert("Produit ajouté avec succès")
-          window.location.href = "/products"
-        })
-        .catch(() => {
-          alert("Une erreur est survenue")
-          setLoading(false)
-        })
-    } else {
-      putProductData(props.productData._id, formData)
-        .then(() => {
-          alert("Produit modifié avec succès")
-          window.location.href = "/products"
-        })
-        .catch(() => {
-          alert("Une erreur est survenue")
-          setLoading(false)
-        })
+    
+    setIsSubmitting(true);
+    setLoading(true);
+  
+    try {
+      if (!props.productData._id) {
+        await postProductData(formData);
+        setAlertSeverity('success');
+        setAlertMessage(t("alertMessageAdd.addProductSuccess"));
+        setAlertOpen(true);
+  
+        setTimeout(() => {
+          setAlertMessage(null);
+          setAlertOpen(false);
+          window.location.href = "/products";
+        }, 2500);
+      } else {
+        await putProductData(props.productData._id, formData);
+        setAlertSeverity('success');
+        setAlertMessage(t("alertMessageEdit.editProductSuccess"));
+        setAlertOpen(true);
+  
+        setTimeout(() => {
+          setAlertMessage(null);
+          setAlertOpen(false);
+          window.location.href = "/products";
+        }, 2500);
+      }
+    } catch (error) {
+      setAlertSeverity('error');
+      setAlertMessage(t("alertError.error"));
+      setAlertOpen(true);
+    } finally {
+      setLoading(false);
     }
-  }
+  };
+
   const cancel = () => {
-    reset()
-    setCategory(props.productData.categoryId)
-    setIsCategoryDirty(false)
-    setIsSold(props.productData.isSold)
-    setIsSoldDirty(false)
-  }
+    reset();
+    setCategory(props.productData.categoryId);
+    setIsCategoryDirty(false);
+    setIsSold(props.productData.isSold);
+    setIsSoldDirty(false);
+  };
+
   const {
     register,
     reset,
@@ -94,11 +134,12 @@ export default function ProductForm(props: ProductFormProps) {
 
   return (
     <>
-      {loading ? (
-        <Box sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100vh' }}>
+      {isSubmitting ? (
+        <Box sx={{ display: 'flex',justifyContent: 'center',alignItems: 'center',position: 'fixed',top: 0,left: 0,right: 0,bottom: 0,zIndex: 9999, }}>
           <CircularProgress />
         </Box>
       ) : (
+        !loading && (
         <Container sx={{ backgroundColor: "lightgrey", padding: "24px", borderRadius: "5px", marginTop: "30px" }}>
           <form onSubmit={handleSubmit(submit)} action="/products">
             <Grid container rowSpacing={3}>
@@ -129,7 +170,7 @@ export default function ProductForm(props: ProductFormProps) {
               </Grid>
               <Grid item xs={12}>
                 <FormControl fullWidth required>
-                  <InputLabel id="labelCategories">{t("produits-form.categorie *")}</InputLabel>
+                  <InputLabel id="labelCategories">{t("produits-form.category")}</InputLabel>
                   <Select sx={{ backgroundColor: "white", borderRadius: "5px" }}
                     labelId="labelCategories"
                     id="categoryId"
@@ -188,6 +229,20 @@ export default function ProductForm(props: ProductFormProps) {
             </Grid>
           </form>
         </Container>
+      ))}
+      
+      {alertMessage && (
+        <Snackbar
+        open={alertOpen}
+        autoHideDuration={3000}
+        onClose={() => setAlertOpen(false)}
+        anchorOrigin={{ vertical: 'top', horizontal: 'center' }}
+      >
+        <Alert severity={alertSeverity}>
+          <AlertTitle>{alertSeverity}</AlertTitle>
+          {alertMessage}
+        </Alert>
+      </Snackbar>
       )}
     </>
   )

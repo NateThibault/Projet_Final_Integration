@@ -6,14 +6,20 @@ import { DataGrid, GridCellParams, GridColDef } from '@mui/x-data-grid';
 import DeleteIcon from '@mui/icons-material/Delete'
 import EditIcon from '@mui/icons-material/EditSharp'
 import { deleteProductData, getProductsData } from '../../../api/api';
-import { Box, Button, CircularProgress } from '@mui/material';
+import { Box, Button, CircularProgress, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle, Snackbar } from '@mui/material';
 import { useTranslations } from 'next-intl';
+import { Alert, AlertTitle } from '@mui/material';
 
 
 const ProductGrid = () => {
   const t= useTranslations();
   const [rows, setRows] = useState<{ id: string;title: string; description: string; price: number }[]>([]);
   const [loading, setLoading] = useState(true);
+  const [confirmDeleteOpen, setConfirmDeleteOpen] = useState(false);
+  const [deleteProductId, setDeleteProductId] = useState<string | null>(null);
+  const [alertOpen, setAlertOpen] = useState(false);
+  const [alertSeverity, setAlertSeverity] = useState<'error' | 'warning' | 'info' | 'success'>('success');
+  const [alertMessage, setAlertMessage] = useState('');
   
   
   useEffect(() => {
@@ -32,25 +38,28 @@ const ProductGrid = () => {
     fetchData();
   }, []);
 
-  const handleDeleteButtonClick = async (params: GridCellParams) => {
+  const handleDeleteButtonClick = (params: GridCellParams) => {
     const productId = params.row.id as string;
-  
-    const confirmDelete = window.confirm('Êtes-vous sûr de vouloir supprimer ce produit ?');
-    if (!confirmDelete) {
-      return;
-    }
-  
+    setDeleteProductId(productId);
+    setConfirmDeleteOpen(true);
+  };
+
+  const handleDeleteConfirm = async () => {
+    setConfirmDeleteOpen(false);
     setLoading(true);
-  
+
     try {
-      await deleteProductData(productId);
-      setRows((prevRows) => prevRows.filter((row) => row.id !== productId));
+      await deleteProductData(deleteProductId!);
+      setRows((prevRows) => prevRows.filter((row) => row.id !== deleteProductId));
       setLoading(false);
-      window.alert('Le produit a bien été supprimé');
+      setAlertSeverity('success');
+      setAlertMessage(t("alertMessageDelete.deleteProductSuccess"));
+      setAlertOpen(true);
     } catch (error) {
-      console.error('Erreur lors de la supression du produit:', error);
       setLoading(false);
-      window.alert('Erreur lors de la supression du produit');
+      setAlertSeverity('error');
+      setAlertMessage(t("alertError.error"));
+      setAlertOpen(true);
     }
   };
 
@@ -147,7 +156,40 @@ const ProductGrid = () => {
           
 
       )
-      }  {/* {t("produits-grid.rowsPerPage")} */}
+      }
+      <Dialog
+        open={confirmDeleteOpen}
+        onClose={() => setConfirmDeleteOpen(false)}
+        aria-labelledby="alert-dialog-title"
+        aria-describedby="alert-dialog-description"
+      >
+        <DialogTitle id="alert-dialog-title">{t("confirmAction.confirmTitle")}</DialogTitle>
+        <DialogContent>
+          <DialogContentText id="alert-dialog-description">
+            {t("confirmAction.confirmMessage")}
+          </DialogContentText>
+        </DialogContent>
+        <DialogActions>
+          <Button onClick={() => setConfirmDeleteOpen(false)}>
+            {t("confirmAction.confirmCancel")}
+          </Button>
+          <Button onClick={handleDeleteConfirm} color="error" autoFocus>
+            {t("confirmAction.confirmDelete")}
+          </Button>
+        </DialogActions>
+      </Dialog>
+
+      <Snackbar
+        open={alertOpen}
+        autoHideDuration={3000}
+        onClose={() => setAlertOpen(false)}
+        anchorOrigin={{ vertical: 'top', horizontal: 'center' }}
+      >
+        <Alert severity={alertSeverity}>
+          <AlertTitle>{alertSeverity}</AlertTitle>
+          {alertMessage}
+        </Alert>
+      </Snackbar>
     </Box>
   )
   

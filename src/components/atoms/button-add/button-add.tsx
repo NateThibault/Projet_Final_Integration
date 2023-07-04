@@ -1,6 +1,9 @@
 import { Button } from "@mui/material"
+import { useTranslations } from "next-intl"
 
 const ButtonAdd = () => {
+
+  const t = useTranslations()
   const handleAddClick = () => {
     window.location.href ="/categories/add"
   }
@@ -11,7 +14,7 @@ const ButtonAdd = () => {
       onClick={handleAddClick}
       sx={{ width: '100px' }}
     >
-      Ajouter
+      {t("buttonAddCategory.add")}
     </Button>
   )
 }

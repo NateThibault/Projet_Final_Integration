@@ -14,7 +14,7 @@ export default async function AddCategory() {
  
   return (
     <>
-      <Header title={t("")} />
+      <Header title={t("categoriesajouter.page-title")} />
       <CategoryForm categoryData={categoryData} />
     </>
   )

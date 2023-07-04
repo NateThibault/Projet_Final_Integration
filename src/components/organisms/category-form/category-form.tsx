@@ -1,52 +1,84 @@
 "use client"
 
 import * as React from 'react'
-import { Box, Button, CircularProgress, Container, Grid, TextField } from "@mui/material"
+import { Alert, AlertTitle, Box, Button, CircularProgress, Container, Grid, Snackbar, TextField } from "@mui/material";
 import { useForm } from "react-hook-form"
 import { yupResolver } from "@hookform/resolvers/yup"
 import * as yup from "yup"
 import { CategoryFormProps, Category } from '@/interface/interface'
 import { postCategoryData, putCategoryData } from '@/api/api'
 import { useTranslations } from 'next-intl'
+import { useState } from 'react';
+
 const schema = yup
-  .object({
-    name: yup.string().min(2, "Le nom de la catégories doit contenir un minimum de 2 caractères").max(50, "Le nom de la catégorie ne doit pas contenir plus de 50 caractères").required(),
-  })
-  .required()
+.object({
+  name: yup.string().min(2, "Le nom de la catégories doit contenir un minimum de 2 caractères").max(50, "Le nom de la catégorie ne doit pas contenir plus de 50 caractères").required(),
+})
+.required()
 
 export default function CategoryForm(props: CategoryFormProps) {
+
   const t = useTranslations()
   const [loading, setLoading] = React.useState(false)
+  const [alertMessage, setAlertMessage] = React.useState<string | null>(null);
+  const [alertSeverity, setAlertSeverity] = useState<'error' | 'warning' | 'info' | 'success'>('success');
+  const [alertOpen, setAlertOpen] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
+
+  const schema = yup.object({
+    name: yup.string().min(2, t("validationCategoryForm.nameMin")).max(50, t("validationCategoryForm.nameMax")).required(),
+  }).required()
+  
+  
 
   const submit = async (formData: Category) => {
-    setLoading(true)
+    setIsSubmitting(true);
+    setLoading(true);
 
     if (!props.categoryData._id) {
       postCategoryData(formData)
         .then(() => {
-          alert("Catégorie ajoutée avec succès")
-          window.location.href = "/categories"
+          setAlertSeverity('success');
+          setAlertMessage(t("alertMessageAdd.addCategorySuccess"));
+          setAlertOpen(true);
+
+          setTimeout(() => {
+            setAlertMessage(null);
+            setAlertOpen(false);
+            window.location.href = "/categories";
+          }, 2500);
         })
         .catch(() => {
-          alert("Une erreur est survenue")
-          setLoading(false)
-        })
+          setAlertSeverity('error');
+          setAlertMessage(t("alertError.error"));
+          setAlertOpen(true);
+          setLoading(false);
+        });
     } else {
       putCategoryData(props.categoryData._id, formData)
         .then(() => {
-          alert("Catégorie modifiée avec succès")
-          window.location.href = "/categories"
+          setAlertSeverity('success');
+          setAlertMessage(t("alertMessageEdit.editCategorySuccess"));
+          setAlertOpen(true);
+
+          setTimeout(() => {
+            setAlertMessage(null);
+            setAlertOpen(false);
+            window.location.href = "/categories";
+          }, 2500);
         })
         .catch(() => {
-          alert("Une erreur est survenue")
-          setLoading(false)
-        })
+          setAlertSeverity('error');
+          setAlertMessage(t("alertError.error"));
+          setAlertOpen(true);
+          setLoading(false);
+        });
     }
-  }
+  };
 
   const cancel = () => {
-    reset()
-  }
+    reset();
+  };
 
   const {
     register,
@@ -63,11 +95,12 @@ export default function CategoryForm(props: CategoryFormProps) {
 
   return (
     <>
-      {loading ? (
-        <Box sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100vh' }}>
+      {isSubmitting ? (
+        <Box sx={{ display: 'flex',justifyContent: 'center',alignItems: 'center',position: 'fixed',top: 0,left: 0,right: 0,bottom: 0,zIndex: 9999, }}>
           <CircularProgress />
         </Box>
       ) : (
+        !loading && (
         <Container sx={{ backgroundColor: "lightgrey", padding: "50px", borderRadius: "5px", marginTop: "30px" }}>
           <form onSubmit={handleSubmit(submit)}>
             <Grid container rowSpacing={3}>
@@ -94,7 +127,7 @@ export default function CategoryForm(props: CategoryFormProps) {
                   variant="contained"
                   onClick={cancel}
                   disabled={!isDirty}>
-                  Annuler
+                  {t("produits-form.cancel")}
                 </Button>
                 <Button
                   sx={{ marginLeft: "20px", width: "100px" }}
@@ -102,12 +135,26 @@ export default function CategoryForm(props: CategoryFormProps) {
                   type="submit"
                   disabled={!isValid || !isDirty}
                   color="primary">
-                  Envoyer
+                  {t("produits-form.submit")}
                 </Button>
               </Grid>
             </Grid>
           </form>
         </Container>
+      ))}
+
+      {alertMessage && (
+        <Snackbar
+          open={alertOpen}
+          autoHideDuration={3000}
+          onClose={() => setAlertOpen(false)}
+          anchorOrigin={{ vertical: 'top', horizontal: 'center' }}
+        >
+          <Alert severity={alertSeverity}>
+            <AlertTitle>{alertSeverity}</AlertTitle>
+            {alertMessage}
+          </Alert>
+        </Snackbar>
       )}
     </>
   )

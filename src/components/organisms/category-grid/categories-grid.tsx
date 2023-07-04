@@ -6,14 +6,20 @@ import { DataGrid, GridColDef, GridCellParams } from '@mui/x-data-grid'
 import DeleteIcon from '@mui/icons-material/Delete'
 import EditIcon from '@mui/icons-material/EditSharp'
 import { getCategoriesData, deleteCategoryData } from '../../../api/api'
-import {Box, Button, CircularProgress} from '@mui/material'
+import { Box, Button, CircularProgress, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle, Snackbar } from '@mui/material';
+import { Alert, AlertTitle } from '@mui/material';
 import { useTranslations } from 'next-intl'
 
 const CategoryGrid = () => {
+
   const t = useTranslations()
-  
   const [rows, setRows] = useState<{ id: string; name: string }[]>([])
   const [loading, setLoading] = useState(true)
+  const [confirmDeleteOpen, setConfirmDeleteOpen] = useState(false);
+  const [deleteCategoryId, setDeleteCategoryId] = useState('');
+  const [alertOpen, setAlertOpen] = useState(false);
+  const [alertSeverity, setAlertSeverity] = useState<'success' | 'error' | 'warning' | 'info'>('success');
+  const [alertMessage, setAlertMessage] = useState('');
 
 
   useEffect(() => {
@@ -36,33 +42,36 @@ const CategoryGrid = () => {
   }, [])
 
   const handleDeleteButtonClick = (params: GridCellParams) => {
+    const categoryId = params.id as string;
+    setDeleteCategoryId(categoryId);
+    setConfirmDeleteOpen(true);
+  };
 
-    const categoryId = params.id as string
-  
-    const confirmDelete = window.confirm('Êtes-vous sûr de vouloir supprimer cette catégorie ?')
-    if (!confirmDelete) {
-      return
-    }
-  
-    setLoading(true)
-  
-    deleteCategoryData(categoryId)
+  const handleDeleteConfirm = () => {
+    setLoading(true);
+
+    deleteCategoryData(deleteCategoryId)
       .then(() => {
-        setRows((prevRows) => prevRows.filter((row) => row.id !== categoryId))
-        setLoading(false)
-        window.alert('La catégorie a été supprimée avec succès.')
+        setRows((prevRows) => prevRows.filter((row) => row.id !== deleteCategoryId));
+        setLoading(false);
+        setAlertSeverity("success");
+        setAlertMessage(t("alertMessageDelete.deleteCategorySuccess"));
+        setAlertOpen(true);
       })
       .catch((error) => {
-        console.error('Erreur lors de la suppression de la catégorie', error)
-        setLoading(false)
-        window.alert('Erreur lors de la suppression de la catégorie')
-      })
-  }
+        setLoading(false);
+        setAlertSeverity("error");
+        setAlertMessage(t("alertError.error"));
+        setAlertOpen(true);
+      });
+
+    setConfirmDeleteOpen(false);
+  };
 
   const handleModifyButtonClick = (params: GridCellParams) => {
-    const categoryId = params.id as string
-    window.location.href = `/categories/${categoryId}`
-  }
+    const categoryId = params.id as string;
+    window.location.href = `/categories/${categoryId}`;
+  };
 
   const columns: GridColDef[] = [
     {
@@ -93,11 +102,7 @@ const CategoryGrid = () => {
       headerName: '',
       width: 50,
       renderCell: (params: GridCellParams) => (
-        <Button
-          onClick={() => handleModifyButtonClick(params)}
-          className={styles.buttonGrid}
-        >
-
+        <Button onClick={() => handleModifyButtonClick(params)} className={styles.buttonGrid}>
           <EditIcon style={{ color: '#2196F3' }} />
         </Button>
       ),
@@ -130,11 +135,36 @@ const CategoryGrid = () => {
           disableColumnMenu
           disableRowSelectionOnClick
         />
-      )}  {/* {t("produits-grid.rowsPerPage")} */}
+      )}
+      <Dialog open={confirmDeleteOpen} onClose={() => setConfirmDeleteOpen(false)}>
+        <DialogTitle>{t("confirmAction.confirmTitle")}</DialogTitle>
+        <DialogContent>
+          <DialogContentText>
+            {t("confirmAction.confirmMessage")}
+          </DialogContentText>
+        </DialogContent>
+        <DialogActions>
+          <Button onClick={() => setConfirmDeleteOpen(false)}>
+            {t("confirmAction.confirmCancel")}
+          </Button>
+          <Button onClick={handleDeleteConfirm} color="error" autoFocus>
+            {t("confirmAction.confirmDelete")}
+          </Button>
+        </DialogActions>
+      </Dialog>
+      <Snackbar
+        open={alertOpen}
+        autoHideDuration={3000}
+        onClose={() => setAlertOpen(false)}
+        anchorOrigin={{ vertical: 'top', horizontal: 'center' }}
+      >
+        <Alert severity={alertSeverity}>
+          <AlertTitle>{alertSeverity}</AlertTitle>
+          {alertMessage}
+        </Alert>
+      </Snackbar>
     </Box>
   )
-
-  
 }
 
 export default CategoryGrid
