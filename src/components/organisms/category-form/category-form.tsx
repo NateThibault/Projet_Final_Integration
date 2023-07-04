@@ -39,7 +39,7 @@ export default function CategoryForm(props: CategoryFormProps) {
       postCategoryData(formData)
         .then(() => {
           setAlertSeverity('success');
-          setAlertMessage("Catégorie ajouté avec succès");
+          setAlertMessage(t("alertMessageAdd.addCategorySuccess"));
           setAlertOpen(true);
 
           setTimeout(() => {
@@ -50,7 +50,7 @@ export default function CategoryForm(props: CategoryFormProps) {
         })
         .catch(() => {
           setAlertSeverity('error');
-          setAlertMessage("Une erreur est survenue");
+          setAlertMessage(t("alertError.error"));
           setAlertOpen(true);
           setLoading(false);
         });
@@ -58,7 +58,7 @@ export default function CategoryForm(props: CategoryFormProps) {
       putCategoryData(props.categoryData._id, formData)
         .then(() => {
           setAlertSeverity('success');
-          setAlertMessage("Catégorie modifié avec succès");
+          setAlertMessage(t("alertMessageEdit.editCategorySuccess"));
           setAlertOpen(true);
 
           setTimeout(() => {
@@ -69,7 +69,7 @@ export default function CategoryForm(props: CategoryFormProps) {
         })
         .catch(() => {
           setAlertSeverity('error');
-          setAlertMessage("Une erreur est survenue");
+          setAlertMessage(t("alertError.error"));
           setAlertOpen(true);
           setLoading(false);
         });
@@ -127,7 +127,7 @@ export default function CategoryForm(props: CategoryFormProps) {
                   variant="contained"
                   onClick={cancel}
                   disabled={!isDirty}>
-                  Annuler
+                  {t("produits-form.cancel")}
                 </Button>
                 <Button
                   sx={{ marginLeft: "20px", width: "100px" }}
@@ -135,7 +135,7 @@ export default function CategoryForm(props: CategoryFormProps) {
                   type="submit"
                   disabled={!isValid || !isDirty}
                   color="primary">
-                  Envoyer
+                  {t("produits-form.submit")}
                 </Button>
               </Grid>
             </Grid>

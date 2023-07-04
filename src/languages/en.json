@@ -21,7 +21,7 @@
         "title": "Title",
         "description": "Description",
         "price": "Price",
-        "categorie *": "Category",
+        "category": "Category",
         "submit": "SUBMIT",
         "cancel": "CANCEL",
         "isSold":"Is the product sold ?"
@@ -68,5 +68,26 @@
     },
     "buttonAddCategory":{
         "add": "ADD"
+    },
+    "alertMessageEdit":{
+        "editProductSuccess": "Product modified successfully !",
+        "editCategorySuccess": "Category modified successfully !"
+    },
+    "alertMessageDelete":{
+        "deleteProductSuccess": "The product has been successfully deleted !",
+        "deleteCategorySuccess": "The category has been successfully deleted !"
+    },
+    "alertMessageAdd":{
+        "addProductSuccess": "Product added successfully !",
+        "addCategorySuccess": "Category added successfully !"
+    },
+    "alertError":{
+        "error": "An error has occurred ... Please try again !"
+    },
+    "confirmAction":{
+        "confirmTitle": "Delete confirmation",
+        "confirmMessage": "Are you sure you want to delete ?",
+        "confirmDelete": "Delete",
+        "confirmCancel": "Cancel"
     }
 }

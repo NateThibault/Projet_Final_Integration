@@ -55,14 +55,13 @@ const CategoryGrid = () => {
         setRows((prevRows) => prevRows.filter((row) => row.id !== deleteCategoryId));
         setLoading(false);
         setAlertSeverity("success");
-        setAlertMessage("La catégorie a été supprimée avec succès.");
+        setAlertMessage(t("alertMessageDelete.deleteCategorySuccess"));
         setAlertOpen(true);
       })
       .catch((error) => {
-        console.error("Erreur lors de la suppression de la catégorie", error);
         setLoading(false);
         setAlertSeverity("error");
-        setAlertMessage("Erreur lors de la suppression de la catégorie");
+        setAlertMessage(t("alertError.error"));
         setAlertOpen(true);
       });
 
@@ -138,16 +137,18 @@ const CategoryGrid = () => {
         />
       )}
       <Dialog open={confirmDeleteOpen} onClose={() => setConfirmDeleteOpen(false)}>
-        <DialogTitle>Confirmation de suppression</DialogTitle>
+        <DialogTitle>{t("confirmAction.confirmTitle")}</DialogTitle>
         <DialogContent>
           <DialogContentText>
-            Êtes-vous sûr de vouloir supprimer cette catégorie ?
+            {t("confirmAction.confirmMessage")}
           </DialogContentText>
         </DialogContent>
         <DialogActions>
-          <Button onClick={() => setConfirmDeleteOpen(false)}>Annuler</Button>
+          <Button onClick={() => setConfirmDeleteOpen(false)}>
+            {t("confirmAction.confirmCancel")}
+          </Button>
           <Button onClick={handleDeleteConfirm} color="error" autoFocus>
-            Supprimer
+            {t("confirmAction.confirmDelete")}
           </Button>
         </DialogActions>
       </Dialog>

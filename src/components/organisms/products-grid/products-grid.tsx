@@ -53,13 +53,12 @@ const ProductGrid = () => {
       setRows((prevRows) => prevRows.filter((row) => row.id !== deleteProductId));
       setLoading(false);
       setAlertSeverity('success');
-      setAlertMessage('Le produit a bien été supprimé');
+      setAlertMessage(t("alertMessageDelete.deleteProductSuccess"));
       setAlertOpen(true);
     } catch (error) {
-      console.error('Erreur lors de la suppression du produit:', error);
       setLoading(false);
       setAlertSeverity('error');
-      setAlertMessage('Erreur lors de la suppression du produit');
+      setAlertMessage(t("alertError.error"));
       setAlertOpen(true);
     }
   };
@@ -164,16 +163,18 @@ const ProductGrid = () => {
         aria-labelledby="alert-dialog-title"
         aria-describedby="alert-dialog-description"
       >
-        <DialogTitle id="alert-dialog-title">Confirmation</DialogTitle>
+        <DialogTitle id="alert-dialog-title">{t("confirmAction.confirmTitle")}</DialogTitle>
         <DialogContent>
           <DialogContentText id="alert-dialog-description">
-            Êtes-vous sûr de vouloir supprimer ce produit ?
+            {t("confirmAction.confirmMessage")}
           </DialogContentText>
         </DialogContent>
         <DialogActions>
-          <Button onClick={() => setConfirmDeleteOpen(false)}>Annuler</Button>
+          <Button onClick={() => setConfirmDeleteOpen(false)}>
+            {t("confirmAction.confirmCancel")}
+          </Button>
           <Button onClick={handleDeleteConfirm} color="error" autoFocus>
-            Supprimer
+            {t("confirmAction.confirmDelete")}
           </Button>
         </DialogActions>
       </Dialog>

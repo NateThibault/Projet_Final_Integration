@@ -78,7 +78,7 @@ export default function ProductForm(props: ProductFormProps) {
       if (!props.productData._id) {
         await postProductData(formData);
         setAlertSeverity('success');
-        setAlertMessage("Produit ajouté avec succès");
+        setAlertMessage(t("alertMessageAdd.addProductSuccess"));
         setAlertOpen(true);
   
         setTimeout(() => {
@@ -89,7 +89,7 @@ export default function ProductForm(props: ProductFormProps) {
       } else {
         await putProductData(props.productData._id, formData);
         setAlertSeverity('success');
-        setAlertMessage("Produit modifié avec succès");
+        setAlertMessage(t("alertMessageEdit.editProductSuccess"));
         setAlertOpen(true);
   
         setTimeout(() => {
@@ -100,7 +100,7 @@ export default function ProductForm(props: ProductFormProps) {
       }
     } catch (error) {
       setAlertSeverity('error');
-      setAlertMessage("Une erreur est survenue");
+      setAlertMessage(t("alertError.error"));
       setAlertOpen(true);
     } finally {
       setLoading(false);
@@ -170,7 +170,7 @@ export default function ProductForm(props: ProductFormProps) {
               </Grid>
               <Grid item xs={12}>
                 <FormControl fullWidth required>
-                  <InputLabel id="labelCategories">{t("produits-form.categorie *")}</InputLabel>
+                  <InputLabel id="labelCategories">{t("produits-form.category")}</InputLabel>
                   <Select sx={{ backgroundColor: "white", borderRadius: "5px" }}
                     labelId="labelCategories"
                     id="categoryId"

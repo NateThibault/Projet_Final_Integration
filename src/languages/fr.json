@@ -18,6 +18,10 @@
         "price": "Prix"
     },
     "produits-form": {
+        "title": "Titre",
+        "description": "Description",
+        "price": "Prix",
+        "category": "Catégorie",
         "submit": "VALIDER",
         "cancel": "ANNULER",
         "isSold":"Est-ce que le produit est vendu ?"
@@ -43,6 +47,7 @@
         "add": "AJOUTER"
     },
     "categories-form": {
+        "name":"Nom de la categorie",
         "submit": "VALIDER",
         "cancel": "ANNULER"
     },
@@ -63,5 +68,26 @@
     },
     "buttonAddCategory":{
         "add": "AJOUTER"
+    },
+    "alertMessageEdit":{
+        "editProductSuccess": "Produit modifié avec succès !",
+        "editCategorySuccess": "Catégorie modifiée avec succès !"
+    },
+    "alertMessageDelete":{
+        "deleteProductSuccess": "Le produit a bien été supprimé !",
+        "deleteCategorySuccess": "La catégorie a bien été supprimée !"
+    },
+    "alertMessageAdd":{
+        "addProductSuccess": "Produit ajouté avec succès !",
+        "addCategorySuccess": "Catégorie ajoutée avec succès !"
+    },
+    "alertError":{
+        "error": "Une erreur est survenue ... Veuillez réessayer !"
+    },
+    "confirmAction":{
+        "confirmTitle": "Confirmation de suppression",
+        "confirmMessage": "Êtes-vous sûr de vouloir supprimer ?",
+        "confirmDelete": "Supprimer",
+        "confirmCancel": "Annuler"
     }
 }
