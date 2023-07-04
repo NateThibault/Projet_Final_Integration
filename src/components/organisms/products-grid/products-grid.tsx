@@ -129,6 +129,7 @@ const ProductGrid = () => {
       minWidth: 50,
     },
   ];
+
   return (
     <Box sx={{ height: 'auto', maxHeight: '100%', width: "100%" }}>
       {loading ? (
@@ -151,12 +152,8 @@ const ProductGrid = () => {
           loading={loading}
           disableColumnMenu
           disableRowSelectionOnClick
-          
         />
-          
-
-      )
-      }
+      )}
       <Dialog
         open={confirmDeleteOpen}
         onClose={() => setConfirmDeleteOpen(false)}
@@ -191,8 +188,7 @@ const ProductGrid = () => {
         </Alert>
       </Snackbar>
     </Box>
-  )
-  
+  ) 
 }
 
 export default ProductGrid;
