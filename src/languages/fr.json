@@ -16,7 +16,6 @@
         "title": "Titre",
         "description": "Description",
         "price": "Prix",
-        "rowsPerPage": "Lignes par page",
         "delete": "Le produit a bien été supprimé",
         "deleteError": "Une erreur est survenue lors de la suppression du produit",
         "confirmDelete": "Êtes-vous sûr de vouloir supprimer ce produit ?"
@@ -60,7 +59,6 @@
     "categories-grid": {
         "name": "Nom de la categorie",
         "description": "Description",
-        "rowsPerPage": "Lignes par page",
         "delete": "La categorie a bien été supprimé",
         "deleteError": "Une erreur est survenue lors de la suppression du la categorie",
         "confirmDelete": "Êtes-vous sûr de vouloir supprimer cette categorie ?"

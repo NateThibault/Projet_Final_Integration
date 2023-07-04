@@ -131,7 +131,7 @@ const CategoryGrid = () => {
           disableColumnMenu
           disableRowSelectionOnClick
         />
-      )}  {/* {t("produits-grid.rowsPerPage")} */}
+      )} 
     </Box>
   )
 

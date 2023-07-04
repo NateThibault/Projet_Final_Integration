@@ -16,7 +16,6 @@
         "title": "Title",
         "description": "Description",
         "price": "Price",
-        "rowsPerPage": "Rows per page",
         "delete": "The product has been deleted",
         "deleteError": "An error occurred while deleting the product",
         "confirmDelete":"Are you sure you want to delete this product ?"
@@ -59,7 +58,6 @@
     "categories-grid": {
         "name": "Name of the category",
         "description": "Description",
-        "rowsPerPage": "Rows per page",
         "delete": "The category has been deleted",
         "deleteError": "An error occurred while deleting the category",
         "confirmDelete":"Are you sure you want to delete this category ?"
