@@ -29,26 +29,31 @@ import { useState } from 'react';
 
 
 const schema = yup
-  .object({
-    title: yup.string().min(2, "Le titre doit contenir un minimum de 2 caractères").max(50, "Le titre ne doit pas contenir plus de 50 caractères").required(),
-    description: yup.string().max(255, "La description ne doit pas contenir plus de 255 caractères").required("La description est requise"),
-    price: yup.number().typeError("Le prix est requis et ne peut contenir que des chiffres").required(),
-    categoryId: yup.string().required(),
-    isSold: yup.boolean()
-  })
-  .required()
+.object({
+  title: yup.string().min(2, "Le titre doit contenir un minimum de 2 caractères").max(50, "Le titre ne doit pas contenir plus de 50 caractères").required(),
+  description: yup.string().max(255, "La description ne doit pas contenir plus de 255 caractères").required("La description est requise"),
+  price: yup.number().typeError("Le prix est requis et ne peut contenir que des chiffres").required(),
+  categoryId: yup.string().required(),
+  isSold: yup.boolean()
+})
+.required()
 
 export default function ProductForm(props: ProductFormProps) {
   const t = useTranslations();
   const [loading, setLoading] = React.useState(false)
-  const [category, setCategory] = React.useState(props.productData.categoryId)
-  const [isSold, setIsSold] = React.useState(props.productData.isSold)
+  const [category, setCategory] = React.useState("")
+  const [isSold, setIsSold] = React.useState(false)
   const [isSoldDirty, setIsSoldDirty] = React.useState(false)
   const [isCategoryDirty, setIsCategoryDirty] = React.useState(false)
   const [alertMessage, setAlertMessage] = React.useState<string | null>(null);
   const [alertSeverity, setAlertSeverity] = useState<'error' | 'warning' | 'info' | 'success'>('success');
   const [alertOpen, setAlertOpen] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
+
+  React.useEffect(() => {
+    setCategory(props.productData.categoryId);
+    setIsSold(props.productData.isSold);
+  }, [props.productData.categoryId,props.productData.isSold]);
 
   const handleChangeCategoryId = (event: SelectChangeEvent) => {
     setCategory(event.target.value)
