@@ -18,6 +18,7 @@ const Home = () => {
           sx={{
             color: "black",
             fontSize: "25px",
+            marginTop: "100px"
           }}
         >
           {t("accueil.subTitle")}
@@ -25,7 +26,7 @@ const Home = () => {
 
         <Typography
           sx={{
-            marginTop: "10px",
+            marginTop: "15px",
             color: "black",
           }}
         >
@@ -44,7 +45,7 @@ const Home = () => {
 
         <Box
           sx={{
-            marginTop: "10px",
+            marginTop: "15px",
             color: "black", marginBottom: "100px"
           }}
         >
