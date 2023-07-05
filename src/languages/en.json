@@ -24,7 +24,7 @@
         "category": "Category",
         "submit": "SUBMIT",
         "cancel": "CANCEL",
-        "isSold":"Is the product sold ?"
+        "isSold": "Is the product sold ?"
     },
     "produitajouter": {
         "page-title": " Add product"
@@ -51,7 +51,7 @@
         "submit": "SUBMIT",
         "cancel": "CANCEL"
     },
-    "validationProductForm":{
+    "validationProductForm": {
         "titleMin": "The title must contain a minimum of 2 characters",
         "titleMax": "The title must not contain more than 50 characters",
         "descriptionMax": "Description must not contain more than 255 characters",
@@ -59,32 +59,32 @@
         "price": "The price is required and may only contain numbers.",
         "categorie": "La catégorie doit être sélectionnée"
     },
-    "validationCategoryForm":{
+    "validationCategoryForm": {
         "nameMin": "The name must contain a minimum of 2 characters",
         "nameMax": "The name must not contain more than 50 characters"
     },
-    "buttonAddProduct":{
+    "buttonAddProduct": {
         "add": "ADD"
     },
-    "buttonAddCategory":{
+    "buttonAddCategory": {
         "add": "ADD"
     },
-    "alertMessageEdit":{
+    "alertMessageEdit": {
         "editProductSuccess": "Product modified successfully !",
         "editCategorySuccess": "Category modified successfully !"
     },
-    "alertMessageDelete":{
+    "alertMessageDelete": {
         "deleteProductSuccess": "The product has been successfully deleted !",
         "deleteCategorySuccess": "The category has been successfully deleted !"
     },
-    "alertMessageAdd":{
+    "alertMessageAdd": {
         "addProductSuccess": "Product added successfully !",
         "addCategorySuccess": "Category added successfully !"
     },
-    "alertError":{
+    "alertError": {
         "error": "An error has occurred ... Please try again !"
     },
-    "confirmAction":{
+    "confirmAction": {
         "confirmTitle": "Delete confirmation",
         "confirmMessage": "Are you sure you want to delete ?",
         "confirmDelete": "Delete",
