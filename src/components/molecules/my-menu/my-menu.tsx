@@ -12,31 +12,30 @@ import Button from '@mui/material/Button'
 import MenuItem from '@mui/material/MenuItem'
 import SportsSoccerIcon from '@mui/icons-material/SportsSoccer'
 import { useTranslations } from 'next-intl'
-import LanguageSwitcher from '@/components/atoms/language-switcher/language-switcher'
-
 
 
 interface MenuItem {
-  label: string;
-  route: string;
+    label: string
+    route: string
 }
 
 function MyMenu() {
-  const t = useTranslations();
-  const [anchorElNav, setAnchorElNav] = React.useState<null | HTMLElement>(null);
+    const t = useTranslations();
+    const [anchorElNav, setAnchorElNav] = React.useState<null | HTMLElement>(null)
+    const handleOpenNavMenu = (event: React.MouseEvent<HTMLElement>) => {
+        setAnchorElNav(event.currentTarget)
+    }
+    const handleCloseNavMenu = () => {
+        setAnchorElNav(null)
+    }
 
-  const handleOpenNavMenu = (event: React.MouseEvent<HTMLElement>) => {
-    setAnchorElNav(event.currentTarget);
-  };
+    const pages: MenuItem[] = [
+        
+        { label: t("menu.products"), route: "/products" },
+        { label: t("menu.categories"), route: "/categories" },
+    ]
 
-  const handleCloseNavMenu = () => {
-    setAnchorElNav(null);
-  };
-
-  const pages: MenuItem[] = [
-    { label: t('menu.products'), route: '/products' },
-    { label: t('menu.categories'), route: '/categories' },
-  ];
+    const isEnglish = window.location.pathname.includes('/en')
 
     return (
         <AppBar position="static">
@@ -128,8 +127,29 @@ function MyMenu() {
                             </Button>
                         ))}
                     </Box>
-
-                    <LanguageSwitcher />
+                    <Typography
+                        component="a"
+                        href="/fr"
+                        style={{
+                        color: isEnglish ? 'white' : 'inherit',
+                        marginRight: '3px',
+                        textDecoration: isEnglish ? 'none' : 'underline',
+                        }}
+                    >
+                        FR
+                    </Typography>
+                    <Typography>/</Typography>
+                    <Typography
+                        component="a"
+                        href="/en"
+                        style={{
+                        color: isEnglish ? 'inherit' : 'white',
+                        marginLeft: '3px',
+                        textDecoration: isEnglish ? 'underline' : 'none',
+                        }}
+                    >
+                        EN
+                    </Typography>
                 </Toolbar>
             </Container>
         </AppBar>
