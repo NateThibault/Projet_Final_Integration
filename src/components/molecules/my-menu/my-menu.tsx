@@ -12,7 +12,7 @@ import Button from '@mui/material/Button'
 import MenuItem from '@mui/material/MenuItem'
 import SportsSoccerIcon from '@mui/icons-material/SportsSoccer'
 import { useTranslations } from 'next-intl'
-
+import { usePathname } from 'next/navigation'
 
 interface MenuItem {
     label: string
@@ -22,6 +22,8 @@ interface MenuItem {
 function MyMenu() {
     const t = useTranslations();
     const [anchorElNav, setAnchorElNav] = React.useState<null | HTMLElement>(null)
+    const pathname = usePathname();
+
     const handleOpenNavMenu = (event: React.MouseEvent<HTMLElement>) => {
         setAnchorElNav(event.currentTarget)
     }
@@ -35,7 +37,7 @@ function MyMenu() {
         { label: t("menu.categories"), route: "/categories" },
     ]
 
-    const isEnglish = window.location.pathname.includes('/en')
+    const isEnglish = pathname.includes('/en');
 
     return (
         <AppBar position="static">

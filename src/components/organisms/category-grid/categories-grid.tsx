@@ -9,6 +9,7 @@ import { getCategoriesData, deleteCategoryData } from '../../../api/api'
 import { Box, Button, CircularProgress, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle, Snackbar } from '@mui/material';
 import { Alert, AlertTitle } from '@mui/material';
 import { useTranslations } from 'next-intl'
+import { useRouter } from 'next/navigation'
 
 const CategoryGrid = () => {
 
@@ -20,7 +21,7 @@ const CategoryGrid = () => {
   const [alertOpen, setAlertOpen] = useState(false);
   const [alertSeverity, setAlertSeverity] = useState<'success' | 'error' | 'warning' | 'info'>('success');
   const [alertMessage, setAlertMessage] = useState('');
-
+  const router = useRouter();
 
   useEffect(() => {
     setLoading(true)
@@ -70,7 +71,7 @@ const CategoryGrid = () => {
 
   const handleModifyButtonClick = (params: GridCellParams) => {
     const categoryId = params.id as string;
-    window.location.href = `/categories/${categoryId}`;
+    router.push(`/categories/${categoryId}`);
   };
 
   const columns: GridColDef[] = [

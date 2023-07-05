@@ -9,7 +9,7 @@ import { deleteProductData, getProductsData } from '../../../api/api';
 import { Box, Button, CircularProgress, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle, Snackbar } from '@mui/material';
 import { useTranslations } from 'next-intl';
 import { Alert, AlertTitle } from '@mui/material';
-
+import { useRouter } from 'next/navigation';
 
 const ProductGrid = () => {
   const t= useTranslations();
@@ -20,7 +20,7 @@ const ProductGrid = () => {
   const [alertOpen, setAlertOpen] = useState(false);
   const [alertSeverity, setAlertSeverity] = useState<'error' | 'warning' | 'info' | 'success'>('success');
   const [alertMessage, setAlertMessage] = useState('');
-  
+  const router = useRouter();
   
   useEffect(() => {
     const fetchData = async () => {
@@ -62,10 +62,10 @@ const ProductGrid = () => {
       setAlertOpen(true);
     }
   };
-
+  
   const handleModifyButtonClick = (params: GridCellParams) => {
     const productId = params.id as string;
-    window.location.href = `/products/${productId}`;
+    router.push(`/products/${productId}`);
   };
 
 

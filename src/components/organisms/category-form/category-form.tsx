@@ -9,6 +9,7 @@ import { CategoryFormProps, Category } from '@/interface/interface'
 import { postCategoryData, putCategoryData } from '@/api/api'
 import { useTranslations } from 'next-intl'
 import { useState } from 'react';
+import { useRouter } from 'next/navigation';
 
 const schema = yup
 .object({
@@ -24,6 +25,7 @@ export default function CategoryForm(props: CategoryFormProps) {
   const [alertSeverity, setAlertSeverity] = useState<'error' | 'warning' | 'info' | 'success'>('success');
   const [alertOpen, setAlertOpen] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const router = useRouter();
 
   const schema = yup.object({
     name: yup.string().min(2, t("validationCategoryForm.nameMin")).max(50, t("validationCategoryForm.nameMax")).required(),
@@ -45,7 +47,7 @@ export default function CategoryForm(props: CategoryFormProps) {
           setTimeout(() => {
             setAlertMessage(null);
             setAlertOpen(false);
-            window.location.href = "/categories";
+            router.push("/categories");
           }, 2500);
         })
         .catch(() => {
@@ -64,7 +66,7 @@ export default function CategoryForm(props: CategoryFormProps) {
           setTimeout(() => {
             setAlertMessage(null);
             setAlertOpen(false);
-            window.location.href = "/categories";
+            router.push("/categories");
           }, 2500);
         })
         .catch(() => {
