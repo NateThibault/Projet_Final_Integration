@@ -12,28 +12,31 @@ import Button from '@mui/material/Button'
 import MenuItem from '@mui/material/MenuItem'
 import SportsSoccerIcon from '@mui/icons-material/SportsSoccer'
 import { useTranslations } from 'next-intl'
+import LanguageSwitcher from '@/components/atoms/language-switcher/language-switcher'
+
 
 
 interface MenuItem {
-    label: string
-    route: string
+  label: string;
+  route: string;
 }
 
 function MyMenu() {
-    const t = useTranslations();
-    const [anchorElNav, setAnchorElNav] = React.useState<null | HTMLElement>(null)
-    const handleOpenNavMenu = (event: React.MouseEvent<HTMLElement>) => {
-        setAnchorElNav(event.currentTarget)
-    }
-    const handleCloseNavMenu = () => {
-        setAnchorElNav(null)
-    }
+  const t = useTranslations();
+  const [anchorElNav, setAnchorElNav] = React.useState<null | HTMLElement>(null);
 
-    const pages: MenuItem[] = [
-        
-        { label: t("menu.products"), route: "/products" },
-        { label: t("menu.categories"), route: "/categories" },
-    ]
+  const handleOpenNavMenu = (event: React.MouseEvent<HTMLElement>) => {
+    setAnchorElNav(event.currentTarget);
+  };
+
+  const handleCloseNavMenu = () => {
+    setAnchorElNav(null);
+  };
+
+  const pages: MenuItem[] = [
+    { label: t('menu.products'), route: '/products' },
+    { label: t('menu.categories'), route: '/categories' },
+  ];
 
     return (
         <AppBar position="static">
@@ -125,9 +128,8 @@ function MyMenu() {
                             </Button>
                         ))}
                     </Box>
-                    <Typography component="a" href="/fr" style={{ color: "white", marginRight: "3px" }}>FR</Typography>
-                    <Typography>/</Typography>
-                    <Typography component="a" href="/en" style={{ color: "white", marginLeft: "3px" }}>EN</Typography>
+
+                    <LanguageSwitcher />
                 </Toolbar>
             </Container>
         </AppBar>
