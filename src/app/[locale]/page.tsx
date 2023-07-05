@@ -17,7 +17,7 @@ const Home = () => {
           sx={{
             color: "black",
             fontSize: "25px",
-            marginTop: "100px",
+            marginTop: "30px",
           }}
         >
           {t("accueil.subTitle")}
