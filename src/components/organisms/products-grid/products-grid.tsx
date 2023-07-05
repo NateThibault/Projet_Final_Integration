@@ -16,12 +16,17 @@ import {
   DialogContentText,
   DialogTitle,
   Snackbar,
+  useMediaQuery,
+  useTheme,
 } from "@mui/material";
 import { useTranslations } from "next-intl";
 import { Alert, AlertTitle } from "@mui/material";
 
 const ProductGrid = () => {
   const t = useTranslations();
+  const theme = useTheme();
+  const isSmScreen = useMediaQuery(theme.breakpoints.down("sm"));
+  
   const [rows, setRows] = useState<
     { id: string; title: string; description: string; price: number }[]
   >([]);
@@ -89,13 +94,13 @@ const ProductGrid = () => {
       width: 100,
       flex: 1,
     },
-    {
+    !isSmScreen && {
       field: "description",
       headerName: t("produits-grid.description"),
       width: 250,
       flex: 1,
     },
-    {
+    !isSmScreen && {
       field: "price",
       headerName: t("produits-grid.price"),
       type: "number",
@@ -140,7 +145,7 @@ const ProductGrid = () => {
       sortable: false,
       minWidth: 50,
     },
-  ];
+  ].filter(Boolean) as GridColDef[];
 
   return (
     <Box sx={{ height: "auto", maxHeight: "100%", width: "100%" }}>

@@ -27,19 +27,19 @@
         "isSold": "Est-ce que le produit est vendu ?"
     },
     "produitajouter": {
-        "page-title": " Ajouter un produit"
+        "page-title": "Ajouter un produit"
     },
     "produitmodifier": {
-        "page-title": " Modifier un produit"
+        "page-title": "Modifier un produit"
     },
     "categories": {
         "page-title": "Liste des catégories"
     },
     "categoriesajouter": {
-        "page-title": " Ajouter une catégorie"
+        "page-title": "Ajouter une catégorie"
     },
     "categoriesmodifier": {
-        "page-title": " Modifier une catégorie"
+        "page-title": "Modifier une catégorie"
     },
     "categories-grid": {
         "name": "Nom de la categorie",
@@ -52,16 +52,16 @@
         "cancel": "ANNULER"
     },
     "validationProductForm": {
-        "titleMin": "Le titre doit contenir un minimum de 2 caractères",
-        "titleMax": "Le titre ne doit pas contenir plus de 50 caractères",
-        "descriptionMax": "La description ne doit pas contenir plus de 255 caractères",
+        "titleMin": "Le titre doit contenir un minimum de 2 caractères.",
+        "titleMax": "Le titre ne doit pas contenir plus de 50 caractères.",
+        "descriptionMax": "La description ne doit pas contenir plus de 255 caractères.",
         "descriptionRequired": "La description est requise !",
-        "price": "Le prix est requis et ne peut contenir que des chiffres",
-        "categorie": "La catégorie doit être sélectionnée"
+        "price": "Le prix est requis et ne peut contenir que des chiffres.",
+        "categorie": "La catégorie doit être sélectionnée."
     },
     "validationCategoryForm": {
-        "nameMin": "Le nom doit contenir un minimum de 2 caractères",
-        "nameMax": "Le nom ne doit pas contenir plus de 50 caractères"
+        "nameMin": "Le nom doit contenir un minimum de 2 caractères.",
+        "nameMax": "Le nom ne doit pas contenir plus de 50 caractères."
     },
     "buttonAddProduct": {
         "add": "AJOUTER"
@@ -86,7 +86,7 @@
     },
     "confirmAction": {
         "confirmTitle": "Confirmation de suppression",
-        "confirmMessage": "Êtes-vous sûr de vouloir supprimer ?",
+        "confirmMessage": "Êtes-vous sûr de vouloir supprimer ceci ?",
         "confirmDelete": "Supprimer",
         "confirmCancel": "Annuler"
     }

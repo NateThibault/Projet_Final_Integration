@@ -216,6 +216,7 @@ export default function ProductForm(props: ProductFormProps) {
                       label="Catégorie"
                       {...register("categoryId")}
                       onChange={handleChangeCategoryId}
+                      required
                     >
                       {props.categoriesData.map((result) => (
                         <MenuItem key={result._id} value={result._id}>
