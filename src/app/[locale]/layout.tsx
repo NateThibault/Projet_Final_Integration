@@ -38,7 +38,6 @@ export default async function RootLayout({
       <body className={inter.className} style={{ background: "white" }}>
         <NextIntlClientProvider locale={params.locale} messages={translations}>
           <MyMenu />
-          {/* {children} */}
           <main style={{ width: "80%", margin: "0 auto" }}>
             {children}
           </main>
