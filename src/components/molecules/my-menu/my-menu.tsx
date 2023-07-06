@@ -30,7 +30,6 @@ function MyMenu() {
     }
 
     const pages: MenuItem[] = [
-        
         { label: t("menu.products"), route: "/products" },
         { label: t("menu.categories"), route: "/categories" },
     ]
@@ -61,7 +60,13 @@ function MyMenu() {
                     >
                         TP3
                     </Typography>
-                    <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}>
+                    <Box sx={{
+                        flexGrow: 1,
+                        display: {
+                            xs: 'flex',
+                            md: 'none'
+                        }
+                    }}>
                         <IconButton
                             size="large"
                             aria-label="account of current user"
@@ -70,7 +75,7 @@ function MyMenu() {
                             onClick={handleOpenNavMenu}
                             color="inherit"
                         >
-                            <MenuIcon />
+                        <MenuIcon />
                         </IconButton>
                         <Menu
                             id="menu-appbar"
@@ -90,11 +95,13 @@ function MyMenu() {
                                 display: { xs: 'block', md: 'none' },
                             }}
                         >
-                            {pages.map((page) => (
-                                <MenuItem key={page.label} onClick={handleCloseNavMenu}>
-                                    <Typography textAlign="center" component="a" href={page.route}>{page.label}</Typography>
-                                </MenuItem>
-                            ))}
+                        {pages.map((page) => (
+                            <MenuItem key={page.label} onClick={handleCloseNavMenu}>
+                                <Typography textAlign="center" component="a" href={page.route}>
+                                    {page.label}
+                                </Typography>
+                            </MenuItem>
+                        ))}
                         </Menu>
                     </Box>
                     <SportsSoccerIcon sx={{ display: { xs: 'flex', md: 'none' }, mr: 1 }} />
@@ -115,7 +122,13 @@ function MyMenu() {
                     >
                         TP3
                     </Typography>
-                    <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
+                    <Box sx={{
+                        flexGrow: 1,
+                        display: {
+                            xs: 'none',
+                            md: 'flex'
+                        }
+                    }}>
                         {pages.map((page) => (
                             <Button
                                 key={page.label}
@@ -131,9 +144,9 @@ function MyMenu() {
                         component="a"
                         href="/fr"
                         style={{
-                        color: isEnglish ? 'white' : 'inherit',
-                        marginRight: '3px',
-                        textDecoration: isEnglish ? 'none' : 'underline',
+                            color: isEnglish ? 'white' : 'inherit',
+                            marginRight: '3px',
+                            textDecoration: isEnglish ? 'none' : 'underline',
                         }}
                     >
                         FR
@@ -143,9 +156,9 @@ function MyMenu() {
                         component="a"
                         href="/en"
                         style={{
-                        color: isEnglish ? 'inherit' : 'white',
-                        marginLeft: '3px',
-                        textDecoration: isEnglish ? 'underline' : 'none',
+                            color: isEnglish ? 'inherit' : 'white',
+                            marginLeft: '3px',
+                            textDecoration: isEnglish ? 'underline' : 'none',
                         }}
                     >
                         EN
