@@ -18,13 +18,14 @@ import {
   AlertTitle,
   Snackbar,
 } from "@mui/material";
-import { useForm } from "react-hook-form";
-import { yupResolver } from "@hookform/resolvers/yup";
-import * as yup from "yup";
-import { postProductData, putProductData } from "@/api/api";
-import { ProductFormProps, Product } from "@/interface/interface";
-import { useTranslations } from "next-intl";
-import { useState } from "react";
+import { useForm } from "react-hook-form"
+import { yupResolver } from "@hookform/resolvers/yup"
+import * as yup from "yup"
+import { postProductData, putProductData } from "@/api/api"
+import { ProductFormProps, Product } from '@/interface/interface'
+import { useTranslations } from 'next-intl'
+import { useState } from 'react';
+import { useRouter } from 'next/navigation';
 
 export default function ProductForm(props: ProductFormProps) {
   const t = useTranslations();
@@ -39,29 +40,15 @@ export default function ProductForm(props: ProductFormProps) {
   >("success");
   const [alertOpen, setAlertOpen] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
-
-  const schema = yup
-    .object({
-      title: yup
-        .string()
-        .min(2, t("validationProductForm.titleMin"))
-        .max(50, t("validationProductForm.titleMax"))
-        .required(),
-      description: yup
-        .string()
-        .max(255, t("validationProductForm.descriptionMax"))
-        .required(t("validationProductForm.descriptionRequired")),
-      price: yup
-        .number()
-        .typeError(t("validationProductForm.price"))
-        .required(),
-      categoryId: yup
-        .string()
-        .required(t("validationProductForm.categorie"))
-        .required(),
-      isSold: yup.boolean(),
-    })
-    .required();
+  const router = useRouter();
+  
+  const schema = yup.object({
+    title: yup.string().min(2, t("validationProductForm.titleMin")).max(50, t("validationProductForm.titleMax")).required(),
+    description: yup.string().max(255, t("validationProductForm.descriptionMax")).required(t("validationProductForm.descriptionRequired")),
+    price: yup.number().typeError(t("validationProductForm.price")).required(),
+    categoryId: yup.string().required(t("validationProductForm.categorie")).required(),
+    isSold: yup.boolean(),
+  }).required();
 
   React.useEffect(() => {
     setCategory(props.productData.categoryId);
@@ -99,7 +86,7 @@ export default function ProductForm(props: ProductFormProps) {
         setTimeout(() => {
           setAlertMessage(null);
           setAlertOpen(false);
-          window.location.href = "/products";
+          router.push("/products");
         }, 2500);
       } else {
         await putProductData(props.productData._id, formData);
@@ -110,7 +97,7 @@ export default function ProductForm(props: ProductFormProps) {
         setTimeout(() => {
           setAlertMessage(null);
           setAlertOpen(false);
-          window.location.href = "/products";
+          router.push("/products");
         }, 2500);
       }
     } catch (error) {
@@ -216,6 +203,7 @@ export default function ProductForm(props: ProductFormProps) {
                       label="Catégorie"
                       {...register("categoryId")}
                       onChange={handleChangeCategoryId}
+                      required
                     >
                       {props.categoriesData.map((result) => (
                         <MenuItem key={result._id} value={result._id}>

@@ -6,6 +6,7 @@
     margin-top: 2%;
     color: black;
 }
+
 .centeredGrid {
     display: flex;
     flex-direction: column;
@@ -13,6 +14,7 @@
     margin-top: 1%;
     position: relative;
 }
+
 .buttonContainer {
     display: flex;
     justify-content: flex-end;
@@ -20,18 +22,22 @@
     width: 100%;
     margin-bottom: 1%;
 }
+
 /*CSS pour les boutons du grid*/
 .buttonGrid {
     background: none;
     border: none;
     transition: transform 0.1s ease;
 }
+
 .buttonGrid:hover {
     transform: scale(1.3);
 }
+
 .buttonGrid:active {
     transform: scale(1);
 }
+
 /* Enable hover only on non-touch devices */
 @media (hover: hover) and (pointer: fine) {
     .card:hover {
@@ -47,6 +53,7 @@
         transform: none;
     }
 }
+
 /* Mobile */
 @media (max-width: 700px) {
     .content {
@@ -113,6 +120,7 @@
         z-index: 1;
     }
 }
+
 /* Tablet and Smaller Desktop */
 @media (min-width: 701px) and (max-width: 1120px) {
     .grid {

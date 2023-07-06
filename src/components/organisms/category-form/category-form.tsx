@@ -1,24 +1,25 @@
 "use client";
 
-import * as React from "react";
-import {
-  Alert,
-  AlertTitle,
-  Box,
-  Button,
-  CircularProgress,
-  Container,
-  Grid,
-  Snackbar,
-  TextField,
-} from "@mui/material";
-import { useForm } from "react-hook-form";
-import { yupResolver } from "@hookform/resolvers/yup";
-import * as yup from "yup";
-import { CategoryFormProps, Category } from "@/interface/interface";
-import { postCategoryData, putCategoryData } from "@/api/api";
-import { useTranslations } from "next-intl";
-import { useState } from "react";
+import * as React from 'react'
+import { 
+  Alert, 
+  AlertTitle, 
+  Box, 
+  Button, 
+  CircularProgress, 
+  Container, 
+  Grid, 
+  Snackbar, 
+  TextField 
+} from "@mui/material"
+import { useForm } from "react-hook-form"
+import { yupResolver } from "@hookform/resolvers/yup"
+import * as yup from "yup"
+import { CategoryFormProps, Category } from '@/interface/interface'
+import { postCategoryData, putCategoryData } from '@/api/api'
+import { useTranslations } from 'next-intl'
+import { useState } from 'react'
+import { useRouter } from 'next/navigation'
 
 const schema = yup
   .object({
@@ -45,6 +46,7 @@ export default function CategoryForm(props: CategoryFormProps) {
   >("success");
   const [alertOpen, setAlertOpen] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const router = useRouter();
 
   const schema = yup
     .object({
@@ -66,11 +68,10 @@ export default function CategoryForm(props: CategoryFormProps) {
           setAlertSeverity("success");
           setAlertMessage(t("alertMessageAdd.addCategorySuccess"));
           setAlertOpen(true);
-
           setTimeout(() => {
             setAlertMessage(null);
             setAlertOpen(false);
-            window.location.href = "/categories";
+            router.push("/categories");
           }, 2500);
         })
         .catch(() => {
@@ -85,11 +86,10 @@ export default function CategoryForm(props: CategoryFormProps) {
           setAlertSeverity("success");
           setAlertMessage(t("alertMessageEdit.editCategorySuccess"));
           setAlertOpen(true);
-
           setTimeout(() => {
             setAlertMessage(null);
             setAlertOpen(false);
-            window.location.href = "/categories";
+            router.push("/categories");
           }, 2500);
         })
         .catch(() => {

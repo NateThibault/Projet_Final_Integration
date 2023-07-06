@@ -6,8 +6,11 @@ import { Box } from "@mui/material";
 import { Typography } from "@mui/material";
 import { useTranslations } from "next-intl";
 
+
 const Home = () => {
+  
   const t = useTranslations();
+  
   return (
     <>
       <Header title={t("accueil.page-title")} />
@@ -17,7 +20,7 @@ const Home = () => {
           sx={{
             color: "black",
             fontSize: "25px",
-            marginTop: "100px",
+            marginTop: "30px",
           }}
         >
           {t("accueil.subTitle")}

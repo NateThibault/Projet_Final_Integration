@@ -1,27 +1,33 @@
-"use client";
+"use client"
 
-import styles from "../../../app/[locale]/page.module.css";
-import React, { useState, useEffect } from "react";
-import { DataGrid, GridCellParams, GridColDef } from "@mui/x-data-grid";
-import DeleteIcon from "@mui/icons-material/Delete";
-import EditIcon from "@mui/icons-material/EditSharp";
-import { deleteProductData, getProductsData } from "../../../api/api";
-import {
-  Box,
-  Button,
-  CircularProgress,
-  Dialog,
-  DialogActions,
-  DialogContent,
-  DialogContentText,
-  DialogTitle,
+import styles from "../../../app/[locale]/page.module.css"
+import React, { useState, useEffect } from 'react';
+import { DataGrid, GridCellParams, GridColDef } from '@mui/x-data-grid';
+import DeleteIcon from '@mui/icons-material/Delete'
+import EditIcon from '@mui/icons-material/EditSharp'
+import { deleteProductData, getProductsData } from '../../../api/api';
+import { 
+  Box, 
+  Button, 
+  CircularProgress, 
+  Dialog, 
+  DialogActions, 
+  DialogContent, 
+  DialogContentText, 
+  DialogTitle, 
   Snackbar,
-} from "@mui/material";
-import { useTranslations } from "next-intl";
-import { Alert, AlertTitle } from "@mui/material";
+  useMediaQuery,
+  useTheme, 
+} from '@mui/material';
+import { useTranslations } from 'next-intl';
+import { Alert, AlertTitle } from '@mui/material';
+import { useRouter } from 'next/navigation';
 
 const ProductGrid = () => {
   const t = useTranslations();
+  const theme = useTheme();
+  const isSmScreen = useMediaQuery(theme.breakpoints.down("sm"));
+  
   const [rows, setRows] = useState<
     { id: string; title: string; description: string; price: number }[]
   >([]);
@@ -29,11 +35,10 @@ const ProductGrid = () => {
   const [confirmDeleteOpen, setConfirmDeleteOpen] = useState(false);
   const [deleteProductId, setDeleteProductId] = useState<string | null>(null);
   const [alertOpen, setAlertOpen] = useState(false);
-  const [alertSeverity, setAlertSeverity] = useState<
-    "error" | "warning" | "info" | "success"
-  >("success");
-  const [alertMessage, setAlertMessage] = useState("");
-
+  const [alertSeverity, setAlertSeverity] = useState<'error' | 'warning' | 'info' | 'success'>('success');
+  const [alertMessage, setAlertMessage] = useState('');
+  const router = useRouter();
+  
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -76,10 +81,10 @@ const ProductGrid = () => {
       setAlertOpen(true);
     }
   };
-
+  
   const handleModifyButtonClick = (params: GridCellParams) => {
     const productId = params.id as string;
-    window.location.href = `/products/${productId}`;
+    router.push(`/products/${productId}`);
   };
 
   const columns: GridColDef[] = [
@@ -89,13 +94,13 @@ const ProductGrid = () => {
       width: 100,
       flex: 1,
     },
-    {
+    !isSmScreen && {
       field: "description",
       headerName: t("produits-grid.description"),
       width: 250,
       flex: 1,
     },
-    {
+    !isSmScreen && {
       field: "price",
       headerName: t("produits-grid.price"),
       type: "number",
@@ -140,7 +145,7 @@ const ProductGrid = () => {
       sortable: false,
       minWidth: 50,
     },
-  ];
+  ].filter(Boolean) as GridColDef[];
 
   return (
     <Box sx={{ height: "auto", maxHeight: "100%", width: "100%" }}>

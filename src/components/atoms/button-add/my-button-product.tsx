@@ -1,11 +1,14 @@
 import { Button } from "@mui/material"
 import { useTranslations } from "next-intl"
+import  { useRouter } from "next/navigation"
 
 const BoutonAdd = () => {
 
   const t = useTranslations()
+  const router = useRouter()
+
   const handleAddClick = () => {
-    window.location.href ="/products/add"
+    router.push("/products/add")
   }
 
   return (

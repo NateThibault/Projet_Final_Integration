@@ -1,24 +1,24 @@
 "use client";
 
-import styles from "../../../../src/app/[locale]/page.module.css";
-import React, { useEffect, useState } from "react";
-import { DataGrid, GridColDef, GridCellParams } from "@mui/x-data-grid";
-import DeleteIcon from "@mui/icons-material/Delete";
-import EditIcon from "@mui/icons-material/EditSharp";
-import { getCategoriesData, deleteCategoryData } from "../../../api/api";
-import {
-  Box,
-  Button,
-  CircularProgress,
-  Dialog,
-  DialogActions,
-  DialogContent,
-  DialogContentText,
-  DialogTitle,
-  Snackbar,
-} from "@mui/material";
-import { Alert, AlertTitle } from "@mui/material";
-import { useTranslations } from "next-intl";
+import styles from "../../../../src/app/[locale]/page.module.css"
+import React, { useEffect, useState } from 'react'
+import { DataGrid, GridColDef, GridCellParams } from '@mui/x-data-grid'
+import DeleteIcon from '@mui/icons-material/Delete'
+import EditIcon from '@mui/icons-material/EditSharp'
+import { getCategoriesData, deleteCategoryData } from '../../../api/api'
+import { Box, 
+  Button, 
+  CircularProgress, 
+  Dialog, 
+  DialogActions, 
+  DialogContent, 
+  DialogContentText, 
+  DialogTitle, 
+  Snackbar 
+} from '@mui/material'
+import { Alert, AlertTitle } from '@mui/material'
+import { useTranslations } from 'next-intl'
+import { useRouter } from 'next/navigation'
 
 const CategoryGrid = () => {
   const t = useTranslations();
@@ -27,10 +27,9 @@ const CategoryGrid = () => {
   const [confirmDeleteOpen, setConfirmDeleteOpen] = useState(false);
   const [deleteCategoryId, setDeleteCategoryId] = useState("");
   const [alertOpen, setAlertOpen] = useState(false);
-  const [alertSeverity, setAlertSeverity] = useState<
-    "success" | "error" | "warning" | "info"
-  >("success");
-  const [alertMessage, setAlertMessage] = useState("");
+  const [alertSeverity, setAlertSeverity] = useState<'success' | 'error' | 'warning' | 'info'>('success');
+  const [alertMessage, setAlertMessage] = useState('');
+  const router = useRouter();
 
   useEffect(() => {
     setLoading(true);
@@ -82,7 +81,7 @@ const CategoryGrid = () => {
 
   const handleModifyButtonClick = (params: GridCellParams) => {
     const categoryId = params.id as string;
-    window.location.href = `/categories/${categoryId}`;
+    router.push(`/categories/${categoryId}`);
   };
 
   const columns: GridColDef[] = [
