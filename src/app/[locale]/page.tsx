@@ -5,12 +5,12 @@ import Header from "../../components/atoms/header/header";
 import { Box } from "@mui/material";
 import { Typography } from "@mui/material";
 import { useTranslations } from "next-intl";
-import { useTheme } from '@mui/material/styles';
+
 
 const Home = () => {
+  
   const t = useTranslations();
-  const theme = useTheme();
-
+  
   return (
     <>
       <Header title={t("accueil.page-title")} />
@@ -20,7 +20,7 @@ const Home = () => {
           sx={{
             color: "black",
             fontSize: "25px",
-            marginTop: "50px",
+            marginTop: "30px",
           }}
         >
           {t("accueil.subTitle")}

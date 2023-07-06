@@ -1,13 +1,12 @@
-"use client"
+"use client";
 
-import { Typography } from '@mui/material'
-import React from 'react'
+import { Typography } from "@mui/material";
+import React from "react";
 interface HeaderProps {
   title: string;
 }
 
 export default function Header(props: HeaderProps) {
-
   return (
     <>
       <Typography
@@ -21,17 +20,5 @@ export default function Header(props: HeaderProps) {
         {props.title}
       </Typography>
     </>
-  )
+  );
 }
-
-
-
-
-
-
-
-
-
-
-
-

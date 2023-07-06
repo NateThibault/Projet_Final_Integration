@@ -38,10 +38,14 @@ export default async function RootLayout({
       <body className={inter.className}>
         <NextIntlClientProvider locale={params.locale} messages={translations}>
           <MyMenu />
-          <main style={{ width: "80%", margin: "0 auto", marginBottom: "80px" }}>
+          <main
+            style={{ width: "80%", margin: "0 auto", marginBottom: "80px" }}
+          >
             {children}
           </main>
-          <footer style={{ position: "fixed", left: 0, bottom: 0, width: "100%" }}>
+          <footer
+            style={{ position: "fixed", left: 0, bottom: 0, width: "100%" }}
+          >
             <MyFooter />
           </footer>
         </NextIntlClientProvider>

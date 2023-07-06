@@ -4,13 +4,13 @@
         "categories": "Categories"
     },
     "accueil": {
-        "page-title": " INTEGRATION TP3",
-        "subTitle": " Project description",
+        "page-title": "INTEGRATION TP3",
+        "subTitle": "Project description",
         "desc": "The project involves creating an administrator interface linked to the back-end and database created during the integration course.",
         "team": "List of team members :"
     },
     "produits": {
-        "page-title": " Products List"
+        "page-title": " Product List"
     },
     "produits-grid": {
         "title": "Title",
@@ -24,22 +24,22 @@
         "category": "Category",
         "submit": "SUBMIT",
         "cancel": "CANCEL",
-        "isSold":"Is the product sold ?"
+        "isSold": "Is the product sold?"
     },
     "produitajouter": {
-        "page-title": " Add product"
+        "page-title": "Add product"
     },
     "produitmodifier": {
-        "page-title": " Edit product"
+        "page-title": "Edit product"
     },
     "categories": {
-        "page-title": " Categories List"
+        "page-title": "Category List"
     },
     "categoriesajouter": {
-        "page-title": " Add category"
+        "page-title": "Add a category"
     },
     "categoriesmodifier": {
-        "page-title": "Edit category "
+        "page-title": "Edit this category "
     },
     "categories-grid": {
         "name": "Name of the category",
@@ -51,42 +51,42 @@
         "submit": "SUBMIT",
         "cancel": "CANCEL"
     },
-    "validationProductForm":{
-        "titleMin": "The title must contain a minimum of 2 characters",
-        "titleMax": "The title must not contain more than 50 characters",
-        "descriptionMax": "Description must not contain more than 255 characters",
-        "descriptionRequired": "Description required !",
+    "validationProductForm": {
+        "titleMin": "The title must contain a minimum of 2 characters.",
+        "titleMax": "The title must not contain more than 50 characters.",
+        "descriptionMax": "Description must not contain more than 255 characters.",
+        "descriptionRequired": "Description required!",
         "price": "The price is required and may only contain numbers.",
-        "categorie": "La catégorie doit être sélectionnée"
+        "categorie": "A category must be selected."
     },
-    "validationCategoryForm":{
-        "nameMin": "The name must contain a minimum of 2 characters",
-        "nameMax": "The name must not contain more than 50 characters"
+    "validationCategoryForm": {
+        "nameMin": "The name must contain a minimum of 2 characters.",
+        "nameMax": "The name must not contain more than 50 characters."
     },
-    "buttonAddProduct":{
+    "buttonAddProduct": {
         "add": "ADD"
     },
-    "buttonAddCategory":{
+    "buttonAddCategory": {
         "add": "ADD"
     },
-    "alertMessageEdit":{
-        "editProductSuccess": "Product modified successfully !",
-        "editCategorySuccess": "Category modified successfully !"
+    "alertMessageEdit": {
+        "editProductSuccess": "Product modified successfully!",
+        "editCategorySuccess": "Category modified successfully!"
     },
-    "alertMessageDelete":{
-        "deleteProductSuccess": "The product has been successfully deleted !",
-        "deleteCategorySuccess": "The category has been successfully deleted !"
+    "alertMessageDelete": {
+        "deleteProductSuccess": "The product has been successfully deleted!",
+        "deleteCategorySuccess": "The category has been successfully deleted!"
     },
-    "alertMessageAdd":{
-        "addProductSuccess": "Product added successfully !",
-        "addCategorySuccess": "Category added successfully !"
+    "alertMessageAdd": {
+        "addProductSuccess": "Product added successfully!",
+        "addCategorySuccess": "Category added successfully!"
     },
-    "alertError":{
-        "error": "An error has occurred ... Please try again !"
+    "alertError": {
+        "error": "An error has occurred ... Please try again!"
     },
-    "confirmAction":{
+    "confirmAction": {
         "confirmTitle": "Delete confirmation",
-        "confirmMessage": "Are you sure you want to delete ?",
+        "confirmMessage": "Are you sure you want to delete this?",
         "confirmDelete": "Delete",
         "confirmCancel": "Cancel"
     }

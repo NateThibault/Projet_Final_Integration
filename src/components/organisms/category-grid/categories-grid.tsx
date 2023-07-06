@@ -1,4 +1,4 @@
-"use client"
+"use client";
 
 import styles from "../../../../src/app/[locale]/page.module.css"
 import React, { useEffect, useState } from 'react'
@@ -6,41 +6,49 @@ import { DataGrid, GridColDef, GridCellParams } from '@mui/x-data-grid'
 import DeleteIcon from '@mui/icons-material/Delete'
 import EditIcon from '@mui/icons-material/EditSharp'
 import { getCategoriesData, deleteCategoryData } from '../../../api/api'
-import { Box, Button, CircularProgress, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle, Snackbar } from '@mui/material';
-import { Alert, AlertTitle } from '@mui/material';
+import { Box, 
+  Button, 
+  CircularProgress, 
+  Dialog, 
+  DialogActions, 
+  DialogContent, 
+  DialogContentText, 
+  DialogTitle, 
+  Snackbar 
+} from '@mui/material'
+import { Alert, AlertTitle } from '@mui/material'
 import { useTranslations } from 'next-intl'
 import { useRouter } from 'next/navigation'
 
 const CategoryGrid = () => {
-
-  const t = useTranslations()
-  const [rows, setRows] = useState<{ id: string; name: string }[]>([])
-  const [loading, setLoading] = useState(true)
+  const t = useTranslations();
+  const [rows, setRows] = useState<{ id: string; name: string }[]>([]);
+  const [loading, setLoading] = useState(true);
   const [confirmDeleteOpen, setConfirmDeleteOpen] = useState(false);
-  const [deleteCategoryId, setDeleteCategoryId] = useState('');
+  const [deleteCategoryId, setDeleteCategoryId] = useState("");
   const [alertOpen, setAlertOpen] = useState(false);
   const [alertSeverity, setAlertSeverity] = useState<'success' | 'error' | 'warning' | 'info'>('success');
   const [alertMessage, setAlertMessage] = useState('');
   const router = useRouter();
 
   useEffect(() => {
-    setLoading(true)
+    setLoading(true);
 
     getCategoriesData()
       .then((data) => {
         const categoryRows = data.map((category: { _id: any; name: any }) => ({
           id: category._id,
           name: category.name,
-        }))
-        setRows(categoryRows)
-        setLoading(false)
+        }));
+        setRows(categoryRows);
+        setLoading(false);
       })
       .catch((error) => {
-        console.error('Erreur dans l\'extraction des données :', error)
-        setRows([])
-        setLoading(false)
-      })
-  }, [])
+        console.error("Erreur dans l'extraction des données :", error);
+        setRows([]);
+        setLoading(false);
+      });
+  }, []);
 
   const handleDeleteButtonClick = (params: GridCellParams) => {
     const categoryId = params.id as string;
@@ -53,7 +61,9 @@ const CategoryGrid = () => {
 
     deleteCategoryData(deleteCategoryId)
       .then(() => {
-        setRows((prevRows) => prevRows.filter((row) => row.id !== deleteCategoryId));
+        setRows((prevRows) =>
+          prevRows.filter((row) => row.id !== deleteCategoryId)
+        );
         setLoading(false);
         setAlertSeverity("success");
         setAlertMessage(t("alertMessageDelete.deleteCategorySuccess"));
@@ -76,48 +86,58 @@ const CategoryGrid = () => {
 
   const columns: GridColDef[] = [
     {
-      field: 'name',
+      field: "name",
       headerName: t("categories-grid.name"),
       flex: 1,
       editable: false,
     },
     {
-      field: 'delete',
+      field: "delete",
       width: 50,
-      headerName: '',
+      headerName: "",
       renderCell: (params: GridCellParams) => (
         <Button
           onClick={() => handleDeleteButtonClick(params)}
           className={styles.buttonGrid}
         >
-          <DeleteIcon style={{ color: 'grey' }} />
+          <DeleteIcon style={{ color: "grey" }} />
         </Button>
       ),
-      headerAlign: 'center',
-      align: 'center',
+      headerAlign: "center",
+      align: "center",
       filterable: false,
       sortable: false,
     },
     {
-      field: 'modify',
-      headerName: '',
+      field: "modify",
+      headerName: "",
       width: 50,
       renderCell: (params: GridCellParams) => (
-        <Button onClick={() => handleModifyButtonClick(params)} className={styles.buttonGrid}>
-          <EditIcon style={{ color: '#2196F3' }} />
+        <Button
+          onClick={() => handleModifyButtonClick(params)}
+          className={styles.buttonGrid}
+        >
+          <EditIcon style={{ color: "#2196F3" }} />
         </Button>
       ),
-      headerAlign: 'center',
-      align: 'center',
+      headerAlign: "center",
+      align: "center",
       filterable: false,
       sortable: false,
     },
-  ]
+  ];
 
   return (
-    <Box sx={{ height: 'auto', maxHeight: '100%', width: "100%"}}>
+    <Box sx={{ height: "auto", maxHeight: "100%", width: "100%" }}>
       {loading ? (
-        <Box sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100%' }}>
+        <Box
+          sx={{
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+            height: "100%",
+          }}
+        >
           <CircularProgress />
         </Box>
       ) : (
@@ -138,7 +158,10 @@ const CategoryGrid = () => {
           disableRowSelectionOnClick
         />
       )}
-      <Dialog open={confirmDeleteOpen} onClose={() => setConfirmDeleteOpen(false)}>
+      <Dialog
+        open={confirmDeleteOpen}
+        onClose={() => setConfirmDeleteOpen(false)}
+      >
         <DialogTitle>{t("confirmAction.confirmTitle")}</DialogTitle>
         <DialogContent>
           <DialogContentText>
@@ -158,7 +181,7 @@ const CategoryGrid = () => {
         open={alertOpen}
         autoHideDuration={3000}
         onClose={() => setAlertOpen(false)}
-        anchorOrigin={{ vertical: 'top', horizontal: 'center' }}
+        anchorOrigin={{ vertical: "top", horizontal: "center" }}
       >
         <Alert severity={alertSeverity}>
           <AlertTitle>{alertSeverity}</AlertTitle>
@@ -166,8 +189,7 @@ const CategoryGrid = () => {
         </Alert>
       </Snackbar>
     </Box>
-  )
-}
+  );
+};
 
-export default CategoryGrid
-
+export default CategoryGrid;
