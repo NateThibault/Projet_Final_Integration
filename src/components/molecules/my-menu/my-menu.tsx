@@ -33,11 +33,11 @@ function MyMenu() {
   }
 
   const pages: MenuItem[] = [
-    { label: t("menu.products"), route: "/products" },
-    { label: t("menu.categories"), route: "/categories" },
+    { label: t("menu.products"), route: pathname.includes("/en") ? "/en/products" : "/products" },
+    { label: t("menu.categories"), route: pathname.includes("/en") ? "/en/categories" : "/categories" },
   ];
 
-  const isEnglish = pathname.startsWith('/en');
+  const isEnglish = pathname.includes('/en');
 
   return (
     <AppBar position="static">
