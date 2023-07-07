@@ -37,7 +37,7 @@ function MyMenu() {
     { label: t("menu.categories"), route: "/categories" },
   ];
 
-  const isEnglish = pathname.includes('/en');
+  const isEnglish = pathname.startsWith('/en');
 
   return (
     <AppBar position="static">
