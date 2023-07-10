@@ -14,6 +14,7 @@ import SportsSoccerIcon from '@mui/icons-material/SportsSoccer'
 import { useTranslations } from 'next-intl'
 import { usePathname } from 'next/navigation'
 
+
 interface MenuItem {
   label: string;
   route: string;
@@ -24,6 +25,7 @@ function MyMenu() {
   const t = useTranslations();
   const [anchorElNav, setAnchorElNav] = React.useState<null | HTMLElement>(null)
   const pathname = usePathname();
+ 
 
   const handleOpenNavMenu = (event: React.MouseEvent<HTMLElement>) => {
     setAnchorElNav(event.currentTarget)
@@ -38,6 +40,13 @@ function MyMenu() {
   ];
 
   const isEnglish = pathname.includes('/en');
+
+  const handleLanguageChange = (language: string) => {
+    const currentPath = window.location.pathname;
+    const route = currentPath.replace(/\/(en|fr)/, '');
+    const newPath = `/${language}${route}`;
+    window.location.href = newPath;
+  };
 
   return (
     <AppBar position="static">
@@ -127,29 +136,27 @@ function MyMenu() {
                 </Button>
               ))}
             </Box>
-            <Typography
-              component="a"
-              href="/fr"
+            <Button
               style={{
-              color: isEnglish ? 'white' : 'inherit',
-              marginRight: '3px',
-              textDecoration: isEnglish ? 'none' : 'underline',
+                color: isEnglish ? 'white' : 'inherit',
+                marginRight: '3px',
+                textDecoration: isEnglish ? 'none' : 'underline',
               }}
+              onClick={() => handleLanguageChange('fr')}
             >
               FR
-            </Typography>
+            </Button>
             <Typography>/</Typography>
-            <Typography
-              component="a"
-              href="/en"
+            <Button
               style={{
-              color: isEnglish ? 'inherit' : 'white',
-              marginLeft: '3px',
-              textDecoration: isEnglish ? 'underline' : 'none',
+                color: isEnglish ? 'inherit' : 'white',
+                marginLeft: '3px',
+                textDecoration: isEnglish ? 'underline' : 'none',
               }}
+              onClick={() => handleLanguageChange('en')}
             >
               EN
-            </Typography>
+            </Button>
           </Toolbar>
       </Container>
     </AppBar>
